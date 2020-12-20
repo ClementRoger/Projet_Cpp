@@ -1,14 +1,14 @@
 #include <iostream>
 #include <fstream>
-#include "Juste_Prix.hh"
+#include "Batonnets.hh"
 
 using namespace std;
 
 int main() {
 
-	Juste_Prix J1;
+	Batonnets B1;
 
-	if(J1.check_victory()){
+	if(B1.check_victory()){
 
 		cout << "\nFélicitations ! Vous avez gagné !" << endl;
 	}

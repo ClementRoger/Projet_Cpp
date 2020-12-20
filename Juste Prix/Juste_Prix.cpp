@@ -4,7 +4,7 @@
 
 #define Nmin 1
 #define Nmax 100
-#define NB_TENTATIVES 7
+#define NB_TENTATIVES 8
 
 using namespace std;
 
@@ -20,16 +20,24 @@ void Juste_Prix :: play() {
 
 	cout << "Vous avez " << nb_tentatives << " tentatives pour trouver un nombre aléatoire entre " << Nmin << " et " << Nmax << endl << endl;
 	victory = false;
-	int number;
+	double number;
 	bool flag = true; //Sert à savoir si on décrémente le nombre de tenttives
 
 	while ( !victory && nb_tentatives > 0) { // Tant que le joueur n'a pas gagné et qu'il reste des tentatives
 
+		cout << "Veuillez entrer un nombre entre " << Nmin << " et " << Nmax << endl;
 		cin >> number;
+		int int_number = (int)number; 
 
-		if(!(cin.fail()) ){ // Si l'entrée est un int
+		if(!(cin.fail()) ){ // Si l'entrée est un double
 
-			if(number < 1) {
+			if(number != int_number){ //L'utilisateur a entré un nombre non entier
+
+				cout << "Erreur ! Veuillez entrer un entier !" << endl;
+				flag = false;
+			}
+
+			else if( (number < 1) || (number > 100) ){ //L'utilisateur a entré un nombre non compris entre 1 et 100
 
 				cout << "Erreur ! Veuillez entrer un nombre entier entre 1 et 100 ..." << endl;
 				flag = false;
@@ -49,7 +57,6 @@ void Juste_Prix :: play() {
 
 			else{
 
-				cout << "Gagné !" << endl;
 				victory = true;
 				flag = false;
 			}
@@ -67,7 +74,7 @@ void Juste_Prix :: play() {
 		if(flag){
 
 			nb_tentatives--;
-			cout << "Il vous reste " << nb_tentatives << " tentatives !" << endl;
+			cout << "Il vous reste " << nb_tentatives << " tentatives !" << endl << endl;
 		}
 	}
 }

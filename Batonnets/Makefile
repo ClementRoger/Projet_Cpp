@@ -5,11 +5,11 @@ OBJ= $(SRC:.cc=.o)
 TST= $(wildcard *.cpp)
 OBJ_TEST = $(filter-out ../main.o, $(OBJ)) $(TST:.cc=.o)
 
-Juste_Prix : $(OBJ_TEST) 
+Batonnets : $(OBJ_TEST) 
 	$(CC) $(CCFLAGS)  -o $@ $^
 
 %.o: %.cpp
 	$(CC) $(CCFLAGS) -I../ -o $@ -c $<
 
 clean :
-	rm -f $(OBJ_TEST) Juste_Prix
+	rm -f $(OBJ_TEST) Batonnets
