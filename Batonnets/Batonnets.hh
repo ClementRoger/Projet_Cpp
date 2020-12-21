@@ -5,10 +5,12 @@ class Batonnets{
  
  public:
 
-  Batonnets();
+  Batonnets(int NB_BATONNETS);
   void play();
   bool check_victory();
   void print();
+  bool user_plays();
+  bool IA_plays();
 
  private:
 

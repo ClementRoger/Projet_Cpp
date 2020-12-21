@@ -4,9 +4,12 @@
 
 using namespace std;
 
+#define NB_BATONNETS 20
+
 int main() {
 
-	Batonnets B1;
+	Batonnets B1(NB_BATONNETS);
+	B1.play();
 
 	if(B1.check_victory()){
 
