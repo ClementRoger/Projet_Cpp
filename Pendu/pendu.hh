@@ -18,9 +18,9 @@ class Pendu {
 
   void play();
 
-  bool win(bool flag);
+  bool win(const bool flag);
 
-  bool entry_test(string tmp);
+  bool validity_test(const string tmp);
 
   string get_mistery() const { return _mistery; }
 
@@ -30,7 +30,7 @@ class Pendu {
 
   void affichage(vector<size_t>found_letters);
 
-  bool find_letter(string letter,vector<size_t>&found_letters,size_t taille);
+  bool find_letter(string letter,vector<size_t>&found_letters, const size_t taille);
 
   friend ostream& operator<<(ostream& in, vector<string>&used_letters);
 

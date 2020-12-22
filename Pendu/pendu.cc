@@ -58,7 +58,7 @@ void Pendu::play(){
         transform(letter.begin(), letter.end(),letter.begin(), ::toupper);
  
     // Si l'entrée est valide
-        if (entry_test(letter)){
+        if (validity_test(letter)){
 
              /* Face à un charactère */
             if (letter.size() == 1 ){
@@ -101,7 +101,7 @@ void Pendu::play(){
     } 
 }
 
-bool Pendu::entry_test(string tmp){
+bool Pendu::validity_test(const string tmp){
 
     if (!tmp.size()){
         return false;
@@ -116,7 +116,7 @@ bool Pendu::entry_test(string tmp){
 
 /* Permet de remplir de tableau des lettre trouvés et de voir si
 elles ont toutes été trouvés */
-bool Pendu::find_letter(string letter,vector<size_t>&found_letters,size_t taille){
+bool Pendu::find_letter(string letter,vector<size_t>&found_letters,const size_t taille){
     bool res = true;
     for (size_t i = 0; i< found_letters.size(); i++){
         if(taille == 1){
@@ -156,7 +156,7 @@ void Pendu::affichage(vector<size_t>found_letters){
 
 
 /* Test si on a gagner ou non */
-bool Pendu::win(bool flag){
+bool Pendu::win(const bool flag){
     if (flag){ 
         cout<< "You win!"<<endl;
         return true; 
