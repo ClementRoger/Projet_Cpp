@@ -7,10 +7,9 @@ using namespace std;
 
 #include "Demineur.hh"
 
-/* 0 = case vide 
-    -1 = bombe 
-    -2 = cases selectionnées par joueur
-    2 -> 8 = nombre de bombes aux alentours */
+/*  _plateau :0 = case vide 
+            -1 = bombe 
+            >0 = nombres de bombes environantes */
 
 /* nb_try, nb_bomb, taille de la grille */
  Demineur::Demineur(const size_t count, const size_t bomb, const size_t gridsize){ 
@@ -30,7 +29,6 @@ using namespace std;
 
     /* Initialise le tableau contenant les bombes + check le nombre de bombes */
     initBomb(tmp,gridsize);
-   // affichage(tmp);
 
     _plateau = tmp;
 
@@ -51,7 +49,7 @@ void Demineur::play(){
     bool flag = false;
     string x,y;
     size_t tmp_x,tmp_y;
-    while (!win(flag) || get_nb_try() > 0){
+    while (!win(flag) && get_nb_try()){
         affichage(tmp);
         cout<<"Entrez les coordonnées votre choix"<<endl;
         cout<<"Entrez le numéro ligne : "<<endl;
@@ -71,7 +69,9 @@ void Demineur::play(){
         else {
             tmp_x = (size_t)stoi(x)-1;
             tmp_y = (size_t)stoi(y)-1;
+
             if (!tmp[tmp_x][tmp_y]){
+                reveal(tmp,get_plateau(),tmp_x,tmp_y);
                 tmp[tmp_x][tmp_y] = true;
                 if( get_plateau()[tmp_x][tmp_y] == -1 ){
                     set_nb_try(get_nb_try()-1);
@@ -89,18 +89,8 @@ void Demineur::play(){
    
 }
 
-/* Check si toutes les cases ont été ouvertes */
-bool Demineur::checkBool(vector<vector<bool>>tab){
 
-    for (size_t i = 0; i < tab.size(); i++){
-        for (size_t j = 0; j < tab.size(); j++){
-            if ( !tab[i][j] && get_plateau()[i][j] != -1) return false;
-        }
-    }
-
-    return true;
-}
-
+/* Initialise le plateau avec les bombes et le nombres de bombes environante */
 void Demineur::initBomb(vector<vector<int>>&tab,const size_t gridsize){
     for (size_t i = 0; i < gridsize; i++){
         for (size_t j = 0; j < gridsize ; j++){
@@ -114,8 +104,9 @@ void Demineur::initBomb(vector<vector<int>>&tab,const size_t gridsize){
     checkBomb(tab,gridsize);
 }
 
+/* Permet d'initialiser les cases avec le nombre de bombes adjacentes */
 void Demineur::checkBomb(vector<vector<int>>&tab, const size_t gridsize){
-   for (size_t i=0 ; i < gridsize; i++){
+    for (size_t i=0 ; i < gridsize; i++){
         for (size_t j=0 ; j < gridsize; j++){
             if(tab[i][j] != -1){
                 if( (i<gridsize-1) && (j<gridsize-1) && (tab[i+1][j+1] == -1)) tab[i][j]++;
@@ -129,12 +120,39 @@ void Demineur::checkBomb(vector<vector<int>>&tab, const size_t gridsize){
             }
         }
     }
+}
 
+/* Si la case choisie contient un 0 = vide alors on affiche toutes les cases à 0 environantes */
+void Demineur::reveal(vector<vector<bool>>&tmp, const vector<vector<int>>tab, const size_t i, const size_t j){
+    if(!tmp[i][j] && !tab[i][j])
+    {       
+        tmp[i][j]=true;
+        if(i>0) {reveal(tmp, tab, i-1, j); }
+        if(i>0 && j>0) {reveal(tmp, tab, i-1, j-1);}
+        if(j>0) {reveal(tmp, tab, i, j-1);}
+        if(j>0 && i<tmp.size()-1) {reveal(tmp, tab, i+1, j-1);}
+        if(i<tmp.size()-1) {reveal(tmp, tab, i+1, j);}
+        if(i>tmp.size()-1 && j<tmp.size()-1) {reveal(tmp, tab, i+1, j+1);}
+        if(j<tmp.size()-1) {reveal(tmp, tab, i, j+1);}
+        if(i>0 && j<tmp.size()-1) {reveal(tmp, tab, i-1, j+1);}
+    }
+}
+
+/* Check si toutes les cases ont été ouvertes */
+bool Demineur::checkBool(const vector<vector<bool>>tab){
+
+    for (size_t i = 0; i < tab.size(); i++){
+        for (size_t j = 0; j < tab.size(); j++){
+            if ( !tab[i][j] && get_plateau()[i][j] != -1) return false;
+        }
+    }
+
+    return true;
 }
 
 
 /* Affichage du jeu */ 
-void Demineur::affichage(vector<vector<bool>>&matrice){
+void Demineur::affichage(const vector<vector<bool>>matrice){
  //   cout<<get_plateau().size();
     for(size_t x=0; x < get_plateau().size(); x++){
         for(size_t y=0; y < get_plateau().size(); y++){
@@ -154,7 +172,7 @@ void Demineur::affichage(vector<vector<bool>>&matrice){
 
 
 /* Test si on a gagner ou non */
-bool Demineur::win(bool flag){
+bool Demineur::win(const bool flag){
     if (flag){ 
         cout<< "You win!"<<endl;
         return true; 

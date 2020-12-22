@@ -16,15 +16,17 @@ class Demineur {
 
   void play();
 
-  bool win(bool flag);
+  bool win(const bool flag);
 
-  void affichage(vector<vector<bool>>&matrice);
+  void affichage(const vector<vector<bool>>matrice);
 
   void initBomb(vector<vector<int>>&tab,const size_t gridsize);
 
-  void checkBomb(vector<vector<int>>&tab, size_t gridsize);
+  void checkBomb(vector<vector<int>>&tab, const size_t gridsize);
 
-  bool checkBool(vector<vector<bool>>tab);
+  bool checkBool(const vector<vector<bool>>tab);
+
+  void reveal(vector<vector<bool>>&tmp, const vector<vector<int>>tab, const size_t i, const size_t j);
 
   /* Getters & Setters */
   size_t get_nb_try() const { return _nb_try; }
