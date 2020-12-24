@@ -80,6 +80,7 @@ void Demineur::display(){
 }
 
 void Demineur:: init_background(sf::RenderWindow &window){
+    
     sf::Texture texture;
     sf::Sprite sprite;
     texture.loadFromFile(TEXTURE_BACKGROUND);
