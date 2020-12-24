@@ -7,32 +7,28 @@
 #include <time.h>
 #include <sstream>
 
+#include "../MiniJeu.hh"
 
-class Missingnumber {
+class Missingnumber : public MiniJeu {
  
  public:
  
-  Missingnumber(fstream& in,const size_t count); //constructeur par défaut
+  Missingnumber(fstream& in,const size_t count); 
 
   ~Missingnumber();
 
   void play();
 
-  bool win(bool flag);
-
   string get_solution() const { return _solution; }
-
-  size_t get_nb_try() const { return _nb_try; }
 
   vector<vector<string>> get_matrice() const{ return _matrice;}
 
-  void set_nb_try(size_t nb){ _nb_try = nb;}
-
   void affichage(vector<vector<string>>matrice);
+
+  void transition();
 
  private:
   vector<vector<string>>_matrice;
- 	string _solution;
- 	size_t _nb_try;
+  string _solution;
 
 };

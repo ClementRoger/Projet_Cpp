@@ -8,10 +8,10 @@ using namespace std;
 
 int main() {
 
-	Batonnets B1(NB_BATONNETS);
+	Batonnets B1(NB_BATONNETS,2);
 	B1.play();
 
-	if(B1.check_victory()){
+	if(B1.win()){
 
 		cout << "\nFélicitations ! Vous avez gagné !" << endl;
 	}

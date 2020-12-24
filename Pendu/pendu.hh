@@ -7,8 +7,9 @@
 #include <time.h>
 #include <sstream>
 
+#include "../MiniJeu.hh"
 
-class Pendu {
+class Pendu : public MiniJeu {
  
  public:
  
@@ -18,25 +19,22 @@ class Pendu {
 
   void play();
 
-  bool win(const bool flag);
+  //bool win(const bool flag);
 
   bool validity_test(const string tmp);
 
   string get_mistery() const { return _mistery; }
 
-  size_t get_nb_try() const { return _nb_try; }
-
-  void set_nb_try(size_t nb){ _nb_try = nb;}
-
   void affichage(vector<size_t>found_letters);
 
   bool find_letter(string letter,vector<size_t>&found_letters, const size_t taille);
+
+  void transition();
 
   friend ostream& operator<<(ostream& in, vector<string>&used_letters);
 
  private:
  	string _mistery;
- 	size_t _nb_try;
 
 };
 

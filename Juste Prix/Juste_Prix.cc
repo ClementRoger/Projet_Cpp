@@ -5,23 +5,22 @@
 
 using namespace std;
 
-Juste_Prix :: Juste_Prix(size_t NB_TENTATIVES, int NMIN, int NMAX) {
+Juste_Prix :: Juste_Prix(size_t NB_TENTATIVES, int NMIN, int NMAX):MiniJeu(NB_TENTATIVES,false) {
 
 	Nmin = NMIN;
 	Nmax = NMAX;
 	std::srand(std::time(nullptr)); //Initialise le générateur de nombres aléatoires
 	mystery_number = rand()%Nmax + Nmin; //Nombre aléatoire entre Nmin et Nmax
-	nb_tentatives = NB_TENTATIVES;
+
 }
 
 void Juste_Prix :: play() {
 
-	cout << "Vous avez " << nb_tentatives << " tentatives pour trouver un nombre aléatoire entre " << Nmin << " et " << Nmax << endl << endl;
-	victory = false;
+	cout << "Vous avez " << get_nb_try() << " tentatives pour trouver un nombre aléatoire entre " << Nmin << " et " << Nmax << endl << endl;
 	double number;
 	bool flag = true; //Sert à savoir si on décrémente le nombre de tentatives
 
-	while ( !victory && nb_tentatives > 0) { // Tant que le joueur n'a pas gagné et qu'il reste des tentatives
+	while ( !win() && get_nb_try() > 0) { // Tant que le joueur n'a pas gagné et qu'il reste des tentatives
 
 		cout << "Veuillez entrer un nombre entre " << Nmin << " et " << Nmax << endl;
 		cin >> number; 
@@ -42,16 +41,13 @@ void Juste_Prix :: play() {
 
 		if(flag){
 
-			nb_tentatives--;
-			cout << "Il vous reste " << nb_tentatives << " tentatives !" << endl << endl;
+			set_nb_try(get_nb_try()-1);
+			cout << "Il vous reste " << get_nb_try() << " tentatives !" << endl << endl;
 		}
 	}
 }
 
-bool Juste_Prix :: check_victory() {
 
-	return victory;
-}
 
 bool Juste_Prix :: check_entry(double number) {
 
@@ -83,7 +79,17 @@ bool Juste_Prix :: check_entry(double number) {
 
 	else{
 
-		victory = true;
+		set_win(true);
 		return false;
 	}
 }
+
+void Juste_Prix :: transition(){
+
+}
+
+/*
+bool Juste_Prix :: win() {
+
+	return victory;
+}*/

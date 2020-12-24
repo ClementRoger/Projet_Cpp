@@ -5,28 +5,21 @@
 
 #include "Demineur.hh"
 
-
-
+ 
 void Demineur::display(){
 
     /* Init la fenetre */
     sf::RenderWindow window(sf::VideoMode(APP_SIZE_X, APP_SIZE_Y), "Demineur de la mort qui tue"); 
-    
-    std::vector<std::vector<bool>>tmp(get_plateau().size(),std::vector<bool>(get_plateau().size(),false));
-
-    bool flag = false;
     bool gridclick = false;
-
-    std::size_t tmp_x,tmp_y;
     sf::Vector2i position;
 
     window.clear();
     init_background(window);
-    print_grid(window,tmp);
+    print_grid(window,get_open_tiles());
     window.display();
 
     /* Boucle de jeu */
-    while (window.isOpen() && !win(flag) && get_nb_try() )
+    while (window.isOpen() && !win() && get_nb_try() )
     {
         /* Test les événements */
         sf::Event event;
@@ -46,37 +39,22 @@ void Demineur::display(){
     /********************************************************/
         // Click dans la zone de jeu ?
         if (gridclick){
-            // Permet de récuperer les indices des cases cliqués 
-            tmp_x = (std::size_t)(position.x - (APP_SIZE_X-(IMG_SIZE*get_plateau().size()))/2)/IMG_SIZE;
-            tmp_y = (std::size_t)(position.y - (APP_SIZE_Y-(IMG_SIZE*get_plateau().size()))/2)/IMG_SIZE;
-
-            if (!tmp[tmp_x][tmp_y]){
-
-                reveal(tmp,get_plateau(),tmp_x,tmp_y);
-                tmp[tmp_x][tmp_y] = true;
-
-                if( get_plateau()[tmp_x][tmp_y] == -1 ){
-                    set_nb_try(get_nb_try()-1);
-                    std::cout<<"Aie, vous etes tombé sur une bombe... Il vous reste : "<<get_nb_try()<<std::endl;
-                }
-                flag=checkBool(tmp);
-            }
-            else {
-                std::cout<<"Vous avez deja ouvert cette case."<<std::endl;
-            }
-
+            set_pos_x(position.x);
+            set_pos_y(position.y);
+            play();
             gridclick = false;
         }  
 
                 /* Affichage de la grille */
         window.clear();
         init_background(window);
-        print_grid(window,tmp);
+
+        print_grid(window,get_open_tiles());
         window.display();
 
     }  
 
-    print_end(win(flag),window);
+    print_end(win(),window);
 }
 
 void Demineur:: init_background(sf::RenderWindow &window){
@@ -124,7 +102,7 @@ void Demineur:: init_background(sf::RenderWindow &window){
 }
 
 /* Permet de determiner la position de la souris lors du click + de savoir si ce click est dans la grille de jeu */
-bool Demineur::Get_Mouse_Click(sf::RenderWindow &window, sf::Vector2i& position){
+bool Demineur::Get_Mouse_Click(sf::RenderWindow &window,sf::Vector2i& position){
     static bool pressed=false;
     while (true){
       if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -169,7 +147,8 @@ void Demineur::print_grid(sf::RenderWindow &window,const std::vector<std::vector
 
                 else if (get_plateau()[x][y]<0){ texture.loadFromFile(TEXTURE_BOMB);}
 
-                else{ texture.loadFromFile(TEXTURE_NONE); }
+                else{ 
+                    texture.loadFromFile(TEXTURE_NONE); }
             }
             else { texture.loadFromFile(TEXTURE_CELL); } 
             sprite.setTexture(texture);
@@ -231,5 +210,9 @@ void Demineur::print_end(bool winner,sf::RenderWindow &window){
     window.display();
     sf::sleep(delayTime);
 }
-    
+
+
+void Demineur::transition() {
+
+}
 

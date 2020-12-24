@@ -13,7 +13,7 @@ int main() {
 	Juste_Prix J1(NB_TENTATIVES, Nmin, Nmax);
 	J1.play();
 
-	if(J1.check_victory()){
+	if(J1.win()){
 
 		cout << "\nFélicitations ! Vous avez gagné !" << endl;
 	}

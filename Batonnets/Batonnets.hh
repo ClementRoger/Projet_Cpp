@@ -1,20 +1,21 @@
 #pragma once 
 #include <iostream>
+#include "../MiniJeu.hh"
 
-class Batonnets{
+class Batonnets : public MiniJeu{
  
  public:
 
-  Batonnets(int NB_BATONNETS);
+  Batonnets(std::size_t NB_BATONNETS,std::size_t nb);
   void play();
-  bool check_victory();
   void print();
   bool user_plays();
   bool IA_plays();
+  void transition();
+  //bool win();
 
  private:
 
   std::size_t nb_batonnets;
-  bool victory;
 
 };  

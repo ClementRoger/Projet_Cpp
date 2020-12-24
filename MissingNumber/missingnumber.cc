@@ -11,9 +11,7 @@ using namespace std;
 
 #include "missingnumber.hh"
 
- Missingnumber::Missingnumber(fstream& in,const size_t nb){ 
-
-    _nb_try = nb;
+ Missingnumber::Missingnumber(fstream& in,const size_t nb):MiniJeu(nb,false){ 
 
     srand(time(0));
     size_t random = 1+rand()%(5);
@@ -26,7 +24,7 @@ using namespace std;
 
     while(!in.eof()){
         getline(in,line,'\n');
-        std::stringstream stream(line);
+        stringstream stream(line);
 
         /* Recuperer la solution de la matrice choisie aléatoirement*/
         if(count <= random){
@@ -65,17 +63,15 @@ using namespace std;
 
 }
 
-
 Missingnumber::~Missingnumber(){ 
     //std::cout<<"Missingnumber destroyed"<<std::endl;
 
 } 
 
 void Missingnumber::play(){
-   bool flag = false;
    string number;
 
-   while (!win(flag) && get_nb_try() ){
+   while (!win() && get_nb_try() ){
         affichage(get_matrice());
         getline(cin,number);
 
@@ -87,7 +83,7 @@ void Missingnumber::play(){
         else {
             /* Si entrée utilisateur & solution sont égaux */
             if (!number.compare(get_solution())){
-                flag = true;
+                set_win(true);
             }
             else {
                 cout<<"Try again. Il vous reste "<<get_nb_try()-1<<" chances."<<endl;
@@ -95,8 +91,13 @@ void Missingnumber::play(){
         }
 
         set_nb_try(get_nb_try()-1);
- 
    }
+
+   if(get_nb_try() <= 0){
+        cout<< "You loose :(!"<<endl;
+        cout<<"The response was : "<<get_solution()<<endl;
+    }
+
 }
 
 
@@ -119,7 +120,11 @@ void Missingnumber::affichage(vector<vector<string>>matrice){
 }
 
 
-/* Test si on a gagner ou non */
+void Missingnumber::transition(){
+
+}
+
+/*
 bool Missingnumber::win(bool flag){
     if (flag){ 
         cout<< "You win!"<<endl;
@@ -131,3 +136,5 @@ bool Missingnumber::win(bool flag){
     }
    return false;
 }
+
+*/

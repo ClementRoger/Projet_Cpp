@@ -6,22 +6,22 @@
 
 using namespace std;
 
-Batonnets :: Batonnets(int NB_BATONNETS) {
+Batonnets :: Batonnets(size_t NB_BATONNETS, size_t nb) : MiniJeu(nb,false) {
 
 	nb_batonnets = NB_BATONNETS;
 	std::srand(std::time(nullptr)); //Initialise le générateur de nombres aléatoires
+
 }
 
 void Batonnets :: play() {
 
-	victory = false;
 	bool tour = true; // A l'IA de jouer si tour == false, sinon au tour du joueur. Le joueur commence
 
 	cout << "Au début il y a 20 bâtonnets" << endl;
 	print();
 	cout << "Vous ne pouvez prendre que 1, 2 ou 3 bâtonnets. Le joueur qui s'empare du dernier a perdu. Bonne chance !" << endl << endl;
 	
-	while ( !victory && nb_batonnets > 0) { // Tant qu'un joueur n'a pas gagné et qu'il reste des batonnets
+	while ( !win() && nb_batonnets > 0) { // Tant qu'un joueur n'a pas gagné et qu'il reste des batonnets
 
 		if(!tour) {
 
@@ -35,10 +35,6 @@ void Batonnets :: play() {
 	}			
 }
 
-bool Batonnets :: check_victory() {
-
-	return victory;
-}
 
 void Batonnets :: print() {
 
@@ -57,7 +53,7 @@ bool Batonnets :: IA_plays() {
 	if (nb_batonnets == 1){
 
 		IA_number = 1;
-		victory = true; //Il ne reste qu'un bâtonnet, l'IA est obligée de le prendre, elle a perdu
+		set_win(true); //Il ne reste qu'un bâtonnet, l'IA est obligée de le prendre, elle a perdu
 		cout << "\nL'adversaire a pris le dernier bâtonnet." << endl;
 	}
 
@@ -71,7 +67,7 @@ bool Batonnets :: IA_plays() {
 		IA_number = rand()%3 + 1; //Sinon on prend au hasard un nombre entre 1 et 3 (la difficulté est moyenne)
 	}
 
-	if(!victory){
+	if(!win()){
 
 		nb_batonnets -= IA_number; // L'adversaire s'empare des bâtonnets
 		sleep(1);
@@ -133,3 +129,14 @@ bool Batonnets :: user_plays() {
 		}
 	}
 }
+
+
+void Batonnets::transition(){
+
+}
+
+/*
+bool Batonnets :: win() {
+
+	return _victory;
+} */

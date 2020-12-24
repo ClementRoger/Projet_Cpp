@@ -66,7 +66,7 @@ void Jeu :: create_button(sf::Sprite Bouton, sf::Text text, size_t x, size_t y) 
 
 	sf::Texture texture;
 	
-	if (!texture.loadFromFile("button.png")){ //NOTE A MOI MEME : PNG >>>>>>>>>>> JPEG. JPEG EST LE DIABLE ET CAUSE DES BUGS DE MEEEEEEEEEEEEEEEEEERDE
+	if (!texture.loadFromFile("button.png")){ //NOTE A MOI MEME : PNG >>>>>>>>>>> JPEG. JPEG EST LE DIABLE ET CAUSE DES BUGS DE MEEEEEEEEEEEEEEEEEERDE (jsuis grv d'accord jpg ça pu sa daronne)
 
     	cout << "Erreur de chargement de l'image du bouton" << endl;
 	}

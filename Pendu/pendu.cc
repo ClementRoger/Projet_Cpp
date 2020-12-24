@@ -11,7 +11,7 @@ using namespace std;
 
 #include "pendu.hh"
 
- Pendu::Pendu(fstream& in, const size_t count){ 
+ Pendu::Pendu(fstream& in, const size_t count):MiniJeu(count,false){ 
 
     srand(time(0));
 
@@ -29,7 +29,6 @@ using namespace std;
 
     _mistery = all_lines[random];
     //cout<<"mistery: "<<_mistery<<endl;
-    _nb_try = count;
 
 }
 
@@ -40,7 +39,6 @@ Pendu::~Pendu(){
 
 void Pendu::play(){
 
-    bool flag = false;
     vector<string>used_letters;
 
     vector<size_t>found_letters(get_mistery().size(),0);
@@ -50,7 +48,7 @@ void Pendu::play(){
     affichage(found_letters);
  
 
-    while (!win(flag) && get_nb_try() ){
+    while (!win() && get_nb_try() ){
 
         string letter;
         cout << "Rentrez une lettre ou un mot :"<<endl;
@@ -68,7 +66,7 @@ void Pendu::play(){
 
                 /* Si on trouve au moins une occurence */
                 if (place != string::npos){
-                    flag = find_letter(letter,found_letters,letter.size());
+                    set_win(find_letter(letter,found_letters,letter.size()));
                     set_nb_try(get_nb_try()+1);
                 }
                 else{
@@ -86,7 +84,7 @@ void Pendu::play(){
                 }
                 /* Sont égaux */
                 else{
-                    flag = find_letter(letter,found_letters,letter.size());
+                    set_win(find_letter(letter,found_letters,letter.size()));
                 }
             }
         }
@@ -99,6 +97,11 @@ void Pendu::play(){
         affichage(found_letters);
         set_nb_try(get_nb_try()-1);
     } 
+
+    if(get_nb_try() <= 0){
+        cout<< "You loose :(!"<<endl;
+        cout<<"The response was : "<<get_mistery()<<endl;
+    }
 }
 
 bool Pendu::validity_test(const string tmp){
@@ -154,8 +157,11 @@ void Pendu::affichage(vector<size_t>found_letters){
     cout<<res<<endl<<endl;
 }
 
+void Pendu::transition(){
 
-/* Test si on a gagner ou non */
+}
+
+/*
 bool Pendu::win(const bool flag){
     if (flag){ 
         cout<< "You win!"<<endl;
@@ -167,3 +173,4 @@ bool Pendu::win(const bool flag){
     }
    return false;
 }
+*/
