@@ -1,4 +1,45 @@
 
+
+#include <iostream>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+#include "TextEntry.hh"
+
+int main() {
+
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Projet C++");
+
+    sf::Event event;
+    
+    TextEntry zone(window,800,600);
+
+    while (window.isOpen()) {
+
+        while(window.pollEvent(event)) {
+
+            zone.check_events(window,event);
+
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+
+           /* else if ((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Enter)){
+                continue;
+            }*/
+        }  
+
+
+    zone.display(window);    
+
+   }
+    
+    return 0;
+}    
+
+
+/*
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
@@ -71,3 +112,4 @@ int main() {
     
     return 0;
 }    
+*/
