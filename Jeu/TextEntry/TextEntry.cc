@@ -81,12 +81,10 @@ void TextEntry :: check_events(sf::RenderWindow& window,sf::Event& event){
 }
 
  void TextEntry :: display (sf::RenderWindow& window){
- 	window.clear(sf::Color::White);
 
     init_rectangle(window,140,30,get_xsize(),get_ysize());
     display_playertext(window,get_playerInput(),get_xsize()+ 140/2 - get_entrysize()/2, get_ysize());
 
-    window.display();
  }
 
  /*

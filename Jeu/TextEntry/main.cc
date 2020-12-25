@@ -29,8 +29,9 @@ int main() {
             }*/
         }  
 
-
-    zone.display(window);    
+    window.clear(sf::Color::White);
+    zone.display(window); 
+    window.display();   
 
    }
     
