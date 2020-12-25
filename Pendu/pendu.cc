@@ -9,7 +9,7 @@
 #include <algorithm> 
 using namespace std;
 
-#include "pendu.hh"
+#include "pendu.hh" 
 
  Pendu::Pendu(fstream& in, const size_t count):MiniJeu(count,false){ 
 
@@ -28,6 +28,10 @@ using namespace std;
     random = rand()%(total_lines);
 
     _mistery = all_lines[random];
+
+    vector<size_t>found_letters(_mistery.size(),0);
+    found_letters[0] = 1;
+    _found_letters=found_letters;
     //cout<<"mistery: "<<_mistery<<endl;
 
 }
@@ -39,69 +43,64 @@ Pendu::~Pendu(){
 
 void Pendu::play(){
 
-    vector<string>used_letters;
+    vector<string>used_letters=get_used_letters();
 
-    vector<size_t>found_letters(get_mistery().size(),0);
+    vector<size_t>found_letters=get_found_letters();
 
+    string letter = get_user_entry();
+    std::cout<<"letters: "<<letter<<std::endl;
+    transform(letter.begin(), letter.end(),letter.begin(), ::toupper);
 
-    found_letters[0] = 1;
-    affichage(found_letters);
- 
+// Si l'entrée est valide
+    if (validity_test(letter)){
 
-    while (!win() && get_nb_try() ){
+        
+        if (letter.size() == 1 ){
+            //used_letters.push_back(letter);
+            add_letter(used_letters,letter);
+            size_t place = get_mistery().find(letter);
 
-        string letter;
-        cout << "Rentrez une lettre ou un mot :"<<endl;
-        getline(cin,letter);
-        transform(letter.begin(), letter.end(),letter.begin(), ::toupper);
- 
-    // Si l'entrée est valide
-        if (validity_test(letter)){
-
-             /* Face à un charactère */
-            if (letter.size() == 1 ){
-                used_letters.push_back(letter);
-                /* On récupère la place de la lettre ou npos*/
-                size_t place = get_mistery().find(letter);
-
-                /* Si on trouve au moins une occurence */
-                if (place != string::npos){
-                    set_win(find_letter(letter,found_letters,letter.size()));
-                    set_nb_try(get_nb_try()+1);
-                }
-                else{
-                    cout<<"Try again. Il vous reste "<<get_nb_try()-1<<" chances."<<endl;
-                }
-
-                cout<<used_letters;
-            }
-            /* Face à un mot */
-            else {
-
-                /* Ne sont pas égaux */
-                if(letter.compare(get_mistery())){
-                    cout<<"Try again. Il vous reste "<<get_nb_try()-1<<" chances."<<endl;
-                }
-                /* Sont égaux */
-                else{
-                    set_win(find_letter(letter,found_letters,letter.size()));
-                }
+            
+            if (place != string::npos){
+                set_win(find_letter(letter,found_letters,letter.size()));
+                set_nb_try(get_nb_try()+1);
             }
         }
-        // entrée non valide    
+        
         else {
-            cout<<"ERROR. Rentrez une lettre ou un mot."<<endl;
-            set_nb_try(get_nb_try()+1);
+
+            if(!letter.compare(get_mistery())){
+                set_win(find_letter(letter,found_letters,letter.size()));
+            }
+           
         }
 
-        affichage(found_letters);
-        set_nb_try(get_nb_try()-1);
-    } 
-
-    if(get_nb_try() <= 0){
-        cout<< "You loose :(!"<<endl;
-        cout<<"The response was : "<<get_mistery()<<endl;
+        set_found_letters(found_letters);
+        set_used_letters(used_letters);
     }
+    // entrée non valide    
+    else {
+       // cout<<"ERROR. Rentrez une lettre ou un mot."<<endl;
+        set_nb_try(get_nb_try()+1);
+    }
+
+    
+    affichage(found_letters);
+    set_nb_try(get_nb_try()-1);
+    cout<<get_nb_try()<<endl;
+}
+
+/* Permet d'ajouter la lettre à used_letters que si elle n'apparait pas déja*/
+void Pendu::add_letter(vector<string>&used_letters,string letter){
+    bool flag = false;
+
+    for (size_t i = 0; i < used_letters.size(); i++){
+        if (used_letters[i] == letter) flag = true;
+    }
+    if (!flag){
+        used_letters.push_back(letter);
+    }
+    
 }
 
 bool Pendu::validity_test(const string tmp){
@@ -157,9 +156,6 @@ void Pendu::affichage(vector<size_t>found_letters){
     cout<<res<<endl<<endl;
 }
 
-void Pendu::transition(){
-
-}
 
 /*
 bool Pendu::win(const bool flag){
@@ -174,3 +170,72 @@ bool Pendu::win(const bool flag){
    return false;
 }
 */
+
+
+/*
+void Pendu::play(){
+
+    vector<string>used_letters;
+
+    vector<size_t>found_letters(get_mistery().size(),0);
+
+
+    found_letters[0] = 1;
+    affichage(found_letters);
+ 
+
+    while (!win() && get_nb_try() ){
+
+        string letter;
+        cout << "Rentrez une lettre ou un mot :"<<endl;
+        getline(cin,letter);
+        transform(letter.begin(), letter.end(),letter.begin(), ::toupper);
+ 
+    // Si l'entrée est valide
+        if (validity_test(letter)){
+
+            
+            if (letter.size() == 1 ){
+                used_letters.push_back(letter);
+                
+                size_t place = get_mistery().find(letter);
+
+                
+                if (place != string::npos){
+                    set_win(find_letter(letter,found_letters,letter.size()));
+                    set_nb_try(get_nb_try()+1);
+                }
+                else{
+                    cout<<"Try again. Il vous reste "<<get_nb_try()-1<<" chances."<<endl;
+                }
+
+                cout<<used_letters;
+            }
+            
+            else {
+
+              
+                if(letter.compare(get_mistery())){
+                    cout<<"Try again. Il vous reste "<<get_nb_try()-1<<" chances."<<endl;
+                }
+               
+                else{
+                    set_win(find_letter(letter,found_letters,letter.size()));
+                }
+            }
+        }
+        // entrée non valide    
+        else {
+            cout<<"ERROR. Rentrez une lettre ou un mot."<<endl;
+            set_nb_try(get_nb_try()+1);
+        }
+
+        affichage(found_letters);
+        set_nb_try(get_nb_try()-1);
+    } 
+
+    if(get_nb_try() <= 0){
+        cout<< "You loose :(!"<<endl;
+        cout<<"The response was : "<<get_mistery()<<endl;
+    }
+} */
