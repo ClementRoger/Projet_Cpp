@@ -12,7 +12,7 @@ int main()
 {   
  
 fstream inFile("mots_difficiles.txt", fstream::in);
-Pendu game(inFile,10); 
+Pendu game(inFile,8); 
 game.display();
  
   return 0;

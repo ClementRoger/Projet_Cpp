@@ -46,7 +46,8 @@ void Pendu::display(){
 
     }  
 
-    print_end(win(),window);
+    print_end(win(),window); 
+    std::cout<<"la solution est: "<<get_mistery()<<std::endl;
 
 }
 
@@ -74,14 +75,6 @@ void Pendu:: init_background(sf::RenderWindow &window){
     text.setPosition(sf::Vector2f(43,78));
     window.draw(text);
 
-
-    /*text.setString("Vies restantes : " + std::to_string(get_nb_try()));
-    text.setCharacterSize(30);
-    text.setFillColor(sf::Color::White);
-    text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f(APP_SIZE_X/3+5,480));
-    window.draw(text); */
-
     texture.loadFromFile(TEXTURE_NAME);
     sprite.setPosition(sf::Vector2f(APP_SIZE_X/2-74,20)); 
     sprite.setTexture(texture);
@@ -90,7 +83,7 @@ void Pendu:: init_background(sf::RenderWindow &window){
     texture.loadFromFile(TEXTURE_BACKGAME);
     texture.setSmooth(true);
     sprite.setTexture(texture);
-    sprite.setPosition(sf::Vector2f(APP_SIZE_X/4+10,180));
+    sprite.setPosition(sf::Vector2f(APP_SIZE_X/4+10,160));
     window.draw(sprite);
 
     texture.loadFromFile(TEXTURE_LETTERS);
@@ -112,6 +105,13 @@ void Pendu:: init_background(sf::RenderWindow &window){
     text.setStyle(sf::Text::Bold);
     text.setPosition(sf::Vector2f(300,430));
     window.draw(text);
+
+    text.setString("Vies restantes : " + std::to_string(get_nb_try()));
+    text.setCharacterSize(24);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f(APP_SIZE_X/3+30,500));
+    window.draw(text); 
 }
 
 void Pendu::print_game( sf::RenderWindow &window ){
@@ -140,7 +140,7 @@ void Pendu::print_word(sf::RenderWindow &window){
     text.setCharacterSize(25);
     text.setFillColor(sf::Color::White);
     text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f((APP_SIZE_X-(get_mistery().size()*25))/2,210));
+    text.setPosition(sf::Vector2f((APP_SIZE_X-(get_mistery().size()*25))/2,190));
     window.draw(text);
    
 }
