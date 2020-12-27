@@ -10,10 +10,10 @@ using namespace std;
    
 int main()
 {   
- 
+  
 fstream inFile("matrices.txt", fstream::in);
 Missingnumber game(inFile,3); 
-game.play();
+game.display();
  
   return 0;
 } 

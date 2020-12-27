@@ -7,24 +7,24 @@
 #include <sstream>
 #include <time.h>
 #include <algorithm> 
-using namespace std;
+
 
 #include "missingnumber.hh"
 
- Missingnumber::Missingnumber(fstream& in,const size_t nb):MiniJeu(nb,false){ 
+ Missingnumber::Missingnumber(std::fstream& in,const std::size_t nb):MiniJeu(nb,false){ 
 
     srand(time(0));
-    size_t random = 1+rand()%(5);
+    std::size_t random = 1+rand()%(5);
 
-    size_t count = 1;
-    size_t tmp = 1;
-    string line;
+    std::size_t count = 1;
+    std::size_t tmp = 1;
+    std::string line;
 
-    vector<vector<string>>tempmatrice;
+    std::vector<std::vector<std::string>>tempmatrice;
 
     while(!in.eof()){
         getline(in,line,'\n');
-        stringstream stream(line);
+        std::stringstream stream(line);
 
         /* Recuperer la solution de la matrice choisie aléatoirement*/
         if(count <= random){
@@ -35,7 +35,7 @@ using namespace std;
                          tmp++;
                         if (tmp == 3){
                              _solution = word;
-                             cout<<"solution:"<<_solution<<endl;
+                             std::cout<<"solution:"<<_solution<<std::endl;
                              tmp = 0;
                          }
         
@@ -45,8 +45,8 @@ using namespace std;
         }
         else {
         /* Recuperer la matrice choisie aléatoirement*/
-            if (tmp < 4){
-                vector<string>templine;
+            if (tmp < 3){
+                std::vector<std::string>templine;
                 for(std::string tempword; getline(stream,tempword,' ');){
                     templine.push_back(tempword); 
                 }
@@ -59,8 +59,8 @@ using namespace std;
     }
     
     _matrice = tempmatrice;
+    _user_entry = "";
     //affichage(tempmatrice);
-
 }
 
 Missingnumber::~Missingnumber(){ 
@@ -68,61 +68,59 @@ Missingnumber::~Missingnumber(){
 
 } 
 
+
 void Missingnumber::play(){
-   string number;
+   std::string number = get_user_entry();
 
-   while (!win() && get_nb_try() ){
-        affichage(get_matrice());
-        getline(cin,number);
+        if (validity_test(number)){
 
-        /* Test si l'entrée est un nombre */
-        if (number.find_first_not_of( "0123456789" ) != string::npos){
-            cout<<"ERROR. Rentrez un chiffre ou un nombre."<<endl;
-            set_nb_try(get_nb_try()+1);
-        }
-        else {
-            /* Si entrée utilisateur & solution sont égaux */
             if (!number.compare(get_solution())){
                 set_win(true);
             }
             else {
-                cout<<"Try again. Il vous reste "<<get_nb_try()-1<<" chances."<<endl;
+                std::cout<<"Try again. Il vous reste "<<get_nb_try()-1<<" chances."<<std::endl;
             }
+
+            set_nb_try(get_nb_try()-1);
         }
 
-        set_nb_try(get_nb_try()-1);
-   }
-
-   if(get_nb_try() <= 0){
-        cout<< "You loose :(!"<<endl;
-        cout<<"The response was : "<<get_solution()<<endl;
-    }
-
 }
+
+/* Test la validité de l'entrée utilisateur */
+bool Missingnumber::validity_test(const std::string tmp){
+
+    if (!tmp.size()){
+        return false;
+    }
+    else {
+        if (tmp.find_first_not_of( "0123456789") != std::string::npos){
+            return false;
+        }
+        return true;
+    }
+}
+
 
 
 /* Affichage du jeu */ 
-void Missingnumber::affichage(vector<vector<string>>matrice){
+void Missingnumber::affichage(std::vector<std::vector<std::string>>matrice){
 
-    cout<<"---------------------------------"<<endl<<endl;
+    std::cout<<"---------------------------------"<<std::endl<<std::endl;
 
-    vector<vector<string> >::iterator row;
-    vector<string>::iterator col;
+    std::vector<std::vector<std::string> >::iterator row;
+    std::vector<std::string>::iterator col;
 
     for(row = matrice.begin() ; row !=matrice.end() ; row++){
         for(col = row->begin() ; col != row->end() ; col++){
-            cout << *col <<" ";
+            std::cout << *col <<" ";
         }
-        cout <<endl;  
+        std::cout << std::endl;  
     }
 
-    cout<<"Entrez un nombre :"<<endl;
-}
+   std::cout<<"Entrez un nombre :"<< std::endl;
+} 
 
 
-void Missingnumber::transition(){
-
-}
 
 /*
 bool Missingnumber::win(bool flag){
@@ -138,3 +136,35 @@ bool Missingnumber::win(bool flag){
 }
 
 */
+
+
+/*
+void Missingnumber::play(){
+   std::string number;
+
+   while (!win() && get_nb_try() ){
+        affichage(get_matrice());
+        getline(std::cin,number);
+
+        if (number.find_first_not_of( "0123456789" ) != std::string::npos){
+            std::cout<<"ERROR. Rentrez un chiffre ou un nombre."<<std::endl;
+            set_nb_try(get_nb_try()+1);
+        }
+        else {
+            if (!number.compare(get_solution())){
+                set_win(true);
+            }
+            else {
+                std::cout<<"Try again. Il vous reste "<<get_nb_try()-1<<" chances."<<std::endl;
+            }
+        }
+
+        set_nb_try(get_nb_try()-1);
+   }
+
+   if(get_nb_try() <= 0){
+        std::cout<< "You loose :(!"<<std::endl;
+        std::cout<<"The response was : "<<get_solution()<<std::endl;
+    }
+
+}*/
