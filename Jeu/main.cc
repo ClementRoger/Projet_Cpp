@@ -3,13 +3,12 @@
 #include <SFML/System.hpp>
 
 #include "Jeu.hh"
-
-#define XWINDOW 800
-#define YWINDOW 600
-
-sf::RenderWindow window(sf::VideoMode(XWINDOW, YWINDOW), "Projet C++");
+ 
 
 int main() {
 
 	Jeu J1;
+	J1.run();
+	
+	return 0;
 }	

@@ -69,7 +69,7 @@ void Demineur:: init_background(sf::RenderWindow &window){
     window.draw(sprite);
  
     sf::Font font;
-    font.loadFromFile("img/arial.ttf");
+    font.loadFromFile("img_demineur/arial.ttf");
     sf::Text text;
     text.setFont(font);
     text.setString("Test \n 5/6");

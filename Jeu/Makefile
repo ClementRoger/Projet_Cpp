@@ -1,11 +1,33 @@
-all: etape1 etape2 clean
+CC=g++
+CCFLAGS= -Wall -Werror -std=c++11 -g
+LIBFLAGS= -lsfml-graphics -lsfml-window -lsfml-system
+SRC= $(wildcard *.cc)
+OBJ= $(SRC:.cc=.o)
+TST_DIR=tests/
+TST= $(wildcard $(TST_DIR)/*.cc)
+OBJ_TEST = $(filter-out main.o, $(OBJ)) $(TST:.cc=.o)
+EXEC= exe 
+ 
 
-etape1: main.cc
-	g++ -c Jeu.cc
-	g++ -c main.cc
 
-etape2: main.o Jeu.o
-	g++ -o exe main.o Jeu.o -lsfml-graphics -lsfml-window -lsfml-system 
+all: $(EXEC)
+
+testcase : 
+	cd $(TST_DIR) ;  make
+
+$(EXEC): $(OBJ)
+	$(CC) $^ -o $@ $(LIBFLAGS)
+
+%.o: %.cc
+	$(CC) $(CCFLAGS) -o $@ -c $<
+
+.depend:
+	g++ $(CCFLAGS) -MM $(SRC) > .depends
+-include .depends
 
 clean:
-	rm -rf *.o
+	rm -f $(OBJ) $(EXEC)
+cleantest:
+	cd $(TST_DIR) ; make clean
+distclean : clean cleantest
+

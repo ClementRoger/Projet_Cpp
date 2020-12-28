@@ -2,30 +2,183 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <iostream>
-
+ 
 #include "Jeu.hh"
+#include "Demineur.hh"
+#include "pendu.hh"
+#include "missingnumber.hh"
 
 using namespace std;
 
 Jeu :: Jeu() {
+	// 1 = facile ~ 2 = difficile ~ 0 = indéfini
+	_difficulty = 0;
+	_passedGames = 0;
+}
 
+void Jeu :: run(){
+	sf::RenderWindow window(sf::VideoMode(XWINDOW, YWINDOW), "Projet C++");
+
+	std::size_t cpt = 0; // nombre de jeux avec 0 l'intro
+	bool Intropassed = false;
 	while(window.isOpen()) {
 
 		sf::Event event;
-        while (window.pollEvent(event)) {
+	    while (window.pollEvent(event)) {
 
-            if (event.type == event.Closed) {
-            	window.close();
-            }
-        }
-
-        window.clear();
-        init_game();
-		window.display();
+	        if (event.type == event.Closed) {
+	        	window.close();
+	        	break;
+	        }
+		    if (!cpt){
+		        if (event.type == sf::Event::MouseButtonPressed){
+		        	Intropassed = Get_Mouse_Click(window);
+		        	break;
+		        }
+		    }
+	    }
+	     // Si un niveau : facile ou difficile sélectionné on incrémente cpt pour passer aux minijeux
+	    if(Intropassed && !cpt){
+	    	cpt ++;
+	    }
+	    // Si niveau facile
+	    if (get_difficulty() == 1){
+	    	easy_game(window,cpt);
+	    }
+	    else if (get_difficulty() == 2){
+	    	difficult_game(window,cpt);
+	    }
+	    
+	    
+	    if (!cpt){
+	    	window.clear();
+	    	init_game(window);
+			window.display();
+	    }
+	    
 	}
 }
 
-void Jeu :: init_game() {
+void Jeu::easy_game(sf::RenderWindow &window,std::size_t& cpt){
+	switch (cpt){
+		case 1 : {
+			std::fstream inFile("img_pendu/mots_faciles.txt", std::fstream::in);
+			Pendu game(inFile,8); 
+    		game.display(window);
+	    	check_end(game,window,cpt);
+			break;
+		}
+
+		case 2 : {
+			std::fstream inFile("img_missing/matrices.txt", std::fstream::in);
+			Missingnumber game(inFile,3); 
+			game.display(window);
+			check_end(game,window,cpt);
+			break;
+		}
+
+		case 3 : {
+			Demineur game(2,8,8); 
+    		game.display(window);
+    		check_end(game,window,cpt);
+			break;
+		}
+		
+		default :
+			std::cout<<"end"<<std::endl;
+			break;
+	}
+}
+
+void Jeu::difficult_game(sf::RenderWindow &window,std::size_t& cpt){
+    switch (cpt){
+		case 1 : {
+			std::fstream inFile("img_pendu/mots_difficiles.txt", std::fstream::in);
+			Pendu game(inFile,8); 
+    		game.display(window);
+	    	check_end(game,window,cpt);
+			break;
+		}
+
+		case 2 : {
+			std::fstream inFile("img_missing/matrices.txt", std::fstream::in);
+			Missingnumber game(inFile,1); 
+			game.display(window);
+			check_end(game,window,cpt);
+			break;
+		}
+
+		case 3 : {
+			Demineur game(1,10,8); 
+    		game.display(window);
+    		check_end(game,window,cpt);
+			break;
+		}
+		
+		default :
+			std::cout<<"end"<<std::endl;
+			break;
+	}
+}
+
+void Jeu::check_end(MiniJeu& game,sf::RenderWindow &window,std::size_t& cpt){
+	if(game.win()){
+		cpt++;
+	}
+	else {
+		window.close();
+	}
+}
+
+/* Permet de determiner la position de la souris lors du click + de savoir si ce click est dans la grille de jeu */
+bool Jeu::Get_Mouse_Click(sf::RenderWindow &window){
+	sf::Vector2i position;
+    static bool pressed=false;
+    while (true){
+      if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+          if (!pressed){
+            position = sf::Mouse::getPosition(window);
+            pressed=true;
+            break;
+          }
+      }
+      else{
+        pressed = false;
+      }   
+    }
+    //std::cout << position.x << " " << position.y << '\n';
+    std::size_t tmp = test_button_border(position);
+    std::cout<<"tmp :"<<tmp<<std::endl;
+    if (tmp > 0){
+    	set_difficulty(tmp);
+    	return true;
+    }
+    return false;
+}
+
+/* Permet de tester si le click se trouve sur difficile ou facile*/
+std::size_t Jeu::test_button_border(const sf::Vector2i position){
+
+    if ( (position.x >= 100)
+        && (position.x <= 100 + 960*0.25f)
+        && (position.y >= 430)
+        && (position.y <= 430 + 480*0.25f )) {
+        return 1;
+    }
+
+    if ( (position.x >= 450)
+        && (position.x <= 450 + 960*0.25f)
+        && (position.y >= 430)
+        && (position.y <= 430 + 480*0.25f )){
+
+    	return 2;
+    }
+    
+    
+    return 0;
+}
+
+void Jeu :: init_game(sf::RenderWindow& window) {
 
 	sf::Font font;
 
@@ -49,8 +202,8 @@ void Jeu :: init_game() {
 	bg.setScale(1.18,1.48); //Valeur trouvées un peu au pif mdr
 	window.draw(bg);
 
-	create_button(Bouton_Facile, Texte_Facile, 100, 430);
-	create_button(Bouton_Difficile, Texte_Difficile, 450, 430);
+	create_button(window,Bouton_Facile, Texte_Facile, 100, 430);
+	create_button(window,Bouton_Difficile, Texte_Difficile, 450, 430);
 
 	sf::Text Texte_Titre("Livin' Tomorrow",font,50);
 	Texte_Titre.setCharacterSize(55);
@@ -62,7 +215,7 @@ void Jeu :: init_game() {
 
 }
 
-void Jeu :: create_button(sf::Sprite Bouton, sf::Text text, size_t x, size_t y) {
+void Jeu :: create_button(sf::RenderWindow& window,sf::Sprite Bouton, sf::Text text, size_t x, size_t y) {
 
 	sf::Texture texture;
 	

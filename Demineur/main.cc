@@ -5,12 +5,12 @@
  
 
 #include "Demineur.hh"
-   
+    
 int main()
 {   
- 
-Demineur game(2,8,8); 
-game.display();
+ sf::RenderWindow window(sf::VideoMode(APP_SIZE_X, APP_SIZE_Y), "Demineur de la mort qui tue");
+Demineur game(2,10,8); 
+game.display(window);
  
   return 0;
 } 
