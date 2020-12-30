@@ -35,3 +35,18 @@ class TextEntry{
   std::size_t _ysize; 
   std::string _final; //choix final
 };  
+
+/*
+
+#pragma once 
+#include <iostream>
+
+class Text_Entry{
+ 
+ public:
+
+  Text_Entry(std::size_t x, std::size_t y);
+
+};  
+
+*/

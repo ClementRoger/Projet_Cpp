@@ -2,22 +2,19 @@
 #include <fstream>
 #include "Batonnets.hh"
 
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+
 using namespace std;
 
 #define NB_BATONNETS 20
 
 int main() {
 
-	Batonnets B1(NB_BATONNETS,2);
-	B1.play();
+	sf::RenderWindow window(sf::VideoMode(APP_SIZE_X, APP_SIZE_Y), "MARCHE STP MARCHE BORDEL");
+	Batonnets B1(NB_BATONNETS,2); //1 easy, 2 difficult
+	B1.display(window);
 
-	if(B1.win()){
-
-		cout << "\nFélicitations ! Vous avez gagné !" << endl;
-	}
-
-	else{
-
-		cout << "\nDésolé. Vous avez perdu !" << endl;
-	}
+	return EXIT_SUCCESS;
 }

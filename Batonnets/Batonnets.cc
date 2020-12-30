@@ -6,37 +6,40 @@
 
 using namespace std;
 
-Batonnets :: Batonnets(size_t NB_BATONNETS, size_t nb) : MiniJeu(nb,false) {
+Batonnets :: Batonnets(size_t NB_BATONNETS, size_t dif) : MiniJeu(dif,false) {
 
 	nb_batonnets = NB_BATONNETS;
-	std::srand(std::time(nullptr)); //Initialise le générateur de nombres aléatoires
+	tour = true;
 
+	if(dif == 1) {//Easy
+		difficulty = true;
+	}	
+	else {
+		difficulty = false;
+	}
 }
 
 void Batonnets :: play() {
-
-	bool tour = true; // A l'IA de jouer si tour == false, sinon au tour du joueur. Le joueur commence
-
-	cout << "Au début il y a 20 bâtonnets" << endl;
-	print();
-	cout << "Vous ne pouvez prendre que 1, 2 ou 3 bâtonnets. Le joueur qui s'empare du dernier a perdu. Bonne chance !" << endl << endl;
 	
-	while ( !win() && nb_batonnets > 0) { // Tant qu'un joueur n'a pas gagné et qu'il reste des batonnets
+	if(!tour) {
 
-		if(!tour) {
+		tour = IA_plays();
+	}
 
-			tour = IA_plays();
-		}
+	else {
 
-		else {
-
-			tour = user_plays();			
-		}
+		tour = user_plays();			
 	}			
 }
 
+int Batonnets :: generer_nb_aleatoire(int min, int max) {
 
-void Batonnets :: print() {
+    std::srand(std::time(nullptr)); //Initialise le générateur de nombres aléatoires
+
+    return rand()%(max - min + 1) + min;
+}
+
+void Batonnets :: print() { //Utilisée pour le test dans le terminal
 
 	for (size_t i = 0; i < nb_batonnets; ++i) {
 		
@@ -54,7 +57,6 @@ bool Batonnets :: IA_plays() {
 
 		IA_number = 1;
 		set_win(true); //Il ne reste qu'un bâtonnet, l'IA est obligée de le prendre, elle a perdu
-		cout << "\nL'adversaire a pris le dernier bâtonnet." << endl;
 	}
 
 	else if(nb_batonnets <= 4) { // l'IA peut gagner
@@ -64,15 +66,31 @@ bool Batonnets :: IA_plays() {
 
 	else{
 
-		IA_number = rand()%3 + 1; //Sinon on prend au hasard un nombre entre 1 et 3 (la difficulté est moyenne)
+		if(difficulty){
+
+			IA_number = generer_nb_aleatoire(1,3); //Sinon on prend au hasard un nombre entre 1 et 3 (la difficulté est moyenne)
+		}
+
+		else {
+
+			if(generer_nb_aleatoire(1,2) == 1){ //Une chance sur deux
+
+				IA_number = 4 - last_move; // L'IA prend 4 - nombre de batonnets pris par l'utilisateur (technique infaillibe pour gagner)
+			}
+
+			else {
+
+				IA_number = generer_nb_aleatoire(1,3);
+			}
+		}
 	}
 
-	if(!win()){
+	if(! win()){
 
 		nb_batonnets -= IA_number; // L'adversaire s'empare des bâtonnets
-		sleep(1);
-		cout << "\nL'adversaire a pris " << IA_number << " bâtonnet(s)" << endl;
-		print(); // Affiche les bâtonnets restants
+		last_move = IA_number;
+		//cout << "\nL'adversaire a pris " << IA_number << " bâtonnet(s)" << endl;
+		//print(); // Affiche les bâtonnets restants
 
 		return true;
 	}
@@ -87,56 +105,19 @@ bool Batonnets :: user_plays() {
 	if(nb_batonnets == 1) { ///Il ne reste qu'un bâtonnet, le joueur est obligé de le prendre, il a perdu
 
 		nb_batonnets--;
-		cout << "Vous avez pris le dernier bâtonnet." << endl;
+		//cout << "Vous avez pris le dernier bâtonnet." << endl;
 		return true;
 	}
 
 	else{
 
-		cout << "\nIndiquez le nombre de bâtonnets que vous souhaitez prendre : ";
-		cin >> number;
-		int int_number = (int)number;
-
-		if(!(cin.fail()) ){ // Si l'entrée est un int
-
-			if(number != int_number){
-	
-				cout << "Erreur ! Veuillez entrer un entier !" << endl;
-				return true;
-
-			}
-					
-			else if( (number >= 1) && (number <= 3) ){ //On ne peut sélectionner que 1, 2 ou 3 bâtonnets
-
-				nb_batonnets -= number;
-				print(); // Affiche les bâtonnets restants
-				return false;
-			}
-			
-			else{
-
-				cout << "Erreur ! Vous ne pouvez prendre que 1, 2 ou 3 bâtonnets !" << endl;
-				return true;
-			}
-		}
-
-		else {
-
-			cout << "Erreur ! Veuillez entrer un entier entre 1 et 3 ..." << endl;
-			cin.clear();
-			cin.ignore();
-			return true;
-		}
+		number = stoi(user_entry, nullptr, 10);;
+		nb_batonnets -= number;
+		last_move = number;
+		return false;
 	}
 }
-
 
 void Batonnets::transition(){
 
 }
-
-/*
-bool Batonnets :: win() {
-
-	return _victory;
-} */

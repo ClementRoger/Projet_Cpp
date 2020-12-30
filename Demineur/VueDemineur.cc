@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "Demineur.hh"
-
  
 void Demineur::display(sf::RenderWindow& window){
 
@@ -158,6 +157,7 @@ void Demineur::print_grid(sf::RenderWindow &window,const std::vector<std::vector
 }
 
 void Demineur::number_texture(const int val, sf::Texture& texture){
+    
     switch(val){
         case 1 : 
                 texture.loadFromFile(TEXTURE_1);
