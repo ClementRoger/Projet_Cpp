@@ -14,7 +14,7 @@ void Batonnets :: display(sf::RenderWindow& window){
 	window.clear();
 	init_background(window);
 	affiche_batonnets(window);
-	TextEntry textbar(window,APP_SIZE_X,APP_SIZE_Y + 260);
+	TextEntry textbar(window,APP_SIZE_X,APP_SIZE_Y + 220);
 	window.display();
 
 	while (window.isOpen() && !win() && nb_batonnets > 0) {
@@ -136,6 +136,14 @@ void Batonnets :: init_background(sf::RenderWindow& window) {
     text.setPosition(sf::Vector2f(400 - text.getLocalBounds().width/2,155));
     window.draw(text);    
 
+    text.setFont(font);
+    text.setString("Press Enter to submit");
+    text.setCharacterSize(25);
+    text.setFillColor(sf::Color(0,0,0));
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f(400 - text.getLocalBounds().width/2,430));
+    window.draw(text);
+
     texture.loadFromFile("images/paint.png");
     texture.setSmooth(true);
     sprite.setTexture(texture);
@@ -159,7 +167,7 @@ void Batonnets :: affiche_batonnets(sf::RenderWindow& window) {
     sf::Sprite sprite;
     texture.loadFromFile("images/metal.jpeg");
     sprite.setTexture(texture);
-    sprite.setPosition(30, 240);
+    sprite.setPosition(30, 220);
     sprite.setScale(1.04,0.3);
     window.draw(sprite);
 
@@ -174,7 +182,7 @@ void Batonnets :: affiche_batonnets(sf::RenderWindow& window) {
 		}	
 
 		sprite.setTexture(texture);
-		sprite.setPosition(700 * i /19, 253);
+		sprite.setPosition(700 * i /19, 233);
 		sprite.setScale(0.2,0.2);
 		window.draw(sprite);
 	}
