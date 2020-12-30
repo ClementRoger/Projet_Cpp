@@ -12,7 +12,7 @@ using namespace std;
 
 int main() {
 
-	sf::RenderWindow window(sf::VideoMode(APP_SIZE_X, APP_SIZE_Y), "MARCHE STP MARCHE BORDEL");
+	sf::RenderWindow window(sf::VideoMode(APP_SIZE_X, APP_SIZE_Y), "Epreuve des Bâtonnets");
 	Batonnets B1(NB_BATONNETS,2); //1 easy, 2 difficult
 	B1.display(window);
 

@@ -1,12 +1,13 @@
 CC=g++
 CCFLAGS= -Wall -Werror -std=c++11 -g
+LIBFLAGS= -lsfml-graphics -lsfml-window -lsfml-system
 SRC= $(wildcard ../*.cc)
 OBJ= $(SRC:.cc=.o)
 TST= $(wildcard *.cc)
 OBJ_TEST = $(filter-out ../main.o, $(OBJ)) $(TST:.cc=.o)
 
 Juste_Prix : $(OBJ_TEST) 
-	$(CC) $(CCFLAGS)  -o $@ $^
+	$(CC) $^ -o $@ $(LIBFLAGS)
 
 %.o: %.cpp
 	$(CC) $(CCFLAGS) -I../ -o $@ -c $<
