@@ -37,7 +37,12 @@
 
     /* Initialise le tableau contenant les bombes + check le nombre de bombes */
     initBomb(tmp,gridsize);
-
+    for (std::size_t i = 0; i< tmp.size(); i++){
+        for (std::size_t j = 0; j< tmp.size(); j++){
+            std::cout<<tmp[j][i]<<" ";
+        }
+        std::cout<<std::endl;
+    }
     _plateau = tmp;
 
     std::vector<std::vector<bool>>open_tiles(get_plateau().size(),std::vector<bool>(get_plateau().size(),false));

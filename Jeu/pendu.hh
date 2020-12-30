@@ -18,6 +18,7 @@
 #define TEXTURE_LETTERS1 "img_pendu/tab.png"
 #define TEXTURE_WIN1 "img_pendu/you_win.png"
 #define TEXTURE_LOSE1 "img_pendu/game_over.png"
+#define TEXTURE_TRANSITION1 "img_pendu/transition.png"
 
 #define APP_SIZE_X1 800
 #define APP_SIZE_Y1 600
@@ -40,12 +41,16 @@ class Pendu : public MiniJeu {
   /* SFML */
   void display(sf::RenderWindow& window);
   void init_background(sf::RenderWindow &window);
+  void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input);
+  void create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file);
   void print_end(bool winner,sf::RenderWindow &window);
   void print_word(sf::RenderWindow &window);
   void print_used_letters(sf::RenderWindow &window);
   void print_game( sf::RenderWindow &window );
 
-  void transition();
+  void transition(sf::RenderWindow &window);
+  std::string setFinalText(bool win);
+  void init_transition(sf::RenderWindow &window);
 
   /* Getters & Setters */
 

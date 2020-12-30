@@ -17,13 +17,13 @@ void Pendu::display(sf::RenderWindow& window){
 
     /* Boucle de jeu */
     while (window.isOpen() && !win() && get_nb_try() )
-    {
+    {   
         /* Test les événements */
         sf::Event event;
         while (window.pollEvent(event))
-        {
+        { 
             player.check_events(window,event);
-            if (event.type == sf::Event::Closed){ 
+            if (event.type == sf::Event::Closed){
                 window.close();
                 break;                
             }
@@ -50,67 +50,43 @@ void Pendu::display(sf::RenderWindow& window){
 
 }
 
-void Pendu:: init_background(sf::RenderWindow &window){
-    
+/* Permet de crée un sprite et de le dessiner sur la fenetre */
+void Pendu::create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file){
     sf::Texture texture;
     sf::Sprite sprite;
-    texture.loadFromFile(TEXTURE_BACKGROUND1);
+    texture.loadFromFile(file);
     sprite.setTexture(texture);
+    sprite.setPosition(sf::Vector2f(x,y));
     window.draw(sprite);
+}
 
-    texture.loadFromFile(TEXTURE_BACKNAME1);
-    sprite.setTexture(texture);
-    sprite.setPosition(sf::Vector2f(10,0));
-    window.draw(sprite);
- 
-    sf::Font font;
-    font.loadFromFile("img_pendu/arial.ttf");
+/* Permet de crée un texte et de le dessiner sur la fenetre */
+void Pendu::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input){
     sf::Text text;
     text.setFont(font);
-    text.setString("Test \n 2/6");
-    text.setCharacterSize(20);
+    text.setString(input);
+    text.setCharacterSize(fontSize);
     text.setFillColor(sf::Color::White);
     text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f(43,78));
+    text.setPosition(sf::Vector2f(x,y));
     window.draw(text);
+}
 
-    texture.loadFromFile(TEXTURE_NAME1);
-    sprite.setPosition(sf::Vector2f(APP_SIZE_X1/2-74,20)); 
-    sprite.setTexture(texture);
-    window.draw(sprite);
+void Pendu:: init_background(sf::RenderWindow &window){
+    
+    sf::Font font;
+    font.loadFromFile("img_pendu/arial.ttf");
 
-    texture.loadFromFile(TEXTURE_BACKGAME1);
-    texture.setSmooth(true);
-    sprite.setTexture(texture);
-    sprite.setPosition(sf::Vector2f(APP_SIZE_X1/4+10,160));
-    window.draw(sprite);
+    create_sprite(window,0,0,TEXTURE_BACKGROUND1);
+    create_sprite(window,10,0,TEXTURE_BACKNAME1);
+    create_text(window,font,20,43,78,"Test \n 2/6");
+    create_sprite(window,APP_SIZE_X1/2-74,20,TEXTURE_NAME1);
+    create_sprite(window,APP_SIZE_X1/4+10,160,TEXTURE_BACKGAME1);
+    create_sprite(window,100,300,TEXTURE_LETTERS1);
+    create_text(window,font,17,300,330,"Press enter to submit :");
+    create_text(window,font,17,300,430,"Lettres deja utilisees :");
+    create_text(window,font,24,APP_SIZE_X1/3+30,500,"Vies restantes : " + std::to_string(get_nb_try()));
 
-    texture.loadFromFile(TEXTURE_LETTERS1);
-    texture.setSmooth(true);
-    sprite.setTexture(texture);
-    sprite.setPosition(sf::Vector2f(100,300));
-    window.draw(sprite);
-
-    text.setString("Press enter to submit :");
-    text.setCharacterSize(17);
-    text.setFillColor(sf::Color::White);
-    text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f(300,330));
-    window.draw(text);
-
-    text.setString("Lettres deja utilisees :");
-    text.setCharacterSize(17);
-    text.setFillColor(sf::Color::White);
-    text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f(300,430));
-    window.draw(text);
-
-    text.setString("Vies restantes : " + std::to_string(get_nb_try()));
-    text.setCharacterSize(24);
-    text.setFillColor(sf::Color::White);
-    text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f(APP_SIZE_X1/3+30,500));
-    window.draw(text); 
 }
 
 void Pendu::print_game( sf::RenderWindow &window ){
@@ -133,14 +109,8 @@ void Pendu::print_word(sf::RenderWindow &window){
 
     sf::Font font;
     font.loadFromFile("arial.ttf");
-    sf::Text text;
-    text.setFont(font);
-    text.setString(res);
-    text.setCharacterSize(25);
-    text.setFillColor(sf::Color::White);
-    text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f((APP_SIZE_X1-(get_mistery().size()*25))/2,190));
-    window.draw(text);
+
+    create_text(window,font,25,(APP_SIZE_X1-(get_mistery().size()*25))/2,190,res);
    
 }
 
@@ -158,37 +128,96 @@ void Pendu::print_used_letters(sf::RenderWindow &window){
 
     sf::Font font;
     font.loadFromFile("img_pendu/arial.ttf");
-    sf::Text text;
-    text.setFont(font);
-    text.setString(res);
-    text.setCharacterSize(16);
-    text.setFillColor(sf::Color::White);
-    text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f((APP_SIZE_X1-(get_used_letters().size()*16))/2,470));
-    window.draw(text);
+
+    create_text(window,font,16,(APP_SIZE_X1-(get_used_letters().size()*16))/2,470,res);
    
 }
 
 void Pendu::print_end(bool winner,sf::RenderWindow &window){
 
     sf::Time delayTime = sf::milliseconds(2500);
-    sf::Texture texture;
-    sf::Sprite sprite;
-    if (winner){ 
-        texture.loadFromFile(TEXTURE_WIN1);
-        sprite.setPosition(sf::Vector2f(530/2,411/2)); }
-    else{ 
-        texture.loadFromFile(TEXTURE_LOSE1); 
-        sprite.setPosition(sf::Vector2f(450/2,411/2)); }
 
-    sprite.setTexture(texture);
-           
-    window.draw(sprite);
+    if (winner) create_sprite(window,530/2,411/2,TEXTURE_WIN1);
+    else create_sprite(window,450/2,411/2,TEXTURE_LOSE1);
+
     window.display();
     sf::sleep(delayTime);
+    transition(window);
 }
 
-void Pendu::transition(){
+std::string Pendu::setFinalText(bool win){
+    std::string res = "";
 
+    if (win){
+        res = std::string("Troisième épreuve :") + "\n \n" +
+
+        "Felicitations, un tiers du chemin parcouru." + "\n" + 
+        "Pour la troisieme epreuve, vous allez affronter" + "\n" + 
+        "Eddy dans le jeu des Batonnets. Devant vous se" + "\n" + 
+        "trouvent 20 batonnets. Chacun votre tour vous " +"\n" +
+        "aurez le droit de prendre un, deux ou trois" + "\n" + 
+        "batonnets, celui qui s'empare du dernier" + "\n" + 
+        "batonnet perd la partie. Le plus jeune" + "\n" +
+        "commence, c'est-à-dire vous." + "\n \n" +
+
+        "Etant donné qu'Eddy est tres mauvais" + "\n" + 
+        "perdant je ne vous garantie pas la " + "\n" + 
+        "survie si vous le battez, mais " + "\n" +
+        "j\'essaierai de vous proteger le " + "\n" +
+        "moment venu.";
+
+    }
+    else {
+        res = std::string("J\'en étais sur.") + "\n\n"+
+        "Encore un gugusse qui réussit les épreuves" + "\n" +
+        "mathématiques mais qui n'a jamais ouvert un" + "\n" +
+        "livre de sa vie. Vous savez comment on" + "\n" +
+        "appelle les gens comme vous avec Eddy ? "+ "\n\n" +
+
+        "Des MAIN, pour Mots Aussi Importants que" + "\n" +
+        "les Nombres. Allez Eddy, liquide moi " + "\n" + 
+        "ce MAIN. *Gunshot* ";
+    }
+
+    //sf::String tmp(res);
+    //tmp.toUtf8();
+    return res;
+}
+
+void Pendu:: init_transition(sf::RenderWindow &window){
+
+    sf::Font font;
+    font.loadFromFile("img_pendu/arial.ttf");
+
+    create_sprite(window,0,0,TEXTURE_BACKGROUND1);
+    create_sprite(window,(APP_SIZE_X1-640)/2,0,TEXTURE_TRANSITION1);
+    create_text(window,font,20,(APP_SIZE_X1-640)/2+90,85,setFinalText(win()));
+    create_text(window,font,16,510,495,"Press enter \nto continue...");
+
+}
+
+
+void Pendu::transition(sf::RenderWindow &window){
+     sf::Event event;
+     std::size_t cpt = 0;
+
+     while(window.isOpen() && cpt < 1){
+        while (window.pollEvent(event))
+        {
+            // Changer de fond
+            if (((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Enter))){
+               cpt ++;
+            }
+            if (event.type == sf::Event::Closed){ 
+                    window.close();
+                    break;                
+                }
+
+        } 
+        window.clear();
+        init_transition(window);
+        window.display();
+     }
+    
 }
 
