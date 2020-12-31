@@ -36,7 +36,6 @@ void TextEntry :: init_rectangle(sf::RenderWindow& window,size_t width, size_t h
 }  
 
 void TextEntry :: display_playertext(sf::RenderWindow& window,string tmp,size_t pos_x,size_t pos_y){
-
 	sf::Text playerText(tmp,_font,50);
     playerText.setCharacterSize(24);
     playerText.setPosition(pos_x,pos_y);
@@ -48,7 +47,6 @@ void TextEntry :: display_playertext(sf::RenderWindow& window,string tmp,size_t 
 }
 
 void TextEntry :: check_events(sf::RenderWindow& window,sf::Event& event){
-
 	string tmp = get_playerInput();
 	std::size_t cpt = 0;
 
@@ -62,7 +60,7 @@ void TextEntry :: check_events(sf::RenderWindow& window,sf::Event& event){
     }
 	else if (event.type == sf::Event::TextEntered) {
 
-		//Si efface un caractère
+		//Si efface un charactère
         if(event.text.unicode == '\b'){
  
             if(tmp != ""){
@@ -88,3 +86,30 @@ void TextEntry :: check_events(sf::RenderWindow& window,sf::Event& event){
     display_playertext(window,get_playerInput(),get_xsize()+ 140/2 - get_entrysize()/2, get_ysize());
 
  }
+
+ /*
+
+ #include <iostream>
+
+using namespace std;
+
+TextEntry :: TextEntry (size_t x, size_t y) {
+
+	init_rectangle(140,30,x/2,y);
+	
+
+
+}
+
+TextEntry :: init_rectangle(size_t width, size_t height, size_t x, size_t y) {
+
+	sf::RectangleShape rectangle(sf::Vector2f(width, height));
+    rectangle.setPosition(x,y);
+
+    rectangle.setFillColor(sf::Color(255,255,255)); //Fill with white
+    rectangle.setOutlineThickness(2); //Border of two pixels ...
+    rectangle.setOutlineColor(sf::Color(0, 0, 0)); // ... in black
+
+}    
+
+*/

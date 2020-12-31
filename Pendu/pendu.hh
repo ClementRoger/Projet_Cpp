@@ -28,6 +28,7 @@ class Pendu : public MiniJeu {
  public:
  
   Pendu(std::fstream& in,const std::size_t count); //constructeur par défaut
+  Pendu(std::string tmp, const size_t count); //for testcase
 
   ~Pendu();
 
@@ -45,7 +46,7 @@ class Pendu : public MiniJeu {
   void print_used_letters(sf::RenderWindow &window);
   void print_game( sf::RenderWindow &window );
 
-  void transition();
+  void transition(sf::RenderWindow &window);
 
   /* Getters & Setters */
 

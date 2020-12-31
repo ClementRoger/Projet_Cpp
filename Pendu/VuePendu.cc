@@ -189,7 +189,7 @@ void Pendu::print_end(bool winner,sf::RenderWindow &window){
     sf::sleep(delayTime);
 }
 
-void Pendu::transition(){
+void Pendu::transition(sf::RenderWindow &window){
 
 }
 

@@ -32,6 +32,18 @@ using namespace std;
     vector<size_t>found_letters(_mistery.size(),0);
     found_letters[0] = 1;
     _found_letters=found_letters;
+    _user_entry ="";
+    //cout<<"mistery: "<<_mistery<<endl;
+
+}
+
+Pendu::Pendu(string tmp, const size_t count):MiniJeu(count,false){ 
+
+    _mistery = tmp;
+    vector<size_t>found_letters(_mistery.size(),0);
+    found_letters[0] = 1;
+    _found_letters=found_letters;
+    _user_entry ="";
     //cout<<"mistery: "<<_mistery<<endl;
 
 }
