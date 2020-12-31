@@ -118,6 +118,6 @@ bool Batonnets :: user_plays() {
 	}
 }
 
-void Batonnets::transition(){
+void Batonnets::transition(sf::RenderWindow &window){
 
 }

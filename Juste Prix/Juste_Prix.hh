@@ -17,9 +17,10 @@ class Juste_Prix : public MiniJeu{
   Juste_Prix(size_t NB_TENTATIVES, int NMIN, int NMAX);
   void play();
   bool check_entry(std::string entry);
-  void transition();
+  void transition(sf::RenderWindow &window);
   void init_background(sf::RenderWindow& window);
   void display(sf::RenderWindow& window);
+  void print_end(bool winner,sf::RenderWindow &window);
 
  private:
 

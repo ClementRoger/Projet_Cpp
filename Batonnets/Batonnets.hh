@@ -16,12 +16,13 @@ class Batonnets : public MiniJeu{
   void print();
   bool user_plays();
   bool IA_plays();
-  void transition();
+  void transition(sf::RenderWindow &window);
   int generer_nb_aleatoire(int min, int max);
   void init_background(sf::RenderWindow& window);
   bool check_entry(std::string entry);
   void display(sf::RenderWindow& window);
   void affiche_batonnets(sf::RenderWindow& window);
+  void print_end(bool winner,sf::RenderWindow &window);
 
  private:
 

@@ -54,7 +54,7 @@ void Batonnets :: display(sf::RenderWindow& window){
         textbar.display(window);
         window.display();
 	}
-
+    print_end(win(),window);
 }
 
 bool Batonnets :: check_entry(string entry) {
@@ -186,4 +186,24 @@ void Batonnets :: affiche_batonnets(sf::RenderWindow& window) {
 		sprite.setScale(0.2,0.2);
 		window.draw(sprite);
 	}
+}
+
+
+void Batonnets::print_end(bool winner,sf::RenderWindow &window){
+
+    sf::Time delayTime = sf::milliseconds(2500);
+    sf::Texture texture;
+    sf::Sprite sprite;
+    if (winner){ 
+        texture.loadFromFile("images/you_win.png");
+        sprite.setPosition(sf::Vector2f(530/2,411/2)); }
+    else{ 
+        texture.loadFromFile("images/game_over.png"); 
+        sprite.setPosition(sf::Vector2f(450/2,411/2)); }
+
+    sprite.setTexture(texture);
+           
+    window.draw(sprite);
+    window.display();
+    sf::sleep(delayTime);
 }

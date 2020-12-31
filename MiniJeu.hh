@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <SFML/Graphics.hpp>
 
 class MiniJeu{
 
@@ -16,7 +17,7 @@ public:
   virtual ~MiniJeu(){};
 
   virtual void play() = 0;
-  virtual void transition() = 0;
+  virtual void transition(sf::RenderWindow &window) = 0;
 
   /* Getters & Setters */
   size_t get_nb_try() const { return _nb_try; }

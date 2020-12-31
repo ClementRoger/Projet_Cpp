@@ -45,7 +45,7 @@ void Juste_Prix :: display(sf::RenderWindow& window){
         textbar.display(window);
         window.display();
 	}
-
+    print_end(win(),window);
 }
 
 bool Juste_Prix :: check_entry(string entry) {
@@ -140,4 +140,24 @@ void Juste_Prix :: init_background(sf::RenderWindow& window) {
     text.setPosition(sf::Vector2f(APP_SIZE_X/3-30,460));
     window.draw(text);
 
+}
+
+
+void Juste_Prix::print_end(bool winner,sf::RenderWindow &window){
+    std::cout<<"jsuis"<<std::endl;
+    sf::Time delayTime = sf::milliseconds(2500);
+    sf::Texture texture;
+    sf::Sprite sprite;
+    if (winner){ 
+        texture.loadFromFile("images/you_win.png");
+        sprite.setPosition(sf::Vector2f(530/2,411/2)); }
+    else{ 
+        texture.loadFromFile("images/game_over.png"); 
+        sprite.setPosition(sf::Vector2f(450/2,411/2)); }
+
+    sprite.setTexture(texture);
+           
+    window.draw(sprite);
+    window.display();
+    sf::sleep(delayTime);
 }
