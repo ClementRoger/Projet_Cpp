@@ -105,7 +105,7 @@ void Juste_Prix :: init_background(sf::RenderWindow& window) {
     text.setPosition(sf::Vector2f(APP_SIZE_X/4-30,25));
     window.draw(text);
 
-    font.loadFromFile("images/Trouble.otf");
+    font.loadFromFile("images/arial.ttf");
 
 	text.setFont(font);
     text.setString(result);
@@ -114,6 +114,8 @@ void Juste_Prix :: init_background(sf::RenderWindow& window) {
     text.setStyle(sf::Text::Bold);
     text.setPosition(sf::Vector2f(400 - text.getLocalBounds().width/2,200));
     window.draw(text);    
+
+    font.loadFromFile("images/Trouble.otf");
 
     text.setFont(font);
     text.setString("Press Enter to submit");

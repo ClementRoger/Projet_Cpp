@@ -27,6 +27,6 @@ class Juste_Prix : public MiniJeu{
   std::size_t Nmin;
   std::size_t Nmax;
   std::string user_entry;
-  std::string result;
+  sf::String result;
 
 };  
