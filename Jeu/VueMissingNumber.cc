@@ -72,6 +72,19 @@ void Missingnumber::create_text(sf::RenderWindow &window, const sf::Font font, c
     window.draw(text);
 }
 
+
+/* Permet de crée un texte et de le dessiner sur la fenetre */
+void Missingnumber::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input){
+    sf::Text text;
+    text.setFont(font);
+    text.setString(input);
+    text.setCharacterSize(fontSize);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f(x,y));
+    window.draw(text);
+}
+
 void Missingnumber:: init_background(sf::RenderWindow &window){
     sf::Font font;
     font.loadFromFile("img_missing/arial.ttf");
@@ -115,50 +128,47 @@ void Missingnumber::print_end(bool winner,sf::RenderWindow &window){
 }
 
 
-std::string Missingnumber::setFinalText(bool win){
-    std::string res = "";
+std::wstring Missingnumber::setFinalText(bool win){
+    std::wstring res;
 
     if (win){
-        res = std::string("Cinquième épreuve :") + "\n \n" +
+        res = std::wstring(L"Cinquième épreuve :\n \n") +
 
-        "Hum, je vais commencer à croire que vous" + "\n" + 
-        "allez réussir le test. Il vous reste deux" + "\n" + 
-        "épreuves, et la prochaine c\'est de la bombe" + "\n" + 
-        "puisqu\'il s\'agit d\'un démineur ! " +"\n" +
-        "Vous savez, dix heures dans ce bureau tous" + "\n" + 
-        "les jours à voir des idiots dans votre genre " + "\n" + 
-        "c\'est épuisant donc si vous pouviez au moins" + "\n" +
-        "rigoler à mes vannes ça me faciliterait la" + "\n" +
-        "tache" + "\n \n" +
+        std::wstring(L"Hum, je vais commencer à croire que vous\n") + 
+        std::wstring(L"allez réussir le test. Il vous reste deux\n") + 
+        std::wstring(L"épreuves, et la prochaine c\'est de la bombe\n") + 
+        std::wstring(L"puisqu\'il s\'agit d\'un démineur ! \n") +
+        std::wstring(L"Vous savez, dix heures dans ce bureau tous\n") + 
+        std::wstring(L"les jours à voir des idiots dans votre genre \n") + 
+        std::wstring(L"c\'est épuisant donc si vous pouviez au moins\n") +
+        std::wstring(L"rigoler à mes vannes ça me faciliterait la\n") +
+        std::wstring(L"tache.\n \n") +
 
-        "Enfin bref, vous devez connaître le principe " + "\n" + 
-        "du démineur : vous avez une grille où sont" + "\n" + 
-        "cachées des bombes. A chaque fois que vous" + "\n" +
-        "cliquez sur une case, on affiche combien de" +"\n" +
+        std::wstring(L"Enfin bref, vous devez connaître le principe \n") + 
+        std::wstring(L"du démineur : vous avez une grille où sont\n") + 
+        std::wstring(L"cachées des bombes. A chaque fois que vous\n" )+
+        std::wstring(L"cliquez sur une case, on affiche combien de\n") +
 
-        "bombes sont adjacentes à celle-ci. Si vous " + "\n" + 
-        "parvenez à découvrir toutes les cases sans  " + "\n" + 
-        "toucher les bombes, vous réussissez " + "\n" +
-        "l\'épreuve, mais faites attention, vous " + "\n" +
-        "avez un nombre limité de vies.";
-
+        std::wstring(L"bombes sont adjacentes à celle-ci. Si vous \n") + 
+        std::wstring(L"parvenez à découvrir toutes les cases sans  \n") + 
+        std::wstring(L"toucher les bombes, vous réussissez \n") +
+        std::wstring(L"l\'épreuve, mais faites attention, vous \n") +
+        std::wstring(L"avez un nombre limité de vies.");
     }
     else {
-        res = std::string("Je suis déçu. Alors que ça devenait") + "\n"+
-        "enfin intéressant, vous échouez " + "\n" +
-        "lamentablement. Vous voulez la réponse" + "\n" +
-        "avant de ... enfin vous savez ? Je peux " + "\n" +
-        "vous la donner, c\'est pas comme si vous  ? " + "\n" +
-        "alliez pouvoir retenter l\'épreuve plus" + "\n" +
-        "tard !" + "\n\n" +
+        res = std::wstring(L"\n\nJe suis déçu. Alors que ça devenait\n")+
+        std::wstring(L"enfin intéressant, vous échouez \n" )+
+        std::wstring(L"lamentablement. Vous voulez la réponse\n" )+
+        std::wstring(L"avant de ... enfin vous savez ? Je peux \n" )+
+        std::wstring(L"vous la donner, c\'est pas comme si vous  ? \n") +
+        std::wstring(L"alliez pouvoir retenter l\'épreuve plus\n" )+
+        std::wstring(L"tard !\n\n" )+
 
-        "C\'était ... *Gunshot*. Eddy ! La dernière" + "\n" +
-        "volonté, ça te parle ? Quel idiot." + "\n" + 
-        "Allez nettoie moi tout ça ...";
+        std::wstring(L"C\'était ... *Gunshot*. Eddy ! La dernière\n") +
+        std::wstring(L"volonté, ça te parle ? Quel idiot.\n") + 
+        std::wstring(L"Allez nettoie moi tout ça ...");
     }
 
-    //sf::String tmp(res);
-    //tmp.toUtf8();
     return res;
 }
 

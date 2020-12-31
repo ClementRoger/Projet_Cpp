@@ -72,6 +72,18 @@ void Pendu::create_text(sf::RenderWindow &window, const sf::Font font, const std
     window.draw(text);
 }
 
+/* Permet de crée un texte et de le dessiner sur la fenetre */
+void Pendu::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input){
+    sf::Text text;
+    text.setFont(font);
+    text.setString(input);
+    text.setCharacterSize(fontSize);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f(x,y));
+    window.draw(text);
+}
+
 void Pendu:: init_background(sf::RenderWindow &window){
     
     sf::Font font;
@@ -79,13 +91,13 @@ void Pendu:: init_background(sf::RenderWindow &window){
 
     create_sprite(window,0,0,TEXTURE_BACKGROUND1);
     create_sprite(window,10,0,TEXTURE_BACKNAME1);
-    create_text(window,font,20,43,78,"Test \n 2/6");
+    create_text(window,font,20,43,78,L"Test \n 2/6");
     create_sprite(window,APP_SIZE_X1/2-74,20,TEXTURE_NAME1);
     create_sprite(window,APP_SIZE_X1/4+10,160,TEXTURE_BACKGAME1);
     create_sprite(window,100,300,TEXTURE_LETTERS1);
-    create_text(window,font,17,300,330,"Press enter to submit :");
-    create_text(window,font,17,300,430,"Lettres deja utilisees :");
-    create_text(window,font,24,APP_SIZE_X1/3+30,500,"Vies restantes : " + std::to_string(get_nb_try()));
+    create_text(window,font,17,300,330,L"Press enter to submit :");
+    create_text(window,font,17,300,430,L"Lettres deja utilisees :");
+    create_text(window,font,24,APP_SIZE_X1/3+30,500,L"Vies restantes : " + std::to_wstring(get_nb_try()));
 
 }
 
@@ -145,42 +157,40 @@ void Pendu::print_end(bool winner,sf::RenderWindow &window){
     transition(window);
 }
 
-std::string Pendu::setFinalText(bool win){
-    std::string res = "";
+std::wstring Pendu::setFinalText(bool win){
+    std::wstring res;
 
     if (win){
-        res = std::string("Troisième épreuve :") + "\n \n" +
+        res = std::wstring(L"Troisième épreuve :\n \n") +
 
-        "Felicitations, un tiers du chemin parcouru." + "\n" + 
-        "Pour la troisieme epreuve, vous allez affronter" + "\n" + 
-        "Eddy dans le jeu des Batonnets. Devant vous se" + "\n" + 
-        "trouvent 20 batonnets. Chacun votre tour vous " +"\n" +
-        "aurez le droit de prendre un, deux ou trois" + "\n" + 
-        "batonnets, celui qui s'empare du dernier" + "\n" + 
-        "batonnet perd la partie. Le plus jeune" + "\n" +
-        "commence, c'est-à-dire vous." + "\n \n" +
+        std::wstring(L"Felicitations, un tiers du chemin parcouru.\n") + 
+        std::wstring(L"Pour la troisieme epreuve, vous allez affronter\n") + 
+        std::wstring(L"Eddy dans le jeu des Batonnets. Devant vous \n") + 
+        std::wstring(L"se trouvent 20 batonnets. Chacun votre tour \n") +
+        std::wstring(L"vous aurez le droit de prendre un, deux ou \n" )+ 
+        std::wstring(L"trois batonnets, celui qui s'empare du dernier\n" )+ 
+        std::wstring(L"batonnet perd la partie. Le plus jeune\n" )+
+        std::wstring(L"commence, c'est-à-dire vous.\n \n") +
 
-        "Etant donné qu'Eddy est tres mauvais" + "\n" + 
-        "perdant je ne vous garantie pas la " + "\n" + 
-        "survie si vous le battez, mais " + "\n" +
-        "j\'essaierai de vous proteger le " + "\n" +
-        "moment venu.";
+        std::wstring(L"Etant donné qu'Eddy est tres mauvais\n") + 
+        std::wstring(L"perdant je ne vous garantie pas la\n") + 
+        std::wstring(L"survie si vous le battez, mais \n" )+
+        std::wstring(L"j\'essaierai de vous proteger le \n" )+
+        std::wstring(L"moment venu.");
 
     }
     else {
-        res = std::string("J\'en étais sur.") + "\n\n"+
-        "Encore un gugusse qui réussit les épreuves" + "\n" +
-        "mathématiques mais qui n'a jamais ouvert un" + "\n" +
-        "livre de sa vie. Vous savez comment on" + "\n" +
-        "appelle les gens comme vous avec Eddy ? "+ "\n\n" +
+        res = std::wstring(L"J\'en étais sur.\n\n")+
+        std::wstring(L"Encore un gugusse qui réussit les épreuves\n" )+
+        std::wstring(L"mathématiques mais qui n'a jamais ouvert un\n") +
+        std::wstring(L"livre de sa vie. Vous savez comment on\n" )+
+        std::wstring(L"appelle les gens comme vous avec Eddy ?\n\n" )+
 
-        "Des MAIN, pour Mots Aussi Importants que" + "\n" +
-        "les Nombres. Allez Eddy, liquide moi " + "\n" + 
-        "ce MAIN. *Gunshot* ";
+        std::wstring(L"Des MAIN, pour Mots Aussi Importants que\n") +
+        std::wstring(L"les Nombres. Allez Eddy, liquide moi \n" )+ 
+        std::wstring(L"ce MAIN. *Gunshot* ");
     }
 
-    //sf::String tmp(res);
-    //tmp.toUtf8();
     return res;
 }
 
@@ -192,7 +202,7 @@ void Pendu:: init_transition(sf::RenderWindow &window){
     create_sprite(window,0,0,TEXTURE_BACKGROUND1);
     create_sprite(window,(APP_SIZE_X1-640)/2,0,TEXTURE_TRANSITION1);
     create_text(window,font,20,(APP_SIZE_X1-640)/2+90,85,setFinalText(win()));
-    create_text(window,font,16,510,495,"Press enter \nto continue...");
+    create_text(window,font,16,510,495,L"Press enter \nto continue...");
 
 }
 

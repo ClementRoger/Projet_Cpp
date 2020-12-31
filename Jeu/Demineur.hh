@@ -57,10 +57,11 @@ class Demineur:public MiniJeu{
   void print_end(bool winner,sf::RenderWindow &window);
   void init_background(sf::RenderWindow &window);
   void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input);
+  void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input);
   void create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file);
   
   void transition(sf::RenderWindow &window);
-  std::string setFinalText(bool win);
+  std::wstring setFinalText(bool win);
   void init_transition(sf::RenderWindow &window);
 
   /* Getters & Setters */

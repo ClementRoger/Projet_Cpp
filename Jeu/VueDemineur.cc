@@ -72,6 +72,19 @@ void Demineur::create_text(sf::RenderWindow &window, const sf::Font font, const 
     window.draw(text);
 }
 
+
+/* Permet de crée un texte et de le dessiner sur la fenetre */
+void Demineur::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input){
+    sf::Text text;
+    text.setFont(font);
+    text.setString(input);
+    text.setCharacterSize(fontSize);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f(x,y));
+    window.draw(text);
+}
+
 void Demineur:: init_background(sf::RenderWindow &window){
 
     sf::Font font;
@@ -191,34 +204,32 @@ void Demineur::print_end(bool winner,sf::RenderWindow &window){
 
 
 
-std::string Demineur::setFinalText(bool win){
-    std::string res = "";
+std::wstring Demineur::setFinalText(bool win){
+    std::wstring res;
 
     if (win){
-        res = std::string("Sixième épreuve :") + "\n \n" +
+        res = std::wstring(L"\n\nSixième épreuve :\n \n" )+
 
-        "Sixième et dernière épreuve. Ouah que le temps " + "\n" + 
-        "passe vite quand on s’amuse ! Pour celle-là," + "\n" + 
-        "vous devrez résoudre un taquin. Quoi ? Vous savez " + "\n" + 
-        "pas ce que c’est c’est ça ? Mais si, je suis sûr" +"\n" +
-        "que vous avez déjà vu ça, le jeu où vous bougez " + "\n" + 
-        "les tuiles pour reconstituer un dessin. Nan ? " + "\n" + 
+        std::wstring(L"Sixième et dernière épreuve. Ouah que le temps \n" )+ 
+        std::wstring(L"passe vite quand on s’amuse ! Pour celle-là,\n" )+ 
+        std::wstring(L"vous devrez résoudre un taquin. Quoi ? Vous savez \n") + 
+        std::wstring(L"pas ce que c’est c’est ça ? Mais si, je suis sûr\n") +
+        std::wstring(L"que vous avez déjà vu ça, le jeu où vous bougez \n" )+ 
+        std::wstring(L"les tuiles pour reconstituer un dessin. Nan ? \n" )+ 
 
-        "Ça vous dit rien ? " + "\n\n" +
-        "Et bah vous comprendrez en jouant ... enfin j’espère" + "\n" +
-        "pour vous !";
+        std::wstring(L"Ça vous dit rien ? \n\n" )+
+        std::wstring(L"Et bah vous comprendrez en jouant ... enfin j’espère\n") +
+        std::wstring(L"pour vous !");
 
     }
     else {
-        res = std::string("Pas vraiment de surprise, vous avez explosé en vol.") + "\n"+
-        "Oh allez j’essaye de vous faire rire une " + "\n" +
-        "dernière fois avant le grand voyage. Bon "+ "\n" +
-        "bah j’aurais essayé ..." + "\n\n" +
-        "Eddy, explose lui la cervelle ! *Gunshot* ";
+        res = std::wstring(L"\n\n\n\nPas vraiment de surprise, vous avez explosé en vol.\n")+
+        std::wstring(L"Oh allez j’essaye de vous faire rire une \n" )+
+        std::wstring(L"dernière fois avant le grand voyage. Bon \n" )+
+        std::wstring(L"bah j’aurais essayé ...\n\n" )+
+        std::wstring(L"Eddy, explose lui la cervelle ! *Gunshot* ");
     }
 
-    //sf::String tmp(res);
-    //tmp.toUtf8();
     return res;
 }
 

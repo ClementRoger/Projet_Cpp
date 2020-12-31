@@ -2,6 +2,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <iostream>
+
  
 #include "Jeu.hh"
 #include "Demineur.hh"
@@ -244,69 +245,83 @@ void Jeu :: create_button(sf::RenderWindow& window,sf::Sprite Bouton, sf::Text t
     window.draw(text);
 }
 
-
-std::string Jeu::setFinalText(const std::size_t cpt){
-    std::string res = "";
+/* char (0x82); - é
+char (0x85) - à
+char (0X8A) - è
+*/
+std::wstring Jeu::setFinalText(const std::size_t cpt){
+    std::wstring res;
+    //char a = char(0x85);
+    //const char e_1 = char(0x82);
+    //const char e_2 = char(0x8A);
     switch (cpt){
     	case 0:
-    		res = std::string("2107.") + "\n \n" +
-	        "Quatorze milliards d\'individus peuplent la Terre" + "\n" + 
-	        "et les ressources commencent à cruellement manquer. " + "\n" + 
-	        "Après la publication d\'un article scientifique de" + "\n" + 
-	        "Svetlana Déac et de Clément Roger Jr - qui leur" +"\n" +
+    		res = std::wstring(L"2107. \n\n") +
+	        std::wstring(L"Quatorze milliards d\'individus peuplent la Terre\n") + 
+	        std::wstring(L"et les ressources commencent à cruellement manquer.\n\n") + 
 
-	        "vaudra le prix Nobel de la Paix - démontrant que" + "\n" + 
-	        "l\'humanité courait à sa perte, l\'ONU convoqua en" + "\n" + 
-	        "urgence un conseil de sécurité. La décision était" + "\n" +
-	        "prise : il fallait éliminer une grande partie de " + "\n" +
-	        "la population mondiale et, de préférence, les moins" + "\n" +
-	        "utiles au développement scientifique des Nations. ";
-	        
+	        std::wstring(L"Après la publication d\'un article scientifique de \n") + 
+	        std::wstring(L"Svetlana Deac et de Clément Roger Jr - qui leur \n") +
+	        std::wstring(L"vaudra le prix Nobel de la Paix - démontrant que \n") + 
+	        std::wstring(L"l\'humanité courait à sa perte, l\'ONU convoqua en\n") + 
+	        std::wstring(L"urgence un conseil de sécurité.  \n\n" ) +
+
+	        std::wstring(L"La décision était prise : il fallait éliminer  \n" ) +
+	        std::wstring(L"une grande partie de la population mondiale et, \n") +
+	        std::wstring(L"de préférence, les moins utiles au développement \n") + 
+	        std::wstring(L"scientifique des Nations.  \n");
     		break;
 
     	case 1:
-    		res = "\n\n" + std::string("Chaque pays a donc eu la responsabilité de créer") + "\n"+
-	        "un test comportant six épreuves que seuls les 5 % " + "\n" +
-	        "les plus intelligents seraient en mesure de réussir. " + "\n" +
-	        "Ils doivent désormais convoquer chaque citoyen de " + "\n" +
-	        "plus de 16 ans et leur faire passer ce test." + "\n\n" +
+    		res = std::wstring(L"\n\nChaque pays a donc eu la responsabilité de créer\n") +
+	        std::wstring(L"un test comportant six épreuves que seuls les 5 % \n") +
+	        std::wstring(L"les plus intelligents seraient en mesure de réussir. \n" )+
+	        std::wstring(L"Ils doivent désormais convoquer chaque citoyen de \n" )+
+	        std::wstring(L"plus de 16 ans et leur faire passer ce test.\n\n") +
 
-	        "En cas d’échec à l\'une des six épreuves, l\'individu " + "\n" +
-	        "sera exécuté sur le champ ..." + "\n\n" +
+	        std::wstring(L"En cas d\'échec à l\'une des six épreuves, l\'individu \n") +
+	        std::wstring(L"sera exécuté sur le champ ...\n\n") +
 
-	        "Demain vous fêterez votre seizième anniversaire. La " + "\n" +
-	        "lettre est arrivée aujourd’hui, vous êtes attendu " + "\n" + 
-	        "demain au Centre de Recherche afin de passer Le Test...";
+	        std::wstring(L"Demain vous fêterez votre seizième anniversaire. \n" )+
+	        std::wstring(L"La lettre est arrivée aujourd’hui, vous êtes \n") + 
+	        std::wstring(L"attendu demain au Centre de Recherche afin de\n")+
+	        std::wstring(L"passer Le Test...");
+	        
 
     		break;
 
     	case 2:
 
-    		res = std::string("Première épreuve :") + "\n\n" +
-    		"\"Asseyez-vous\" dit le scientifique d\'un ton froid. " + "\n\n" +
+    		res = std::wstring(L"\n\nPremière épreuve :\n\n") +
+    		std::wstring(L"\"Asseyez-vous\" dit le scientifique d\'un ton froid.\n\n") +
 
-	        "Je pense que vous connaissez les règles : vous allez" + "\n" +
-	        "passer six épreuves par ordre croissant de difficulté," + "\n" +
-	        "si vous échouez à l\'une d’elle, mon ami Eddy ici présent" + "\n" +
-	        "se chargera de vous éliminer d\'une balle dans la tête. " + "\n" +
+	        std::wstring(L"Je pense que vous connaissez les règles : vous \n") +
+	        std::wstring(L"allez passer six épreuves par ordre croissant de \n") +
+	        std::wstring(L"difficulté, si vous échouez à l\'une d’elle, mon ami \n") +
+	        std::wstring(L"Eddy ici présent se chargera de vous éliminer d\'une \n") +
 
-	        "Vous avez de la chance, vous êtes le premier à passer" + "\n\n" +
+	        std::wstring(L"balle dans la tête. Vous avez de la chance, vous\n") +
 
-	        "aujourd’hui, vous ne vous êtes pas assis sur des morceaux  " + "\n" +
-	        "de cervelle, dit-il en ricanant.";
+	        std::wstring(L"êtes le premier à passer aujourd\'hui, vous ne vous\n") +
+	        std::wstring(L"êtes pas assis sur des morceaux de cervelle,\n") +
+	        std::wstring(L"dit-il en ricanant.");
+
+    	
 	        break;
 
 	    case 3:
-    		res = "\n\n" + std::string("Bien. Commençons.") + "\n"+
-	        "Pour la première épreuve je vais penser à un nombre  " + "\n" +
-	        "entre 1 et 100 inclus, votre objectif est de retrouver " + "\n" +
-	        "ce nombre en un nombre limité de tentatives. A chacune " + "\n" +
-	        "de vos propositions je ne répondrai que \"C\'est plus\"," + "\n\n" +
+    		 res = std::wstring(L"\n\nBien. Commençons.\n\n") +
+	         std::wstring(L"Pour la première épreuve je vais penser à un nombre\n") +
+	         std::wstring(L"entre 1 et 100 inclus, votre objectif est de retrouver\n") +
+	         std::wstring(L"ce nombre en un nombre limité de tentatives.\n") +
+	         std::wstring(L"A chacune de vos propositions je ne répondrai\n") +
 
-	        "\"C\'est moins\" ou \"C\'est correct\", rien d’autre." + "\n\n" +
-	        
-	        "Si à la fin des tentatives autorisés, vous n’avez" + "\n" + 
-	        "pas trouvé le nombre, pan. Compris ?";
+	         std::wstring(L"que \"C\'est plus\",\"C\'est moins\" ou \"C\'est correct\",\n") +
+	         std::wstring(L"rien d’autre.\n\n") +
+
+	         std::wstring(L"Si à la fin des tentatives autorisés,vous n’avez \n") + 
+	         std::wstring(L"pas trouvé le nombre, pan.\n\n") +
+	         std::wstring(L"Compris ?"); 
 
     		break;
 
@@ -334,7 +349,7 @@ void Jeu::create_sprite(sf::RenderWindow &window, const std::size_t x, const std
 }
 
 /* Permet de crée un texte et de le dessiner sur la fenetre */
-void Jeu::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input){
+void Jeu::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input){
     sf::Text text;
     text.setFont(font);
     text.setString(input);
@@ -352,8 +367,8 @@ void Jeu:: init_transition(sf::RenderWindow &window,const std::size_t cpt){
 
     create_sprite(window,0,0,TEXTURE_BACKGROUND2);
     create_sprite(window,(APP_SIZE_X2-640)/2,0,TEXTURE_TRANSITION2);
-    create_text(window,font,18,(APP_SIZE_X2-640)/2+90,70,setFinalText(cpt));
-    create_text(window,font,16,510,505,"Press enter \nto continue...");
+    create_text(window,font,18,(APP_SIZE_X2-640)/2+90,90,setFinalText(cpt));
+    create_text(window,font,16,510,505,L"Press enter \nto continue...");
 
 }
 
