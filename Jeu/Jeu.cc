@@ -8,6 +8,8 @@
 #include "Demineur.hh"
 #include "pendu.hh"
 #include "missingnumber.hh"
+#include "Batonnets.hh"
+#include "Juste_Prix.hh"
 
 using namespace std;
 
@@ -64,23 +66,33 @@ void Jeu :: run(){
 
 void Jeu::easy_game(sf::RenderWindow &window,std::size_t& cpt){
 	switch (cpt){
-		case 1 : {
+		case 1: {
+			Juste_Prix J1(8, 1, 100);
+			J1.display(window);
+			check_end(J1,window,cpt);
+		}
+		case 2 : {
 			std::fstream inFile("img_pendu/mots_faciles.txt", std::fstream::in);
 			Pendu game(inFile,8); 
     		game.display(window);
 	    	check_end(game,window,cpt);
 			break;
 		}
-
-		case 2 : {
+		case 3 : {
+			Batonnets B1(20,1); //1 easy, 2 difficult
+			B1.display(window);
+    		check_end(B1,window,cpt);
+			break;
+		}
+		case 4 : {
 			std::fstream inFile("img_missing/matrices.txt", std::fstream::in);
 			Missingnumber game(inFile,3); 
 			game.display(window);
 			check_end(game,window,cpt);
 			break;
 		}
-
-		case 3 : {
+		
+		case 5 : {
 			Demineur game(2,8,8); 
     		game.display(window);
     		check_end(game,window,cpt);
@@ -97,23 +109,32 @@ void Jeu::easy_game(sf::RenderWindow &window,std::size_t& cpt){
 
 void Jeu::difficult_game(sf::RenderWindow &window,std::size_t& cpt){
     switch (cpt){
-		case 1 : {
+    	case 1: {
+			Juste_Prix J1(6, 1, 100);
+			J1.display(window);
+			check_end(J1,window,cpt);
+		}
+		case 2 : {
 			std::fstream inFile("img_pendu/mots_difficiles.txt", std::fstream::in);
 			Pendu game(inFile,8); 
     		game.display(window);
 	    	check_end(game,window,cpt);
 			break;
 		}
-
-		case 2 : {
+		case 3 : {
+			Batonnets B1(20,2); //1 easy, 2 difficult
+			B1.display(window);
+    		check_end(B1,window,cpt);
+			break;
+		}
+		case 4 : {
 			std::fstream inFile("img_missing/matrices.txt", std::fstream::in);
 			Missingnumber game(inFile,1); 
 			game.display(window);
 			check_end(game,window,cpt);
 			break;
 		}
-
-		case 3 : {
+		case 5 : {
 			Demineur game(1,10,8); 
     		game.display(window);
     		check_end(game,window,cpt);
