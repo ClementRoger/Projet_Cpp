@@ -41,8 +41,14 @@ void Taquin :: init_background(sf::RenderWindow& window) {
 
     //cout << v_name.size() << endl;
     //cout << v_position.size() << endl; 
-    
-    for (int i = 0; i < 8; ++i){
+    sf::Texture texture;
+    sf::Sprite sprite;
+
+    texture.loadFromFile("images/background.jpg");
+    sprite.setTexture(texture);
+    window.draw(sprite);
+
+      for (int i = 0; i < 8; ++i){
 
         cout << i << endl;
         cout << v_name[i] << endl;
@@ -56,12 +62,6 @@ void Taquin :: init_background(sf::RenderWindow& window) {
         sprite.setPosition(v_position[i]);
         window.draw(sprite);
     }
-
-    sf::Texture texture;
-    sf::Sprite sprite;
-    texture.loadFromFile("images/background.jpg");
-    sprite.setTexture(texture);
-    window.draw(sprite);
 
     texture.loadFromFile("images/taquin.png"); 
     sprite.setTexture(texture);
@@ -105,7 +105,7 @@ void Taquin :: init_background(sf::RenderWindow& window) {
     window.draw(text);
 }
 
-void Taquin :: transition() {
+void Taquin :: transition(sf::RenderWindow& window) {
 
 
 }

@@ -16,7 +16,7 @@ class Taquin : public MiniJeu{
   void init_background(sf::RenderWindow& window);
   bool check_move();
   void display(sf::RenderWindow& window);
-  void transition();
+  void transition(sf::RenderWindow& window);
   void init_names();
   void init_position();
 
