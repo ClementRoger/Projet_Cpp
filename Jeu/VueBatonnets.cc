@@ -192,7 +192,6 @@ void Batonnets :: affiche_batonnets(sf::RenderWindow& window) {
 	}
 }
 
-<<<<<<< HEAD
 void Batonnets :: print_end(bool winner,sf::RenderWindow &window){
 
     sf::Time delayTime = sf::milliseconds(2500);
@@ -308,25 +307,4 @@ void Batonnets :: transition(sf::RenderWindow &window){
         init_transition(window);
         window.display();
     }
-    
-=======
-
-void Batonnets::print_end(bool winner,sf::RenderWindow &window){
-
-    sf::Time delayTime = sf::milliseconds(2500);
-    sf::Texture texture;
-    sf::Sprite sprite;
-    if (winner){ 
-        texture.loadFromFile("images_batonnets/you_win.png");
-        sprite.setPosition(sf::Vector2f(530/2,411/2)); }
-    else{ 
-        texture.loadFromFile("images_batonnets/game_over.png"); 
-        sprite.setPosition(sf::Vector2f(450/2,411/2)); }
-
-    sprite.setTexture(texture);
-           
-    window.draw(sprite);
-    window.display();
-    sf::sleep(delayTime);
->>>>>>> a39cc9bf4a3fdc1bacc8dce187f4b7d45877a40a
-}
+}    

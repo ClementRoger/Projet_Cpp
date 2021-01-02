@@ -161,32 +161,27 @@ std::wstring Pendu::setFinalText(bool win){
     std::wstring res;
 
     if (win){
-        res = std::wstring(L"\n\n Felicitations, un tiers du chemin parcouru.\n") + 
-        std::wstring(L"Pour la troisieme epreuve, vous allez affronter\n") + 
-        std::wstring(L"Eddy dans le jeu des Batonnets. Devant vous \n") + 
-        std::wstring(L"se trouvent 20 batonnets. Chacun votre tour \n") +
-        std::wstring(L"vous aurez le droit de prendre un, deux ou \n" )+ 
-        std::wstring(L"trois batonnets, celui qui s'empare du dernier\n" )+ 
-        std::wstring(L"batonnet perd la partie. Le plus jeune\n" )+
-        std::wstring(L"commence, c'est-à-dire vous.\n \n") +
+        res = std::wstring(L"\n\nFélicitations, un tiers du chemin parcouru.\n") + 
+        std::wstring(L"Pour la troisième épreuve, vous allez affronter Eddy\n") + 
+        std::wstring(L"dans le jeu des bâtonnets. Devant vous se trouvent\n") + 
+        std::wstring(L"vingts bâtonnets. Chacun votre tour vous aurez le droit\n") +
+        std::wstring(L"de prendre un, deux ou trois bâtonnets, celui qui\n" )+ 
+        std::wstring(L"s'empare du dernier bâtonnet perd la partie. Le plus\n" )+ 
+        std::wstring(L"jeune commence, c'est-à-dire vous.\n\n") +
 
-        std::wstring(L"Etant donné qu'Eddy est tres mauvais\n") + 
-        std::wstring(L"perdant je ne vous garantie pas la\n") + 
-        std::wstring(L"survie si vous le battez, mais \n" )+
-        std::wstring(L"j\'essaierai de vous proteger le \n" )+
-        std::wstring(L"moment venu.");
-
+        std::wstring(L"Étant donné qu'Eddy est très mauvais perdant je ne\n") + 
+        std::wstring(L"vous garantie pas la survie si vous le battez, mais\n") + 
+        std::wstring(L"j\'essaierai de vous proteger le moment venu.\n" );
     }
-    else {
-        res = std::wstring(L"\n\n\n J\'en étais sur.\n\n")+
-        std::wstring(L"Encore un gugusse qui réussit les épreuves\n" )+
-        std::wstring(L"mathématiques mais qui n'a jamais ouvert un\n") +
-        std::wstring(L"livre de sa vie. Vous savez comment on\n" )+
-        std::wstring(L"appelle les gens comme vous avec Eddy ?\n\n" )+
 
-        std::wstring(L"Des MAIN, pour Mots Aussi Importants que\n") +
-        std::wstring(L"les Nombres. Allez Eddy, liquide moi \n" )+ 
-        std::wstring(L"ce MAIN. *Gunshot* ");
+    else {
+        res = std::wstring(L"\n\n\n J\'en étais sur.\n\n") +
+        std::wstring(L"Encore un gugusse qui réussit les épreuves mathématiques\n" )+
+        std::wstring(L"mais qui n'a jamais ouvert un livre de sa vie. Vous\n") +
+        std::wstring(L"savez comment on appelle les gens comme vous avec Eddy ?\n\n" )+
+
+        std::wstring(L"Des MAIN, pour Mots Aussi Importants que les Nombres.\n") +
+        std::wstring(L"Allez Eddy, liquide moi ce MAIN. *Gunshot* \n" ); 
     }
 
     return res;
