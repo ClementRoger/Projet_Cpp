@@ -90,17 +90,17 @@ void Taquin :: init_position(std::vector<int> v){
 
 					case 0 :
 
-						v_position.push_back(sf::Vector2f(X_init,Y_init));
+						v_position.push_back(sf::Vector2f(X_init,Y_init)); // 0 => en haut à gauche => (X_INIT,Y_INIT)
 						break;
 
 					case 1 :
 
-						v_position.push_back(sf::Vector2f(X_init + d,Y_init));
+						v_position.push_back(sf::Vector2f(X_init + d,Y_init)); // 1 => deuxième case, à droite du 0 => (X_INIT + d, Y_INIT) 
 						break;
 
 					case 2 :
 
-						v_position.push_back(sf::Vector2f(X_init + 2*d,Y_init));
+						v_position.push_back(sf::Vector2f(X_init + 2*d,Y_init)); //etc
 						break;
 
 					case 3 :	
