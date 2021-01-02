@@ -9,7 +9,7 @@
 using namespace std;
 
 #define FACILE 150
-#define DIFFICILE 75
+#define DIFFICILE 750
 
 int main() {
 

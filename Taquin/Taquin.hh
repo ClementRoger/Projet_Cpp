@@ -24,6 +24,9 @@ class Taquin : public MiniJeu{
   int get_image_number(int x, int y); //Renvoie le numéro de l'image (l'index du vecteur) sur laquelle l'utilisateur a cliquée
   bool check_victory(); //Renvoie true si les cases sont toutes à la bonne place, false sinon
   void read_file(); // Remplit le vecteur avec la grille du fichier
+  void init_transition(sf::RenderWindow &window);
+  std::wstring setFinalText(bool win);
+  void print_end(bool winner,sf::RenderWindow &window);
 
  private:
 

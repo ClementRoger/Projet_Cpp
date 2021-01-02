@@ -207,3 +207,116 @@ void Batonnets::print_end(bool winner,sf::RenderWindow &window){
     window.display();
     sf::sleep(delayTime);
 }
+
+void Batonnets :: print_end(bool winner,sf::RenderWindow &window){
+
+    sf::Time delayTime = sf::milliseconds(2500);
+
+    sf::Texture texture;
+    sf::Sprite sprite;
+
+    if (winner) {
+
+        texture.loadFromFile("images/win.png");
+        sprite.setTexture(texture);
+    }    
+
+    else {
+
+        texture.loadFromFile("images/game_over.png");
+        sprite.setTexture(texture);
+    }    
+
+    sprite.setScale(0.9,0.9);
+    sprite.setPosition(APP_SIZE_X/2 - sprite.getLocalBounds().width/2,APP_SIZE_Y/2 - sprite.getLocalBounds().height/2);
+    window.draw(sprite);
+
+    window.display();
+    sf::sleep(delayTime);
+    transition(window);
+}
+
+wstring Taquin :: setFinalText(bool win){
+
+    std::wstring res;
+
+    if (win){
+
+        res = std::wstring(L"Bon, il semblerait que vous ayiez réussi. Vous vous \n" )+ 
+        std::wstring(L"attendiez à des cotillons et des feux d’artifices ? Allez,\n" )+ 
+        std::wstring(L"ouste, j’ai d’autres gens à faire passer moi ... \n\n") + 
+        std::wstring(L"NAN ! Pas cette porte ! c’est celle où Eddy entasse \n") +
+        std::wstring(L"ceux qui ont raté. Me regardez pas comme ça, on les rend \n" )+ 
+        std::wstring(L"à leur famille après … enfin je crois, faudrait que je \n" )+ 
+        std::wstring(L"demande à Thierry du service morgue ... \n\n" );
+
+    }
+
+    else {
+        res = std::wstring(L"\n\nOuah si près du but ça fait mal au coeur. Nan je vous\n")+
+        std::wstring(L"jure, j’y croyais, , je me disais que vous alliez y arriver. \n" )+
+        std::wstring(L"Je suis à deux doigts de vous laisser retenter la dernière épreuve ... \n" )+
+        std::wstring(L"Naaan je rigole. Eddy je te laisse t’occuper de lui, je vais me chercher un café.\n\n" )+
+        std::wstring(L"Comme d’habitude, je te prends un déca ? *Gunshot*");
+    }
+
+    return res;
+}
+
+void Taquin :: init_transition(sf::RenderWindow &window){
+
+    sf::Font font;
+    font.loadFromFile("images/Type.ttf");
+    wstring str = L"Press enter \nto continue...";
+
+    sf::Texture texture;
+    sf::Sprite sprite;
+
+    texture.loadFromFile("images/wall.jpeg");
+    sprite.setTexture(texture);
+    window.draw(sprite);
+
+    sf::Text text;
+    text.setFont(font);
+    text.setString(setFinalText(win()));
+    text.setCharacterSize(18);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f((APP_SIZE_X - text.getLocalBounds().width)/2,(APP_SIZE_Y - text.getLocalBounds().height)/2));
+    window.draw(text);
+
+    text.setString(str);
+    text.setCharacterSize(16);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f(510,505));
+    window.draw(text);
+}
+
+void Taquin :: transition(sf::RenderWindow &window){
+
+    sf::Event event;
+    std::size_t cpt = 0;
+
+    while(window.isOpen() && cpt < 1){
+    
+        while (window.pollEvent(event)) {
+            
+            if (((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Enter))) {
+
+               cpt ++;
+            }
+
+            if (event.type == sf::Event::Closed){ 
+
+                    window.close();
+                    break;                
+            }
+        } 
+
+        window.clear();
+        init_transition(window);
+        window.display();
+    }
+    
+}
