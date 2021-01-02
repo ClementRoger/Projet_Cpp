@@ -22,9 +22,8 @@ class Taquin : public MiniJeu{
   void init_case_vide(); //Initialise le vecteur contenant les coordonnées de la case vide
   void init_solution(); // //Initialise le vecteur contenant les coordonéées des cases de la solution
   int get_image_number(int x, int y); //Renvoie le numéro de l'image (l'index du vecteur) sur laquelle l'utilisateur a cliquée
-  bool check_victory();
-  void read_file();
-  //friend bool operator==(std::vector<sf::Vector2f> v1, std::vector<sf::Vector2f> v2);
+  bool check_victory(); //Renvoie true si les cases sont toutes à la bonne place, false sinon
+  void read_file(); // Remplit le vecteur avec la grille du fichier
 
  private:
 

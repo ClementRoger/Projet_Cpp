@@ -32,7 +32,7 @@ void Taquin :: init_names() {
 	v_name.push_back("images/8.png");
 }
 
-void Taquin :: read_file() { // Si La grille est 481 / 576 / 23. La case 1 aura donc comme position (X_init + 2*d, Y_init) par exemple, d étant la largeur d'une case (toutes les cases sont carrées et ont la même taille) 
+void Taquin :: read_file() { 
 	
 	ifstream file( "grilles.txt" ); 
   
