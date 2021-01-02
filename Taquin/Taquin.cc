@@ -33,7 +33,7 @@ void Taquin :: init_names() {
 }
 
 void Taquin :: init_position() { // La grille est 481 / 576 / 23. La case 1 aura donc comme position (X_init + 2*d, Y_init) par exemple, d étant la largeur d'une case (toutes les cases sont carrées et ont la même taille) 
-
+	
 	v_position.push_back(sf::Vector2f(X_init + 2*d,Y_init)); // Case 1
 	v_position.push_back(sf::Vector2f(X_init,Y_init + 2*d)); // Case 2
 	v_position.push_back(sf::Vector2f(X_init + d,Y_init + 2*d)); // Case 3

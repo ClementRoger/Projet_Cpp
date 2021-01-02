@@ -145,15 +145,7 @@ int Taquin :: get_image_number(int x, int y) {
 
 bool Taquin :: check_victory() {
 
-    for (int i = 0; i < 8; ++i) { 
-
-        if( (v_position[i].x != v_solution[i].x) || (v_position[i].y != v_solution[i].y) ) {
-            
-            return false;
-        }
-    }
-
-    return true;
+    return v_position == v_solution; //Surcharge d'opérateur
 }
 
 void Taquin :: transition(sf::RenderWindow& window) {

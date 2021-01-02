@@ -34,13 +34,15 @@ class Taquin : public MiniJeu{
   int number;
 };  
 
-/*
+bool operator==(std::vector<sf::Vector2f> v1, std::vector<sf::Vector2f> v2) {
 
-    GRILLE D'ORIGINE             SOLUTION
+  for (int i = 0; i < 8; ++i) { 
 
-      _____________           _____________
-      | 4 | 8 | 1 |           | 1 | 2 | 3 | 
-      | 5 | 7 | 6 |   ====>   | 4 | 5 | 6 | 
-      | 2 | 3 |   |           | 7 | 8 |   | 
-      ¯¯¯¯¯¯¯¯¯¯¯¯¯           ¯¯¯¯¯¯¯¯¯¯¯¯¯
-*/      
+        if( (v1[i].x != v2[i].x) || (v1[i].y != v2[i].y) ) {
+            
+            return false;
+        }
+    }
+
+  return true;
+}
