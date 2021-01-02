@@ -39,6 +39,3 @@ void Juste_Prix :: play() {
 	set_nb_try(get_nb_try() - 1);
 }
 
-void Juste_Prix::transition(sf::RenderWindow &window){
-
-}

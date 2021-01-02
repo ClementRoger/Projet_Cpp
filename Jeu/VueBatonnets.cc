@@ -7,6 +7,9 @@
 #include "Batonnets.hh"
 #include "TextEntry.hh"
 
+#define APP_SIZE_X 800
+#define APP_SIZE_Y 600
+
 using namespace std;
  
 void Batonnets :: display(sf::RenderWindow& window){
@@ -54,6 +57,7 @@ void Batonnets :: display(sf::RenderWindow& window){
         textbar.display(window);
         window.display();
 	}
+
     print_end(win(),window);
 }
 
@@ -188,6 +192,124 @@ void Batonnets :: affiche_batonnets(sf::RenderWindow& window) {
 	}
 }
 
+<<<<<<< HEAD
+void Batonnets :: print_end(bool winner,sf::RenderWindow &window){
+
+    sf::Time delayTime = sf::milliseconds(2500);
+
+    sf::Texture texture;
+    sf::Sprite sprite;
+
+    if (winner) {
+
+        texture.loadFromFile("images_batonnets/you_win.png");
+        sprite.setTexture(texture);
+    }    
+
+    else {
+
+        texture.loadFromFile("images_batonnets/game_over.png");
+        sprite.setTexture(texture);
+    }    
+
+    sprite.setScale(0.9,0.9);
+    sprite.setPosition(APP_SIZE_X/2 - sprite.getLocalBounds().width/2,APP_SIZE_Y/2 - sprite.getLocalBounds().height/2);
+    window.draw(sprite);
+
+    window.display();
+    sf::sleep(delayTime);
+    transition(window);
+}
+
+wstring Batonnets :: setFinalText(bool win){
+
+    std::wstring res;
+
+    if (win){
+
+        res = std::wstring(L"Bravo. Oh ne prenez pas cet air hautain, battre Eddy\n") + 
+        std::wstring(L"n’a rien d'impressionnant, et vous n’êtes qu’à la moitié.\n") + 
+        std::wstring(L"Les choses sérieuses commencent maintenant, avant c’était\n") +
+        std::wstring(L"l’échauffement.\n\nLa quatrième épreuve est très simple - même pour\n")+
+        std::wstring(L"vous -. Huit chiffres seront affichés devant vous, à vous\n") + 
+        std::wstring(L"de retrouver la logique et de deviner le nombre manquant.\n\n") +
+        std::wstring(L"Cela peut paraître facile sur le papier, mais je suis celui qui\n") +
+        std::wstring(L"a créé ce test donc attendez-vous à du challenge. Réfléchissez\n") +
+        std::wstring(L"bien, vous n’aurez droit qu’à quelques propositions avant\n") +
+        std::wstring(L"qu’Eddy vous transforme en viande hachée.\n\n");
+
+    }
+
+    else {
+
+        res = std::wstring(L"Je n’en reviens pas qu’autant de personnes perdent\n") +
+        std::wstring(L"contre Eddy à cette épreuve. Avant de devenir ... “nettoyeur”\n") +
+        std::wstring(L"ici, il lisait l’avenir dans un potiron dans une foire ambulante,\n") +
+        std::wstring(L"ce gars est bête comme une brique. Ne le prends pas mal Eddy, \n") +
+        std::wstring(L"tu fais parfaitement ton boulot maintenant. \n\n") +
+        std::wstring(L"Allez, élimine le. *Gunshot*\n"); 
+    }
+
+    return res;
+}
+
+void Batonnets :: init_transition(sf::RenderWindow &window){
+
+    sf::Font font;
+    font.loadFromFile("images_batonnets/Type.ttf");
+    wstring str = L"Press enter \nto continue...";
+
+    sf::Texture texture;
+    sf::Sprite sprite;
+
+    texture.loadFromFile("images_batonnets/wall.jpeg");
+    sprite.setTexture(texture);
+    window.draw(sprite);
+
+    sf::Text text;
+    text.setFont(font);
+    text.setString(setFinalText(win()));
+    text.setCharacterSize(18);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f((APP_SIZE_X - text.getLocalBounds().width)/2,(APP_SIZE_Y - text.getLocalBounds().height)/2));
+    window.draw(text);
+
+    text.setString(str);
+    text.setCharacterSize(16);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f(510,505));
+    window.draw(text);
+}
+
+void Batonnets :: transition(sf::RenderWindow &window){
+
+    sf::Event event;
+    std::size_t cpt = 0;
+
+    while(window.isOpen() && cpt < 1){
+    
+        while (window.pollEvent(event)) {
+            
+            if (((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Enter))) {
+
+               cpt ++;
+            }
+
+            if (event.type == sf::Event::Closed){ 
+
+                    window.close();
+                    break;                
+            }
+        } 
+
+        window.clear();
+        init_transition(window);
+        window.display();
+    }
+    
+=======
 
 void Batonnets::print_end(bool winner,sf::RenderWindow &window){
 
@@ -206,4 +328,5 @@ void Batonnets::print_end(bool winner,sf::RenderWindow &window){
     window.draw(sprite);
     window.display();
     sf::sleep(delayTime);
+>>>>>>> a39cc9bf4a3fdc1bacc8dce187f4b7d45877a40a
 }

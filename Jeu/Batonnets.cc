@@ -117,7 +117,3 @@ bool Batonnets :: user_plays() {
 		return false;
 	}
 }
-
-void Batonnets::transition(sf::RenderWindow &window){
-
-}

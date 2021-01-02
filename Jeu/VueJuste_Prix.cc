@@ -7,6 +7,9 @@
 #include "Juste_Prix.hh"
 #include "TextEntry.hh"
 
+#define APP_SIZE_X 800
+#define APP_SIZE_Y 600
+
 using namespace std;
  
 void Juste_Prix :: display(sf::RenderWindow& window){
@@ -142,20 +145,114 @@ void Juste_Prix :: init_background(sf::RenderWindow& window) {
 }
 
 
-void Juste_Prix::print_end(bool winner,sf::RenderWindow &window){
+void Juste_Prix :: print_end(bool winner,sf::RenderWindow &window){
+
     sf::Time delayTime = sf::milliseconds(2500);
+
     sf::Texture texture;
     sf::Sprite sprite;
-    if (winner){ 
-        texture.loadFromFile("images_justep/you_win.png");
-        sprite.setPosition(sf::Vector2f(530/2,411/2)); }
-    else{ 
-        texture.loadFromFile("images_justep/game_over.png"); 
-        sprite.setPosition(sf::Vector2f(450/2,411/2)); }
 
-    sprite.setTexture(texture);
-           
+    if (winner) {
+
+        texture.loadFromFile("images_batonnets/you_win.png");
+        sprite.setTexture(texture);
+    }    
+
+    else {
+
+        texture.loadFromFile("images_batonnets/game_over.png");
+        sprite.setTexture(texture);
+    }    
+
+    sprite.setScale(0.9,0.9);
+    sprite.setPosition(APP_SIZE_X/2 - sprite.getLocalBounds().width/2,APP_SIZE_Y/2 - sprite.getLocalBounds().height/2);
     window.draw(sprite);
+
     window.display();
     sf::sleep(delayTime);
+    transition(window);
+}
+
+wstring Juste_Prix :: setFinalText(bool win){
+
+    std::wstring res;
+
+    if (win){
+
+        res = std::wstring(L"Bon vous avez réussi. Étant donné votre tête je m’attendais\n") + 
+        std::wstring(L" à ce que vous ne compreniez même pas les règles mais bon, on est\n") + 
+        std::wstring(L"surpris de tout de nos jours. Voyons maintenant si vous êtes aussi\n") +
+        std::wstring(L"à l’aise avec les lettres qu’avec les chiffres.\n\n")+
+        std::wstring(L"La deuxième épreuve est un pendu : vous devez trouver le mot secret\n") +
+        std::wstring(L"en devinant les lettres qui le composent. Pour cela vous n’avez le\n") +
+        std::wstring(L"droit qu’à peu d'erreurs, si vous ne voulez pas finir en donut ...\n\n");
+    }
+
+    else {
+
+        res = std::wstring(L"Eh beh ce fut rapide. Si seulement tous les participants\n") +
+        std::wstring(L"pouvaient être aussi idiots, je ferais des journées de 3h\n") +
+        std::wstring(L"et je pourrais passer du temps avec mes gosses. \nEddy, sois gentil ") +
+        std::wstring(L"fais ton boulot s’il te plait. *Gunshot*\n");
+    }
+
+    return res;
+}
+
+void Juste_Prix :: init_transition(sf::RenderWindow &window){
+
+    sf::Font font;
+    font.loadFromFile("images_batonnets/Type.ttf");
+    wstring str = L"Press enter \nto continue...";
+
+    sf::Texture texture;
+    sf::Sprite sprite;
+
+    texture.loadFromFile("images_batonnets/wall.jpeg");
+    sprite.setTexture(texture);
+    window.draw(sprite);
+
+    sf::Text text;
+    text.setFont(font);
+    text.setString(setFinalText(win()));
+    text.setCharacterSize(18);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f((APP_SIZE_X - text.getLocalBounds().width)/2,(APP_SIZE_Y - text.getLocalBounds().height)/2));
+    window.draw(text);
+
+    text.setString(str);
+    text.setCharacterSize(16);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f(510,505));
+    window.draw(text);
+}
+
+void Juste_Prix :: transition(sf::RenderWindow &window){
+
+    sf::Event event;
+    std::size_t cpt = 0;
+
+    while(window.isOpen() && cpt < 1){
+    
+        while (window.pollEvent(event)) {
+            
+            if (((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Enter))) {
+
+               cpt ++;
+            }
+
+            if (event.type == sf::Event::Closed){ 
+
+                    window.close();
+                    break;                
+            }
+        } 
+
+        window.clear();
+        init_transition(window);
+        window.display();
+    }
+    
 }

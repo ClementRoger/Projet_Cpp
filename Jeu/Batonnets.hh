@@ -23,6 +23,8 @@ class Batonnets : public MiniJeu{
   void display(sf::RenderWindow& window);
   void affiche_batonnets(sf::RenderWindow& window);
   void print_end(bool winner,sf::RenderWindow &window);
+  void init_transition(sf::RenderWindow &window);
+  std::wstring setFinalText(bool win);
 
  private:
 

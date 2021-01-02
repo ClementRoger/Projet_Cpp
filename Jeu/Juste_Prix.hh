@@ -22,6 +22,8 @@ class Juste_Prix : public MiniJeuAvecSolution{
   void init_background(sf::RenderWindow& window);
   void display(sf::RenderWindow& window);
   void print_end(bool winner,sf::RenderWindow &window);
+  std::wstring setFinalText(bool win);
+  void init_transition(sf::RenderWindow &window);
 
  private:
 

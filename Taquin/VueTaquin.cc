@@ -195,11 +195,12 @@ wstring Taquin :: setFinalText(bool win){
     }
 
     else {
-        res = std::wstring(L"\n\nOuah si près du but ça fait mal au coeur. Nan je vous\n")+
-        std::wstring(L"jure, j’y croyais, , je me disais que vous alliez y arriver. \n" )+
-        std::wstring(L"Je suis à deux doigts de vous laisser retenter la dernière épreuve ... \n" )+
-        std::wstring(L"Naaan je rigole. Eddy je te laisse t’occuper de lui, je vais me chercher un café.\n\n" )+
-        std::wstring(L"Comme d’habitude, je te prends un déca ? *Gunshot*");
+        res = std::wstring(L"\n\nOuah si près du but ça fait mal au coeur. Nan je\n")+
+        std::wstring(L"vous jure, j’y croyais, , je me disais que vous alliez y \n" )+
+        std::wstring(L"arriver. Je suis à deux doigts de vous laisser retenter la\n" )+
+        std::wstring(L"dernière épreuve ... Naaan je rigole. Eddy je te laisse \n" )+
+        std::wstring(L"t’occuper de lui, je vais me chercher un café.\n\n") +
+        std::wstring(L"Comme d’habitude, je te prends un déca ? *Gunshot*\n\n");
     }
 
     return res;
