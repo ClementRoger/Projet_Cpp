@@ -19,7 +19,7 @@
 #define TEXTURE_LETTERS1 "img_pendu/tab.png"
 #define TEXTURE_WIN1 "img_pendu/you_win.png"
 #define TEXTURE_LOSE1 "img_pendu/game_over.png"
-#define TEXTURE_TRANSITION1 "img_pendu/transition.png"
+#define TEXTURE_TRANSITION1 "img_pendu/wall.jpeg"
 
 #define APP_SIZE_X1 800
 #define APP_SIZE_Y1 600

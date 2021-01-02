@@ -335,9 +335,9 @@ std::wstring Jeu::setFinalText(const std::size_t cpt){
 	         std::wstring(L"Pour la première épreuve je vais penser à un nombre\n") +
 	         std::wstring(L"entre 1 et 100 inclus, votre objectif est de retrouver\n") +
 	         std::wstring(L"ce nombre en un nombre limité de tentatives.\n") +
-	         std::wstring(L"A chacune de vos propositions je ne répondrai\n") +
+	         std::wstring(L"A chacune de vos propositions je ne répondrai que \n") +
 
-	         std::wstring(L"que \"C\'est plus\",\"C\'est moins\" ou \"C\'est correct\",\n") +
+	         std::wstring(L"\"C\'est plus\",\"C\'est moins\" ou \"C\'est correct\",\n") +
 	         std::wstring(L"rien d’autre.\n\n") +
 
 	         std::wstring(L"Si à la fin des tentatives autorisés,vous n’avez \n") + 
@@ -384,11 +384,10 @@ void Jeu::create_text(sf::RenderWindow &window, const sf::Font font, const std::
 void Jeu:: init_transition(sf::RenderWindow &window,const std::size_t cpt){
 
     sf::Font font;
-    font.loadFromFile("img_pendu/arial.ttf");
+    font.loadFromFile("img_pendu/Type.ttf");
 
-    create_sprite(window,0,0,TEXTURE_BACKGROUND2);
-    create_sprite(window,(APP_SIZE_X2-640)/2,0,TEXTURE_TRANSITION2);
-    create_text(window,font,18,(APP_SIZE_X2-640)/2+90,90,setFinalText(cpt));
+    create_sprite(window,0,0,TEXTURE_TRANSITION1);
+    create_text(window,font,20,100,90,setFinalText(cpt));
     create_text(window,font,16,510,505,L"Press enter \nto continue...");
 
 }

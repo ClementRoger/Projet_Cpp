@@ -132,37 +132,31 @@ std::wstring Missingnumber::setFinalText(bool win){
     std::wstring res;
 
     if (win){
-        res = std::wstring(L"Cinquième épreuve :\n \n") +
-
-        std::wstring(L"Hum, je vais commencer à croire que vous\n") + 
-        std::wstring(L"allez réussir le test. Il vous reste deux\n") + 
-        std::wstring(L"épreuves, et la prochaine c\'est de la bombe\n") + 
-        std::wstring(L"puisqu\'il s\'agit d\'un démineur ! \n") +
-        std::wstring(L"Vous savez, dix heures dans ce bureau tous\n") + 
-        std::wstring(L"les jours à voir des idiots dans votre genre \n") + 
-        std::wstring(L"c\'est épuisant donc si vous pouviez au moins\n") +
-        std::wstring(L"rigoler à mes vannes ça me faciliterait la\n") +
-        std::wstring(L"tache.\n \n") +
-
-        std::wstring(L"Enfin bref, vous devez connaître le principe \n") + 
-        std::wstring(L"du démineur : vous avez une grille où sont\n") + 
-        std::wstring(L"cachées des bombes. A chaque fois que vous\n" )+
-        std::wstring(L"cliquez sur une case, on affiche combien de\n") +
+        res = std::wstring(L"\n\nHum, je vais commencer à croire que vous\n") + 
+        std::wstring(L"allez réussir le test. Il vous reste deux épreuves,  \n") + 
+        std::wstring(L"et la prochaine c\'est de la bombe puisqu\'il \n") + 
+        std::wstring(L"s\'agit d\'un démineur ! \n\n") +
+        std::wstring(L"Vous savez, dix heures dans ce bureau tous les jours \n") + 
+        std::wstring(L"à voir des idiots dans votre genre c\'est épuisant  \n") + 
+        std::wstring(L"donc si vous pouviez au moins rigoler à mes vannes \n") +
+        std::wstring(L"ça me faciliterait la tache.\n \n") +
+       
+        std::wstring(L"Enfin bref, vous devez connaître le principe du \n") + 
+        std::wstring(L"démineur: vous avez une grille où sont cachées\n") + 
+        std::wstring(L"des bombes. A chaque fois que vous cliquez sur \n" )+
+        std::wstring(L"une case, on affiche combien de\n") +
 
         std::wstring(L"bombes sont adjacentes à celle-ci. Si vous \n") + 
-        std::wstring(L"parvenez à découvrir toutes les cases sans  \n") + 
-        std::wstring(L"toucher les bombes, vous réussissez \n") +
-        std::wstring(L"l\'épreuve, mais faites attention, vous \n") +
-        std::wstring(L"avez un nombre limité de vies.");
+        std::wstring(L"parvenez à découvrir toutes les cases sans toucher \n") + 
+        std::wstring(L"les bombes, vous réussissez l\'épreuve, mais faites \n") +
+        std::wstring(L"attention, vous avez un nombre limité de vies.");
     }
     else {
-        res = std::wstring(L"\n\nJe suis déçu. Alors que ça devenait\n")+
-        std::wstring(L"enfin intéressant, vous échouez \n" )+
-        std::wstring(L"lamentablement. Vous voulez la réponse\n" )+
-        std::wstring(L"avant de ... enfin vous savez ? Je peux \n" )+
-        std::wstring(L"vous la donner, c\'est pas comme si vous  ? \n") +
-        std::wstring(L"alliez pouvoir retenter l\'épreuve plus\n" )+
-        std::wstring(L"tard !\n\n" )+
+        res = std::wstring(L"\n\n\n\nJe suis déçu. Alors que ça devenait enfin \n")+
+        std::wstring(L"intéressant,vous échouez lamentablement. Vous voulez \n" )+
+        std::wstring(L"la réponse avant de ... enfin vous savez ? Je peux \n" )+
+        std::wstring(L"vous la donner, c\'est pas comme si vous alliez   \n") +
+        std::wstring(L"pouvoir retenter l\'épreuve plus tard !\n\n" )+
 
         std::wstring(L"C\'était ... *Gunshot*. Eddy ! La dernière\n") +
         std::wstring(L"volonté, ça te parle ? Quel idiot.\n") + 
@@ -175,11 +169,10 @@ std::wstring Missingnumber::setFinalText(bool win){
 void Missingnumber:: init_transition(sf::RenderWindow &window){
  
     sf::Font font;
-    font.loadFromFile("img_pendu/arial.ttf");
+    font.loadFromFile("img_pendu/Type.ttf");
 
-    create_sprite(window,0,0,TEXTURE_BACKGROUND2);
-    create_sprite(window,(APP_SIZE_X2-640)/2,0,TEXTURE_TRANSITION2);
-    create_text(window,font,18,(APP_SIZE_X2-640)/2+90,70,setFinalText(win()));
+    create_sprite(window,0,0,TEXTURE_TRANSITION2);
+    create_text(window,font,20,120,20,setFinalText(win()));
     create_text(window,font,16,510,505,"Press enter \nto continue...");
 
 }

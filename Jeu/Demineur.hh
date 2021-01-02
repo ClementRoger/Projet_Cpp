@@ -23,7 +23,7 @@
 #define TEXTURE_BACKGROUND "img_demineur/background.jpg"
 #define TEXTURE_BACKNAME "img_demineur/bomb.png"
 #define TEXTURE_BACKGAME "img_demineur/nb_try.png"
-#define TEXTURE_TRANSITION "img_demineur/transition.png"
+#define TEXTURE_TRANSITION "img_demineur/wall.jpeg"
 
 #define APP_SIZE_X 800
 #define APP_SIZE_Y 600

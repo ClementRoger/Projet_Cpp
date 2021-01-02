@@ -208,9 +208,7 @@ std::wstring Demineur::setFinalText(bool win){
     std::wstring res;
 
     if (win){
-        res = std::wstring(L"\n\nSixième épreuve :\n \n" )+
-
-        std::wstring(L"Sixième et dernière épreuve. Ouah que le temps \n" )+ 
+        res = std::wstring(L"Sixième et dernière épreuve. Ouah que le temps \n" )+ 
         std::wstring(L"passe vite quand on s’amuse ! Pour celle-là,\n" )+ 
         std::wstring(L"vous devrez résoudre un taquin. Quoi ? Vous savez \n") + 
         std::wstring(L"pas ce que c’est c’est ça ? Mais si, je suis sûr\n") +
@@ -236,11 +234,10 @@ std::wstring Demineur::setFinalText(bool win){
 void Demineur:: init_transition(sf::RenderWindow &window){
 
     sf::Font font;
-    font.loadFromFile("img_pendu/arial.ttf");
+    font.loadFromFile("img_pendu/Type.ttf");
 
-    create_sprite(window,0,0,TEXTURE_BACKGROUND);
-    create_sprite(window,(APP_SIZE_X-640)/2,0,TEXTURE_TRANSITION);
-    create_text(window,font,18,(APP_SIZE_X-640)/2+90,70,setFinalText(win()));
+    create_sprite(window,0,0,TEXTURE_TRANSITION);
+    create_text(window,font,20,100,130,setFinalText(win()));
     create_text(window,font,16,510,505,"Press enter \nto continue...");
 
 }

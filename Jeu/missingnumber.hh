@@ -21,7 +21,7 @@
 #define TEXTURE_LETTERS2 "img_missing/tab.png" 
 #define TEXTURE_WIN2 "img_missing/you_win.png"
 #define TEXTURE_LOSE2 "img_missing/game_over.png"
-#define TEXTURE_TRANSITION2 "img_missing/transition.png"
+#define TEXTURE_TRANSITION2 "img_missing/wall.jpeg"
 
 
 #define APP_SIZE_X2 800

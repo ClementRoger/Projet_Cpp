@@ -161,9 +161,7 @@ std::wstring Pendu::setFinalText(bool win){
     std::wstring res;
 
     if (win){
-        res = std::wstring(L"Troisième épreuve :\n \n") +
-
-        std::wstring(L"Felicitations, un tiers du chemin parcouru.\n") + 
+        res = std::wstring(L"\n\n Felicitations, un tiers du chemin parcouru.\n") + 
         std::wstring(L"Pour la troisieme epreuve, vous allez affronter\n") + 
         std::wstring(L"Eddy dans le jeu des Batonnets. Devant vous \n") + 
         std::wstring(L"se trouvent 20 batonnets. Chacun votre tour \n") +
@@ -180,7 +178,7 @@ std::wstring Pendu::setFinalText(bool win){
 
     }
     else {
-        res = std::wstring(L"J\'en étais sur.\n\n")+
+        res = std::wstring(L"\n\n\n J\'en étais sur.\n\n")+
         std::wstring(L"Encore un gugusse qui réussit les épreuves\n" )+
         std::wstring(L"mathématiques mais qui n'a jamais ouvert un\n") +
         std::wstring(L"livre de sa vie. Vous savez comment on\n" )+
@@ -197,11 +195,10 @@ std::wstring Pendu::setFinalText(bool win){
 void Pendu:: init_transition(sf::RenderWindow &window){
 
     sf::Font font;
-    font.loadFromFile("img_pendu/arial.ttf");
+    font.loadFromFile("img_pendu/Type.ttf");
 
-    create_sprite(window,0,0,TEXTURE_BACKGROUND1);
-    create_sprite(window,(APP_SIZE_X1-640)/2,0,TEXTURE_TRANSITION1);
-    create_text(window,font,20,(APP_SIZE_X1-640)/2+90,85,setFinalText(win()));
+    create_sprite(window,0,0,TEXTURE_TRANSITION1);
+    create_text(window,font,20,120,85,setFinalText(win()));
     create_text(window,font,16,510,495,L"Press enter \nto continue...");
 
 }
