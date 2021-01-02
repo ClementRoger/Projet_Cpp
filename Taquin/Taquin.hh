@@ -14,16 +14,33 @@ class Taquin : public MiniJeu{
   Taquin(std::size_t NB_TRY);
   void play();
   void init_background(sf::RenderWindow& window);
-  bool check_move();
+  bool check_move(int number); // Renvoie true si on peut bouger la case, false sinon
   void display(sf::RenderWindow& window);
   void transition(sf::RenderWindow& window);
-  void init_names();
-  void init_position();
+  void init_names(); //Initialise le vecteur contenant le nom des fichiers images
+  void init_position(); //Initialise le vecteur contenant les coordonnées des cases
+  void init_case_vide(); //Initialise le vecteur contenant les coordonnées de la case vide
+  void init_solution(); // //Initialise le vecteur contenant les coordonéées des cases de la solution
+  int get_image_number(int x, int y); //Renvoie le numéro de l'image (l'index du vecteur) sur laquelle l'utilisateur a cliquée
+  bool check_victory();
 
  private:
 
   std::size_t nb_try;
   std::vector<sf::Vector2f> v_position;
+  std::vector<sf::Vector2f> v_solution;
   std::vector<std::string> v_name;
-
+  sf::Vector2f case_vide;
+  int number;
 };  
+
+/*
+
+    GRILLE D'ORIGINE             SOLUTION
+
+      _____________           _____________
+      | 4 | 8 | 1 |           | 1 | 2 | 3 | 
+      | 5 | 7 | 6 |   ====>   | 4 | 5 | 6 | 
+      | 2 | 3 |   |           | 7 | 8 |   | 
+      ¯¯¯¯¯¯¯¯¯¯¯¯¯           ¯¯¯¯¯¯¯¯¯¯¯¯¯
+*/      

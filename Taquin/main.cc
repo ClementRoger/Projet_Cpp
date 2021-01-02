@@ -8,12 +8,12 @@
 
 using namespace std;
 
-#define NB_TRY 70
+#define NB_TRY 200
 
 int main() {
 
 	sf::RenderWindow window(sf::VideoMode(APP_SIZE_X, APP_SIZE_Y), "Epreuve du Taquin");
-	Taquin T1(NB_TRY); //1 easy, 2 difficult
+	Taquin T1(NB_TRY);
 	T1.display(window);
 
 	return EXIT_SUCCESS;
