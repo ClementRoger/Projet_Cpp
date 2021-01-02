@@ -18,11 +18,13 @@ class Taquin : public MiniJeu{
   void display(sf::RenderWindow& window);
   void transition(sf::RenderWindow& window);
   void init_names(); //Initialise le vecteur contenant le nom des fichiers images
-  void init_position(); //Initialise le vecteur contenant les coordonnées des cases
+  void init_position(std::vector<int> v); //Initialise le vecteur contenant les coordonnées des cases
   void init_case_vide(); //Initialise le vecteur contenant les coordonnées de la case vide
   void init_solution(); // //Initialise le vecteur contenant les coordonéées des cases de la solution
   int get_image_number(int x, int y); //Renvoie le numéro de l'image (l'index du vecteur) sur laquelle l'utilisateur a cliquée
   bool check_victory();
+  void read_file();
+  //friend bool operator==(std::vector<sf::Vector2f> v1, std::vector<sf::Vector2f> v2);
 
  private:
 
@@ -34,15 +36,16 @@ class Taquin : public MiniJeu{
   int number;
 };  
 
-bool operator==(std::vector<sf::Vector2f> v1, std::vector<sf::Vector2f> v2) {
+inline bool operator==(std::vector<sf::Vector2f> v1, std::vector<sf::Vector2f> v2) {
 
   for (int i = 0; i < 8; ++i) { 
 
-        if( (v1[i].x != v2[i].x) || (v1[i].y != v2[i].y) ) {
+    if( (v1[i].x != v2[i].x) || (v1[i].y != v2[i].y) ) {
             
-            return false;
-        }
+      return false;
     }
+  }
 
   return true;
 }
+

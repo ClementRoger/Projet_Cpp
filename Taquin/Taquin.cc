@@ -14,7 +14,7 @@ Taquin :: Taquin(size_t NB_TRY) : MiniJeu(NB_TRY,false) {
 
 	nb_try = NB_TRY;
 
-	init_position();
+	read_file();
 	init_names();
 	init_case_vide();
 	init_solution();
@@ -32,17 +32,107 @@ void Taquin :: init_names() {
 	v_name.push_back("images/8.png");
 }
 
-void Taquin :: init_position() { // La grille est 481 / 576 / 23. La case 1 aura donc comme position (X_init + 2*d, Y_init) par exemple, d étant la largeur d'une case (toutes les cases sont carrées et ont la même taille) 
+void Taquin :: read_file() { // Si La grille est 481 / 576 / 23. La case 1 aura donc comme position (X_init + 2*d, Y_init) par exemple, d étant la largeur d'une case (toutes les cases sont carrées et ont la même taille) 
 	
-	v_position.push_back(sf::Vector2f(X_init + 2*d,Y_init)); // Case 1
-	v_position.push_back(sf::Vector2f(X_init,Y_init + 2*d)); // Case 2
-	v_position.push_back(sf::Vector2f(X_init + d,Y_init + 2*d)); // Case 3
-	v_position.push_back(sf::Vector2f(X_init,Y_init)); // Case 4
-	v_position.push_back(sf::Vector2f(X_init,Y_init + d)); // Case 5
-	v_position.push_back(sf::Vector2f(X_init + 2*d,Y_init + d)); // Case 6
-	v_position.push_back(sf::Vector2f(X_init + d,Y_init + d)); // Case 7
-	v_position.push_back(sf::Vector2f(X_init + d,Y_init)); // Case 8
+	ifstream file( "grilles.txt" ); 
+  
+    string line; 
 
+    int cpt = 1;
+
+    srand((unsigned)time(0)); 
+    int numero_grille = (rand()%7); //Entre 1 et 6
+   	int numero_ligne = 9*numero_grille + 1; //8 chiffres + un saut de lignes = 9, le +1 car le fichier commence ligne 1 et non 0
+   	std::vector<int> v; 
+
+    if ( file ) {
+
+        std::string line;
+  
+        while ( getline( file, line ) )  { 
+
+        	if(cpt >= numero_ligne && cpt <= numero_ligne + 7){
+             
+             	int number = stoi(line, nullptr, 10);
+             	v.push_back(number);
+        	}
+
+        	cpt++;
+        }
+
+        init_position(v); 
+    } 
+}
+
+void Taquin :: init_position(std::vector<int> v){
+
+	int number = 1;
+
+	/*for (int i = 0; i < 8; ++i){
+
+		cout << v[i];
+
+		if(i == 2 || i == 5) {
+
+			cout << endl;
+		}
+	}*/
+
+	cout << endl;
+
+	while(v_position.size() != 8) {
+
+		for (int i = 0; i < 8; ++i) {
+		
+			if(v[i] == number){
+
+				switch(i) {
+
+					case 0 :
+
+						v_position.push_back(sf::Vector2f(X_init,Y_init));
+						break;
+
+					case 1 :
+
+						v_position.push_back(sf::Vector2f(X_init + d,Y_init));
+						break;
+
+					case 2 :
+
+						v_position.push_back(sf::Vector2f(X_init + 2*d,Y_init));
+						break;
+
+					case 3 :	
+
+						v_position.push_back(sf::Vector2f(X_init,Y_init + d));
+						break;
+
+					case 4 :
+						
+						v_position.push_back(sf::Vector2f(X_init + d,Y_init + d));
+						break;
+
+					case 5 :	
+
+						v_position.push_back(sf::Vector2f(X_init + 2*d,Y_init + d));
+						break;
+					
+					case 6 :
+
+						v_position.push_back(sf::Vector2f(X_init,Y_init + 2*d));
+						break;
+
+					case 7 :
+
+						v_position.push_back(sf::Vector2f(X_init + d,Y_init + 2*d));
+						break;				
+					}	
+
+				number++;
+			}
+		}	
+	}
 }
 
 void Taquin :: init_case_vide() { // Initialement la case vide est la case tout en bas à droite
