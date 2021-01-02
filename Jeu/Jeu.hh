@@ -27,9 +27,9 @@ class Jeu {
 
     std::size_t test_button_border(const sf::Vector2i position);
     bool Get_Mouse_Click(sf::RenderWindow &window);
-    void check_end(MiniJeu& game,sf::RenderWindow &window,std::size_t& cpt);
-    void easy_game(sf::RenderWindow &window,std::size_t& cpt);
-    void difficult_game(sf::RenderWindow &window,std::size_t& cpt);
+    void check_end(MiniJeu& game,sf::RenderWindow &window);
+    void easy_game(sf::RenderWindow &window);
+    void difficult_game(sf::RenderWindow &window);
 
     void transition(sf::RenderWindow &window,sf::Event& event);
   	std::wstring setFinalText(const std::size_t cpt);

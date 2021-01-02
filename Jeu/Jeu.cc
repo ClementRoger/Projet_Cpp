@@ -21,8 +21,6 @@ Jeu :: Jeu() {
 
 void Jeu :: run(){
 	sf::RenderWindow window(sf::VideoMode(XWINDOW, YWINDOW), "Projet C++");
-
-	std::size_t cpt = 0; // nombre de jeux avec 0 l'intro
 	bool Intropassed = false;
 	while(window.isOpen()) {
 
@@ -30,11 +28,10 @@ void Jeu :: run(){
 	    while (window.pollEvent(event)) {
 
 	        if (event.type == event.Closed) {
-	        	std::cout<<"im in"<<std::endl;
 	        	window.close();
 	        	break;
 	        }
-		    if (!cpt){
+		    if (!_passedGames){
 		        if (event.type == sf::Event::MouseButtonPressed){
 		        	Intropassed = Get_Mouse_Click(window);
 		        	break;
@@ -42,20 +39,20 @@ void Jeu :: run(){
 		    }
 	    }
 	     // Si un niveau : facile ou difficile sélectionné on incrémente cpt pour passer aux minijeux
-	    if(Intropassed && !cpt){
+	    if(Intropassed && !_passedGames){
 	    	transition(window,event);
-	    	cpt ++;
+	    	_passedGames ++;
 	    }
 	    // Si niveau facile
 	    if (get_difficulty() == 1){
-	    	easy_game(window,cpt);
+	    	easy_game(window);
 	    }
 	    else if (get_difficulty() == 2){
-	    	difficult_game(window,cpt);
+	    	difficult_game(window);
 	    }
 	    
 	    
-	    if (!cpt){
+	    if (!_passedGames){
 	    	window.clear();
 	    	init_game(window);
 			window.display();
@@ -64,38 +61,38 @@ void Jeu :: run(){
 	}
 }
 
-void Jeu::easy_game(sf::RenderWindow &window,std::size_t& cpt){
-	switch (cpt){
+void Jeu::easy_game(sf::RenderWindow &window){
+	switch (_passedGames){
 		case 1: {
 			Juste_Prix J1(8, 1, 100);
 			J1.display(window);
-			check_end(J1,window,cpt);
+			check_end(J1,window);
 		}
 		case 2 : {
 			std::fstream inFile("img_pendu/mots_faciles.txt", std::fstream::in);
 			Pendu game(inFile,8); 
     		game.display(window);
-	    	check_end(game,window,cpt);
+	    	check_end(game,window);
 			break;
 		}
 		case 3 : {
 			Batonnets B1(20,1); //1 easy, 2 difficult
 			B1.display(window);
-    		check_end(B1,window,cpt);
+    		check_end(B1,window);
 			break;
 		}
 		case 4 : {
 			std::fstream inFile("img_missing/matrices.txt", std::fstream::in);
 			Missingnumber game(inFile,3); 
 			game.display(window);
-			check_end(game,window,cpt);
+			check_end(game,window);
 			break;
 		}
 		
 		case 5 : {
 			Demineur game(2,8,8); 
     		game.display(window);
-    		check_end(game,window,cpt);
+    		check_end(game,window);
 			break;
 		}
 		
@@ -107,37 +104,37 @@ void Jeu::easy_game(sf::RenderWindow &window,std::size_t& cpt){
 	}
 }
 
-void Jeu::difficult_game(sf::RenderWindow &window,std::size_t& cpt){
-    switch (cpt){
+void Jeu::difficult_game(sf::RenderWindow &window){
+    switch (_passedGames){
     	case 1: {
 			Juste_Prix J1(6, 1, 100);
 			J1.display(window);
-			check_end(J1,window,cpt);
+			check_end(J1,window);
 		}
 		case 2 : {
 			std::fstream inFile("img_pendu/mots_difficiles.txt", std::fstream::in);
 			Pendu game(inFile,8); 
     		game.display(window);
-	    	check_end(game,window,cpt);
+	    	check_end(game,window);
 			break;
 		}
 		case 3 : {
 			Batonnets B1(20,2); //1 easy, 2 difficult
 			B1.display(window);
-    		check_end(B1,window,cpt);
+    		check_end(B1,window);
 			break;
 		}
 		case 4 : {
 			std::fstream inFile("img_missing/matrices.txt", std::fstream::in);
 			Missingnumber game(inFile,1); 
 			game.display(window);
-			check_end(game,window,cpt);
+			check_end(game,window);
 			break;
 		}
 		case 5 : {
 			Demineur game(1,10,8); 
     		game.display(window);
-    		check_end(game,window,cpt);
+    		check_end(game,window);
 			break;
 		}
 		
@@ -149,9 +146,9 @@ void Jeu::difficult_game(sf::RenderWindow &window,std::size_t& cpt){
 	}
 }
 
-void Jeu::check_end(MiniJeu& game,sf::RenderWindow &window,std::size_t& cpt){
+void Jeu::check_end(MiniJeu& game,sf::RenderWindow &window){
 	if(game.win()){
-		cpt++;
+		_passedGames++;
 	}
 	else {
 		window.close();
