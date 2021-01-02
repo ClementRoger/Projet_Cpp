@@ -17,7 +17,6 @@ void Juste_Prix :: display(sf::RenderWindow& window){
 
 	TextEntry textbar(window,APP_SIZE_X4,APP_SIZE_Y4 + 50);
 	window.display();
-
 	while (window.isOpen() && !win() && get_nb_try() > 0) {
 
 		sf::Event event;
@@ -32,11 +31,11 @@ void Juste_Prix :: display(sf::RenderWindow& window){
             }
         }
 
-        prev = user_entry;
+        prev = get_user_entry();
 
 		if(check_entry(textbar.get_finalInput()) && textbar.get_finalInput() != "" && prev != textbar.get_finalInput()){
 
-            user_entry = textbar.get_finalInput();
+            set_user_entry(textbar.get_finalInput());
 			play();
 		}	
 			

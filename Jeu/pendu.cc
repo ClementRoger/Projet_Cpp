@@ -11,7 +11,7 @@ using namespace std;
 
 #include "pendu.hh" 
 
- Pendu::Pendu(fstream& in, const size_t count):MiniJeu(count,false){ 
+ Pendu::Pendu(fstream& in, const size_t count):MiniJeuAvecSolution(count,false){ 
 
     srand(time(0));
 
@@ -27,13 +27,13 @@ using namespace std;
 
     random = rand()%(total_lines);
 
-    _mistery = all_lines[random];
+    set_solution(all_lines[random]);
 
-    vector<size_t>found_letters(_mistery.size(),0);
+    vector<size_t>found_letters(get_solution().size(),0);
     found_letters[0] = 1;
     _found_letters=found_letters;
     _user_entry ="";
-    cout<<"mistery: "<<_mistery<<endl;
+    cout<<"mistery: "<<get_solution()<<endl;
 
 }
 
@@ -53,13 +53,13 @@ void Pendu::play(){
     transform(letter.begin(), letter.end(),letter.begin(), ::toupper);
 
 // Si l'entrée est valide
-    if (validity_test(letter)){
+    if (check_entry(letter)){
 
         
         if (letter.size() == 1 ){
             //used_letters.push_back(letter);
             add_letter(used_letters,letter);
-            size_t place = get_mistery().find(letter);
+            size_t place = get_solution().find(letter);
 
             
             if (place != string::npos){
@@ -70,7 +70,7 @@ void Pendu::play(){
         
         else {
 
-            if(!letter.compare(get_mistery())){
+            if(!letter.compare(get_solution())){
                 set_win(find_letter(letter,found_letters,letter.size()));
             }
            
@@ -104,13 +104,13 @@ void Pendu::add_letter(vector<string>&used_letters,string letter){
     
 }
 
-bool Pendu::validity_test(const string tmp){
+bool Pendu::check_entry(const string entry){
 
-    if (!tmp.size()){
+    if (!entry.size()){
         return false;
     }
     else {
-        if (tmp.find_first_not_of("ABCDEFGHIJKLMNOPQRSTUVWXYZ") != std::string::npos){
+        if (entry.find_first_not_of("ABCDEFGHIJKLMNOPQRSTUVWXYZ") != std::string::npos){
             return false;
         }
         return true;
@@ -124,7 +124,7 @@ bool Pendu::find_letter(string letter,vector<size_t>&found_letters,const size_t 
     for (size_t i = 0; i< found_letters.size(); i++){
         if(taille == 1){
             std::ostringstream ss;
-            ss << get_mistery()[i];
+            ss << get_solution()[i];
             string tmp = ss.str();
             if(letter == tmp ){
                 found_letters[i] = 1;
@@ -147,7 +147,7 @@ void Pendu::affichage(vector<size_t>found_letters){
 
     for (size_t i=0; i<found_letters.size();i++){
         if (found_letters[i]){
-            res = res + get_mistery()[i];
+            res = res + get_solution()[i];
         }
         else {
             res = res + "*";

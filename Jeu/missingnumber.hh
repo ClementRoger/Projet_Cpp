@@ -11,6 +11,7 @@
 #include "TextEntry.hh"
 
 #include "../MiniJeu.hh"
+#include "../MiniJeuAvecSolution.hh"
 
 #define TEXTURE_BACKGROUND2 "img_missing/background.png"
 
@@ -26,7 +27,7 @@
 #define APP_SIZE_X2 800
 #define APP_SIZE_Y2 600
 
-class Missingnumber : public MiniJeu {
+class Missingnumber : public MiniJeuAvecSolution {
  
  public:
  
@@ -36,7 +37,7 @@ class Missingnumber : public MiniJeu {
 
   void play();
   void affichage(std::vector<std::vector<std::string>>matrice);
-  bool validity_test(const std::string tmp);
+  bool check_entry(const std::string entry);
 
   /* SFML */
   void display(sf::RenderWindow &window);
@@ -54,7 +55,6 @@ class Missingnumber : public MiniJeu {
   void init_transition(sf::RenderWindow &window);
 
   /* Getters & Setters */
-  std::string get_solution() const { return _solution; }
   std::vector<std::vector<std::string>> get_matrice() const{ return _matrice;}
 
   std::string get_user_entry() const { return _user_entry; }

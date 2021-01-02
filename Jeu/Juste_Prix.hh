@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "../MiniJeu.hh"
+#include "../MiniJeuAvecSolution.hh"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -10,13 +11,13 @@
 #define APP_SIZE_X4 800
 #define APP_SIZE_Y4 600
 
-class Juste_Prix : public MiniJeu{
+class Juste_Prix : public MiniJeuAvecSolution{
  
  public:
 
   Juste_Prix(size_t NB_TENTATIVES, int NMIN, int NMAX);
   void play();
-  bool check_entry(std::string entry);
+  bool check_entry(const std::string entry);
   void transition(sf::RenderWindow &window);
   void init_background(sf::RenderWindow& window);
   void display(sf::RenderWindow& window);
@@ -24,10 +25,8 @@ class Juste_Prix : public MiniJeu{
 
  private:
 
-  std::size_t mystery_number;
   std::size_t Nmin;
   std::size_t Nmax;
-  std::string user_entry;
   sf::String result;
 
 };  

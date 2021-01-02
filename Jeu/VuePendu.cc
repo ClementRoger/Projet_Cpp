@@ -46,7 +46,7 @@ void Pendu::display(sf::RenderWindow& window){
     }  
 
     print_end(win(),window); 
-    std::cout<<"la solution est: "<<get_mistery()<<std::endl;
+    std::cout<<"la solution est: "<<get_solution()<<std::endl;
 
 }
 
@@ -112,7 +112,7 @@ void Pendu::print_word(sf::RenderWindow &window){
 
     for (size_t i=0; i<get_found_letters().size();i++){
         if (get_found_letters()[i]){
-            res = res + " " + get_mistery()[i];
+            res = res + " " + get_solution()[i];
         }
         else {
             res = res + " _";
@@ -122,7 +122,7 @@ void Pendu::print_word(sf::RenderWindow &window){
     sf::Font font;
     font.loadFromFile("arial.ttf");
 
-    create_text(window,font,25,(APP_SIZE_X1-(get_mistery().size()*25))/2,190,res);
+    create_text(window,font,25,(APP_SIZE_X1-(get_solution().size()*25))/2,190,res);
    
 }
 

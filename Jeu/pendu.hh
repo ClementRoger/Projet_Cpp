@@ -10,6 +10,7 @@
 #include "TextEntry.hh"
 
 #include "../MiniJeu.hh"
+#include "../MiniJeuAvecSolution.hh"
 
 #define TEXTURE_BACKGROUND1 "img_pendu/background.png"
 #define TEXTURE_BACKNAME1 "img_pendu/hangman.png"
@@ -24,7 +25,7 @@
 #define APP_SIZE_Y1 600
 
 
-class Pendu : public MiniJeu {
+class Pendu : public MiniJeuAvecSolution {
  
  public:
  
@@ -33,7 +34,7 @@ class Pendu : public MiniJeu {
   ~Pendu();
 
   void play();
-  bool validity_test(const std::string tmp);
+  bool check_entry(const std::string entry);
   void affichage(std::vector<std::size_t>found_letters);
   bool find_letter(std::string letter,std::vector<std::size_t>&found_letters, const std::size_t taille);
   void add_letter(std::vector<std::string>&used_letters,std::string letter);
@@ -56,20 +57,16 @@ class Pendu : public MiniJeu {
 
   /* Getters & Setters */
 
-  std::string get_mistery() const { return _mistery; }
-  std::string get_user_entry() const { return _user_entry; }
   std::vector<std::string>  get_used_letters() const { return _used_letters; }
   std::vector<std::size_t>  get_found_letters() const { return _found_letters; }
 
-  void  set_user_entry(const std::string tmp) { _user_entry = tmp; }
   void  set_used_letters(const std::vector<std::string>tmp) { _used_letters=tmp; }
   void  set_found_letters(const std::vector<std::size_t>tmp) { _found_letters=tmp; }
 
   friend std::ostream& operator<<(std::ostream& in, std::vector<std::string>&used_letters);
 
  private:
- 	std::string _mistery;
-  std::string _user_entry;
+
   std::vector<std::string> _used_letters;
   std::vector<std::size_t> _found_letters;
 

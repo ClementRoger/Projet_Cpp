@@ -11,7 +11,7 @@
 
 #include "missingnumber.hh"
 
- Missingnumber::Missingnumber(std::fstream& in,const std::size_t nb):MiniJeu(nb,false){ 
+ Missingnumber::Missingnumber(std::fstream& in,const std::size_t nb):MiniJeuAvecSolution(nb,false){ 
 
     srand(time(0));
     std::size_t random = 1+rand()%(5);
@@ -34,8 +34,10 @@
                     for(std::string word; getline(stream,word,' ');){
                          tmp++;
                         if (tmp == 3){
-                             _solution = word;
-                             std::cout<<"solution:"<<_solution<<std::endl;
+                            std::cout<<"word : "<<word<<std::endl;
+                        std::cout<<"tmp : "<<tmp<<std::endl;
+                             set_solution(word);
+                             std::cout<<"solution:"<<get_solution()<<std::endl;
                              tmp = 0;
                          }
         
@@ -59,7 +61,7 @@
     }
     
     _matrice = tempmatrice;
-    _user_entry = "";
+    set_user_entry("");
     //affichage(tempmatrice);
 }
 
@@ -72,7 +74,7 @@ Missingnumber::~Missingnumber(){
 void Missingnumber::play(){
    std::string number = get_user_entry();
 
-        if (validity_test(number)){
+        if (check_entry(number)){
 
             if (!number.compare(get_solution())){
                 set_win(true);
@@ -87,13 +89,13 @@ void Missingnumber::play(){
 }
 
 /* Test la validité de l'entrée utilisateur */
-bool Missingnumber::validity_test(const std::string tmp){
+bool Missingnumber::check_entry(const std::string entry){
 
-    if (!tmp.size()){
+    if (!entry.size()){
         return false;
     }
     else {
-        if (tmp.find_first_not_of( "0123456789") != std::string::npos){
+        if (entry.find_first_not_of( "0123456789") != std::string::npos){
             return false;
         }
         return true;

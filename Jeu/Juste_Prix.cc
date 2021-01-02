@@ -6,26 +6,27 @@
 
 using namespace std;
 
-Juste_Prix :: Juste_Prix(size_t NB_TENTATIVES, int NMIN, int NMAX) : MiniJeu(NB_TENTATIVES,false) {
+Juste_Prix :: Juste_Prix(size_t NB_TENTATIVES, int NMIN, int NMAX) : MiniJeuAvecSolution(NB_TENTATIVES,false) {
 
 	Nmin = NMIN;
 	Nmax = NMAX;
 	std::srand(std::time(nullptr)); //Initialise le générateur de nombres aléatoires
-	mystery_number = rand()%Nmax + Nmin; //Nombre aléatoire entre Nmin et Nmax
-	//cout << mystery_number << endl;
+	set_solution(std::to_string(rand()%Nmax + Nmin)); //Nombre aléatoire entre Nmin et Nmax
+	cout << get_solution() << endl;
 
 }
 
 void Juste_Prix :: play() {
 
-	size_t number = (size_t) stoi(user_entry, nullptr, 10);
+	size_t number = (size_t) stoi(get_user_entry(), nullptr, 10);
+	size_t solution = (size_t) stoi(get_solution(), nullptr, 10);
 
-	if(number > mystery_number) {
+	if(number > solution) {
 
 		result = "C'est moins";
 	}
 
-	else if(number < mystery_number){
+	else if(number < solution){
 
 		result = "C'est plus";
 	}
