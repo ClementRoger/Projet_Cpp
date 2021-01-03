@@ -11,9 +11,6 @@ void Pendu::display(sf::RenderWindow& window){
     TextEntry player(window,APP_SIZE_X1,APP_SIZE_Y1+170);
     std::string prev= get_user_entry(); 
 
-    window.clear();
-    init_background(window);
-    window.display();
 
     /* Boucle de jeu */
     while (window.isOpen() && !win() && get_nb_try() )

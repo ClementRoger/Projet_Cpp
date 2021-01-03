@@ -18,6 +18,7 @@ Jeu :: Jeu() {
 	// 1 = facile ~ 2 = difficile ~ 0 = indéfini
 	_difficulty = 0;
 	_passedGames = 0;
+	_playagain = 0;
 }
 
 void Jeu :: run(){
@@ -35,6 +36,7 @@ void Jeu :: run(){
 		    if (!_passedGames){
 		        if (event.type == sf::Event::MouseButtonPressed){
 		        	Intropassed = Get_Mouse_Click(window);
+		        	_playagain = 0;
 		        	break;
 		        }
 		    }
@@ -43,13 +45,14 @@ void Jeu :: run(){
 	    if(Intropassed && !_passedGames){
 	    	transition(window,event);
 	    	_passedGames ++;
+	    	Intropassed = false;
 	    }
 	    // Si niveau facile
 	    if (get_difficulty() == 1){
-	    	easy_game(window);
+	    	easy_game(window,event);
 	    }
 	    else if (get_difficulty() == 2){
-	    	difficult_game(window);
+	    	difficult_game(window,event);
 	    }
 	    
 	    
@@ -62,91 +65,97 @@ void Jeu :: run(){
 	}
 }
 
-void Jeu::easy_game(sf::RenderWindow &window){
+void Jeu::easy_game(sf::RenderWindow &window,sf::Event& event){
 	switch (_passedGames){
 		case 1: {
-			Juste_Prix J1(8, 1, 100);
+			Juste_Prix J1(2, 1, 100);
 			J1.display(window);
-			check_end(J1,window);
+			check_end(J1,window,event);
+			break;
 		}
 		case 2 : {
+			std::cout<<"enter here"<<std::endl;
 			std::fstream inFile("img_pendu/mots_faciles.txt", std::fstream::in);
-			Pendu game(inFile,8); 
-    		game.display(window);
-	    	check_end(game,window);
+			Pendu games(inFile,8); 
+    		games.display(window);
+	    	check_end(games,window,event);
 			break;
 		}
 		case 3 : {
 			Batonnets B1(20,1); //1 easy, 2 difficult
 			B1.display(window);
-    		check_end(B1,window);
+    		check_end(B1,window,event);
 			break;
 		}
 		case 4 : {
 			std::fstream inFile("img_missing/matrices.txt", std::fstream::in);
 			Missingnumber game(inFile,3); 
 			game.display(window);
-			check_end(game,window);
+			check_end(game,window,event);
 			break;
 		}
 		
 		case 5 : {
 			Demineur game(2,0,8); 
     		game.display(window);
-    		check_end(game,window);
+    		check_end(game,window,event);
 			break;
 		}
 		case 6 : {
 			Taquin T1(150);
 			T1.display(window);
-			check_end(T1,window);
+			check_end(T1,window,event);
+			break;
 		}
 		
 		default :
 			//ajouter la possibilité de rejouer?
-			window.close();
+			playagain(window,event);
+			//window.close();
 			std::cout<<"end"<<std::endl;
 			break;
 	}
 }
 
-void Jeu::difficult_game(sf::RenderWindow &window){
+void Jeu::difficult_game(sf::RenderWindow &window,sf::Event& event){
     switch (_passedGames){
     	case 1: {
 			Juste_Prix J1(6, 1, 100);
 			J1.display(window);
-			check_end(J1,window);
+			check_end(J1,window,event);
+			break;
 		}
 		case 2 : {
 			std::fstream inFile("img_pendu/mots_difficiles.txt", std::fstream::in);
-			Pendu game(inFile,8); 
-    		game.display(window);
-	    	check_end(game,window);
+			Pendu games(inFile,8); 
+    		games.display(window);
+	    	check_end(games,window,event);
 			break;
 		}
 		case 3 : {
 			Batonnets B1(20,2); //1 easy, 2 difficult
 			B1.display(window);
-    		check_end(B1,window);
+    		check_end(B1,window,event);
 			break;
 		}
 		case 4 : {
 			std::fstream inFile("img_missing/matrices.txt", std::fstream::in);
 			Missingnumber game(inFile,1); 
 			game.display(window);
-			check_end(game,window);
+			check_end(game,window,event);
 			break;
 		}
 		case 5 : {
 			Demineur game(1,10,8); 
     		game.display(window);
-    		check_end(game,window);
+    		check_end(game,window,event);
 			break;
 		}
 		case 6 : {
 			Taquin T1(1);
 			T1.display(window);
-			check_end(T1,window);
+			check_end(T1,window,event);
+			break;
 		}
 		default :
 		//ajouter la possibilité  de rejouer?
@@ -156,12 +165,64 @@ void Jeu::difficult_game(sf::RenderWindow &window){
 	}
 }
 
-void Jeu::check_end(MiniJeu& game,sf::RenderWindow &window){
+void Jeu::init_playagain(sf::RenderWindow &window){
+	create_sprite(window,0,0,TEXTURE_TRANSITION1);
+	sf::Font font;
+
+	if (!font.loadFromFile("zorque.ttf")) {
+        cout << "Erreur de chargement de la police" << endl;
+    }
+
+    sf::Sprite Bouton_Facile, Bouton_Difficile;
+	sf::Text Texte_Facile("Rejouer",font,50);
+	sf::Text Texte_Difficile("Quitter",font,50);
+
+	create_button(window,Bouton_Facile, Texte_Facile, 100, 430);
+	create_button(window,Bouton_Difficile, Texte_Difficile, 450, 430);
+
+    create_text(window,font,40,300,250,L"Play Again?");
+
+}
+
+void Jeu::playagain (sf::RenderWindow &window,sf::Event& event){
+	bool passed = false;
+	while (window.isOpen() && !_playagain){
+		
+		while (window.pollEvent(event)) {
+				if (event.type == sf::Event::MouseButtonPressed){
+	        	passed = Get_Mouse_Click(window);
+	        	std::cout<<"passed: "<<passed<<std::endl;
+	        	break;
+			}
+			
+	        if (event.type == event.Closed) {
+	        	window.close();
+	        	break;
+	        }
+		   
+		    
+	    }
+
+		if (passed && _playagain == 1){
+			_passedGames = 0;
+			_difficulty = 0;
+		}
+		if(passed && _playagain == 2){
+			window.close();
+		}
+		window.clear();
+		init_playagain(window);
+		window.display();
+	}
+	
+}
+
+void Jeu::check_end(MiniJeu& game,sf::RenderWindow &window,sf::Event& event){
 	if(game.win()){
 		_passedGames++;
 	}
 	else {
-		window.close();
+		playagain(window,event);
 	}
 }
 
@@ -181,10 +242,11 @@ bool Jeu::Get_Mouse_Click(sf::RenderWindow &window){
         pressed = false;
       }   
     }
-    //std::cout << position.x << " " << position.y << '\n';
+    
     std::size_t tmp = test_button_border(position);
     if (tmp > 0){
-    	set_difficulty(tmp);
+    	if(!_passedGames){ set_difficulty(tmp); }
+    	else { _playagain = tmp; }
     	return true;
     }
     return false;

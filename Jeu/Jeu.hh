@@ -27,9 +27,9 @@ class Jeu {
 
     std::size_t test_button_border(const sf::Vector2i position);
     bool Get_Mouse_Click(sf::RenderWindow &window);
-    void check_end(MiniJeu& game,sf::RenderWindow &window);
-    void easy_game(sf::RenderWindow &window);
-    void difficult_game(sf::RenderWindow &window);
+    void check_end(MiniJeu& game,sf::RenderWindow &window,sf::Event& event);
+    void easy_game(sf::RenderWindow &window,sf::Event& event);
+    void difficult_game(sf::RenderWindow &window,sf::Event& event);
 
     void transition(sf::RenderWindow &window,sf::Event& event);
   	std::wstring setFinalText(const std::size_t cpt);
@@ -38,6 +38,8 @@ class Jeu {
   	void create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file);
   
 
+    void init_playagain(sf::RenderWindow &window);
+    void playagain(sf::RenderWindow &window,sf::Event& event);
     /* Getters & Setters */
     std::size_t get_difficulty() const { return _difficulty;}
   	void set_difficulty(const std::size_t val){ _difficulty = val; }
@@ -47,6 +49,7 @@ class Jeu {
 	private:
 	std::size_t _difficulty;
 	std::size_t _passedGames;
+  std::size_t _playagain;
 };
 /*
 
