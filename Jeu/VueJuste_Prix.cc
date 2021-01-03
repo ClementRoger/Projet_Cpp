@@ -180,7 +180,7 @@ wstring Juste_Prix :: setFinalText(bool win){
     if (win){
 
         res = std::wstring(L"Bon vous avez réussi. Étant donné votre tête je m’attendais\n") + 
-        std::wstring(L" à ce que vous ne compreniez même pas les règles mais bon, on est\n") + 
+        std::wstring(L"à ce que vous ne compreniez même pas les règles mais bon, on est\n") + 
         std::wstring(L"surpris de tout de nos jours. Voyons maintenant si vous êtes aussi\n") +
         std::wstring(L"à l’aise avec les lettres qu’avec les chiffres.\n\n")+
         std::wstring(L"La deuxième épreuve est un pendu : vous devez trouver le mot secret\n") +

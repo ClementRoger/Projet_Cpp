@@ -96,8 +96,8 @@ void Pendu:: init_background(sf::RenderWindow &window){
     create_sprite(window,APP_SIZE_X1/4+10,160,TEXTURE_BACKGAME1);
     create_sprite(window,100,300,TEXTURE_LETTERS1);
     create_text(window,font,17,300,330,L"Press enter to submit :");
-    create_text(window,font,17,300,430,L"Lettres deja utilisees :");
-    create_text(window,font,24,APP_SIZE_X1/3+30,500,L"Vies restantes : " + std::to_wstring(get_nb_try()));
+    create_text(window,font,17,300,430,L"Lettres déjà utilisées :");
+    create_text(window,font,24,APP_SIZE_X1/3+30,500,L"Erreurs restantes : " + std::to_wstring(get_nb_try()));
 
 }
 
@@ -159,7 +159,7 @@ void Pendu::print_end(bool winner,sf::RenderWindow &window){
 
 std::wstring Pendu::setFinalText(bool win){
     std::wstring res;
-
+ 
     if (win){
         res = std::wstring(L"\n\nFélicitations, un tiers du chemin parcouru.\n") + 
         std::wstring(L"Pour la troisième épreuve, vous allez affronter Eddy\n") + 
@@ -171,11 +171,11 @@ std::wstring Pendu::setFinalText(bool win){
 
         std::wstring(L"Étant donné qu'Eddy est très mauvais perdant je ne\n") + 
         std::wstring(L"vous garantie pas la survie si vous le battez, mais\n") + 
-        std::wstring(L"j\'essaierai de vous proteger le moment venu.\n" );
+        std::wstring(L"j\'essaierai de vous protéger le moment venu.\n" );
     }
 
     else {
-        res = std::wstring(L"\n\n\n J\'en étais sur.\n\n") +
+        res = std::wstring(L"\n\n\n\nJ\'en étais sur.\n\n") +
         std::wstring(L"Encore un gugusse qui réussit les épreuves mathématiques\n" )+
         std::wstring(L"mais qui n'a jamais ouvert un livre de sa vie. Vous\n") +
         std::wstring(L"savez comment on appelle les gens comme vous avec Eddy ?\n\n" )+
@@ -193,7 +193,7 @@ void Pendu:: init_transition(sf::RenderWindow &window){
     font.loadFromFile("img_pendu/Type.ttf");
 
     create_sprite(window,0,0,TEXTURE_TRANSITION1);
-    create_text(window,font,20,120,85,setFinalText(win()));
+    create_text(window,font,20,50,85,setFinalText(win()));
     create_text(window,font,16,510,495,L"Press enter \nto continue...");
 
 }

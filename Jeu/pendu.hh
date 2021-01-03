@@ -16,7 +16,7 @@
 #define TEXTURE_BACKNAME1 "img_pendu/hangman.png"
 #define TEXTURE_NAME1 "img_pendu/title.png"
 #define TEXTURE_BACKGAME1 "img_pendu/nb_try.png"
-#define TEXTURE_LETTERS1 "img_pendu/tab.png"
+#define TEXTURE_LETTERS1 "img_pendu/paint_bg.png"
 #define TEXTURE_WIN1 "img_pendu/you_win.png"
 #define TEXTURE_LOSE1 "img_pendu/game_over.png"
 #define TEXTURE_TRANSITION1 "img_pendu/wall.jpeg"

@@ -94,7 +94,7 @@ void Demineur:: init_background(sf::RenderWindow &window){
     create_text(window,font,24,28,43,"Test \n 5/6");
     create_sprite(window,APP_SIZE_X/4+10,450,TEXTURE_BACKGAME);
 
-    create_text(window,font,30,APP_SIZE_X/3+15,480,"Vies restantes : " + std::to_string(get_nb_try()));
+    create_text(window,font,30,APP_SIZE_X/3-8,480,"Erreurs restantes : " + std::to_string(get_nb_try()));
 
     create_sprite(window,APP_SIZE_X/4,0,TEXTURE_NAME);
 }
@@ -208,7 +208,7 @@ std::wstring Demineur::setFinalText(bool win){
     std::wstring res;
 
     if (win){
-        res = std::wstring(L"Sixième et dernière épreuve. Ouah que le temps \n" )+ 
+        res = std::wstring(L"\n\nSixième et dernière épreuve. Ouah que le temps \n" )+ 
         std::wstring(L"passe vite quand on s’amuse ! Pour celle-là,\n" )+ 
         std::wstring(L"vous devrez résoudre un taquin. Quoi ? Vous savez \n") + 
         std::wstring(L"pas ce que c’est c’est ça ? Mais si, je suis sûr\n") +

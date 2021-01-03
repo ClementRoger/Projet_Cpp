@@ -20,7 +20,7 @@ Jeu :: Jeu() {
 }
 
 void Jeu :: run(){
-	sf::RenderWindow window(sf::VideoMode(XWINDOW, YWINDOW), "Projet C++");
+	sf::RenderWindow window(sf::VideoMode(XWINDOW, YWINDOW), "Livin' Tomorrow");
 	bool Intropassed = false;
 	while(window.isOpen()) {
 
@@ -310,8 +310,7 @@ std::wstring Jeu::setFinalText(const std::size_t cpt){
 
     	case 2:
 
-    		res = std::wstring(L"\n\nPremière épreuve :\n\n") +
-    		std::wstring(L"\"Asseyez-vous\" dit le scientifique d\'un ton froid.\n\n") +
+    		res = std::wstring(L"\n\n\n\n\"Asseyez-vous\" dit le scientifique d\'un ton froid.\n\n") +
 
 	        std::wstring(L"Je pense que vous connaissez les règles : vous \n") +
 	        std::wstring(L"allez passer six épreuves par ordre croissant de \n") +
@@ -334,7 +333,7 @@ std::wstring Jeu::setFinalText(const std::size_t cpt){
 	         std::wstring(L"ce nombre en un nombre limité de tentatives.\n") +
 	         std::wstring(L"A chacune de vos propositions je ne répondrai que \n") +
 
-	         std::wstring(L"\"C\'est plus\",\"C\'est moins\" ou \"C\'est correct\",\n") +
+	         std::wstring(L"\"C\'est plus\",\"C\'est moins\" ou \"C\'est correct\",") +
 	         std::wstring(L"rien d’autre.\n\n") +
 
 	         std::wstring(L"Si à la fin des tentatives autorisés,vous n’avez \n") + 
@@ -384,7 +383,7 @@ void Jeu:: init_transition(sf::RenderWindow &window,const std::size_t cpt){
     font.loadFromFile("img_pendu/Type.ttf");
 
     create_sprite(window,0,0,TEXTURE_TRANSITION1);
-    create_text(window,font,20,100,90,setFinalText(cpt));
+    create_text(window,font,20,75,90,setFinalText(cpt));
     create_text(window,font,16,510,505,L"Press enter \nto continue...");
 
 }

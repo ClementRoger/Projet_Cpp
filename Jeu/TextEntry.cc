@@ -2,6 +2,8 @@
 #include "TextEntry.hh"
 using namespace std; 
 
+#define SIZE 200
+
 TextEntry :: TextEntry (sf::RenderWindow& window,size_t x, size_t y) {
 
 	if (!_font.loadFromFile("arial.ttf")) {
@@ -10,12 +12,10 @@ TextEntry :: TextEntry (sf::RenderWindow& window,size_t x, size_t y) {
   
     _playerInput = "";
     _entrysize = 0;
-    _xsize = (size_t)(x-140)/2;
+    _xsize = (size_t)(x-SIZE)/2;
     _ysize = (size_t)(y-30)/2;
     _final = "";
    // display(window);
-
-
 }
 
 TextEntry :: ~TextEntry(){ 
@@ -36,7 +36,7 @@ void TextEntry :: init_rectangle(sf::RenderWindow& window,size_t width, size_t h
 }  
 
 void TextEntry :: display_playertext(sf::RenderWindow& window,string tmp,size_t pos_x,size_t pos_y){
-	sf::Text playerText(tmp,_font,50);
+	sf::Text playerText(tmp,_font,SIZE);
     playerText.setCharacterSize(24);
     playerText.setPosition(pos_x,pos_y);
     playerText.setFillColor(sf::Color(0, 0, 0));
@@ -68,7 +68,7 @@ void TextEntry :: check_events(sf::RenderWindow& window,sf::Event& event){
                 tmp.erase(tmp.size() -1, 1);
             }
         }
-        else if (get_entrysize() < 120){
+        else if (get_entrysize() < SIZE-20){
         	
         	tmp += event.text.unicode;
             
@@ -82,8 +82,8 @@ void TextEntry :: check_events(sf::RenderWindow& window,sf::Event& event){
 
  void TextEntry :: display (sf::RenderWindow& window){
 
-    init_rectangle(window,140,30,get_xsize(),get_ysize());
-    display_playertext(window,get_playerInput(),get_xsize()+ 140/2 - get_entrysize()/2, get_ysize());
+    init_rectangle(window,SIZE,30,get_xsize(),get_ysize());
+    display_playertext(window,get_playerInput(),get_xsize()+ SIZE/2 - get_entrysize()/2, get_ysize());
 
  }
 

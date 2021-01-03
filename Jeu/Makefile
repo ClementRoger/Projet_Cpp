@@ -6,7 +6,7 @@ OBJ= $(SRC:.cc=.o)
 TST_DIR=tests/
 TST= $(wildcard $(TST_DIR)/*.cc)
 OBJ_TEST = $(filter-out main.o, $(OBJ)) $(TST:.cc=.o)
-EXEC= exe 
+EXEC= Jeu 
  
 
 

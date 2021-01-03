@@ -67,9 +67,9 @@ void Missingnumber::create_text(sf::RenderWindow &window, const sf::Font font, c
     text.setString(input);
     text.setCharacterSize(fontSize);
     text.setFillColor(sf::Color::White);
-    text.setStyle(sf::Text::Bold);
+    text.setStyle(sf::Text::Bold); 
     text.setPosition(sf::Vector2f(x,y));
-    window.draw(text);
+    window.draw(text); 
 }
 
 
@@ -142,21 +142,20 @@ std::wstring Missingnumber::setFinalText(bool win){
         std::wstring(L"ça me faciliterait la tache.\n \n") +
        
         std::wstring(L"Enfin bref, vous devez connaître le principe du \n") + 
-        std::wstring(L"démineur: vous avez une grille où sont cachées\n") + 
+        std::wstring(L"démineur : vous avez une grille où sont cachées\n") + 
         std::wstring(L"des bombes. A chaque fois que vous cliquez sur \n" )+
-        std::wstring(L"une case, on affiche combien de\n") +
-
-        std::wstring(L"bombes sont adjacentes à celle-ci. Si vous \n") + 
-        std::wstring(L"parvenez à découvrir toutes les cases sans toucher \n") + 
-        std::wstring(L"les bombes, vous réussissez l\'épreuve, mais faites \n") +
-        std::wstring(L"attention, vous avez un nombre limité de vies.");
+        std::wstring(L"une case, on affiche combien de bombes sont\n") +
+        std::wstring(L"adjacentes à celle-ci. Si vous parvenez à découvrir\n") + 
+        std::wstring(L"toutes les cases sans toucher les bombes, vous\n") + 
+        std::wstring(L"réussissez l'épreuve, mais faites attention, vous\n") +
+        std::wstring(L"avez un nombre limité de vies.");
     }
     else {
-        res = std::wstring(L"\n\n\n\nJe suis déçu. Alors que ça devenait enfin \n")+
-        std::wstring(L"intéressant,vous échouez lamentablement. Vous voulez \n" )+
-        std::wstring(L"la réponse avant de ... enfin vous savez ? Je peux \n" )+
-        std::wstring(L"vous la donner, c\'est pas comme si vous alliez   \n") +
-        std::wstring(L"pouvoir retenter l\'épreuve plus tard !\n\n" )+
+        res = std::wstring(L"\n\n\n\n\n\nJe suis déçu. Alors que ça devenait enfin \n")+
+        std::wstring(L"intéressant,vous échouez lamentablement.\n" )+
+        std::wstring(L"Vous voulez la réponse avant de ... enfin vous\n" )+
+        std::wstring(L"savez ? Je peux vous la donner, c\'est pas comme si\n") +
+        std::wstring(L" vous alliez pouvoir retenter l\'épreuve plus\ntard !\n\n" )+
 
         std::wstring(L"C\'était ... *Gunshot*. Eddy ! La dernière\n") +
         std::wstring(L"volonté, ça te parle ? Quel idiot.\n") + 
@@ -172,7 +171,7 @@ void Missingnumber:: init_transition(sf::RenderWindow &window){
     font.loadFromFile("img_pendu/Type.ttf");
 
     create_sprite(window,0,0,TEXTURE_TRANSITION2);
-    create_text(window,font,20,120,20,setFinalText(win()));
+    create_text(window,font,20,90,20,setFinalText(win()));
     create_text(window,font,16,510,505,"Press enter \nto continue...");
 
 }

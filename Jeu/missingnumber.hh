@@ -18,7 +18,7 @@
 #define TEXTURE_BACKNAME2 "img_missing/arrow.png"
 #define TEXTURE_NAME2 "img_missing/title.png"
 #define TEXTURE_GRID2 "img_missing/grid.png" 
-#define TEXTURE_LETTERS2 "img_missing/tab.png" 
+#define TEXTURE_LETTERS2 "img_missing/paint_bg.png" 
 #define TEXTURE_WIN2 "img_missing/you_win.png"
 #define TEXTURE_LOSE2 "img_missing/game_over.png"
 #define TEXTURE_TRANSITION2 "img_missing/wall.jpeg"
