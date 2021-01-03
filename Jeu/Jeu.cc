@@ -12,6 +12,25 @@
 #include "Juste_Prix.hh"
 #include "Taquin.hh"
 
+#define NB_TRY_JP_EASY 8
+#define NB_TRY_JP_DIFFICULT 6
+#define NMIN 1
+#define NMAX 100
+#define NB_TRY_PENDU_EASY 6
+#define NB_TRY_PENDU_DIFFICULT 8
+#define NB_BATONNETS 20
+#define EASY 1
+#define DIFFICULT 2
+#define NB_TRY_MISSING_NUMBER_EASY 3
+#define NB_TRY_MISSING_NUMBER_DIFFICULT 1
+#define NB_TRY_DEMINEUR_EASY 3
+#define NB_TRY_DEMINEUR_DIFFICULT 1
+#define NB_BOMBS_EASY 8
+#define NB_BOMBS_DIFFICULT 10
+#define DEMINEUR_GRID_SIZE 8
+#define NB_TRY_TAQUIN_EASY 150
+#define NB_TRY_TAQUIN_DIFFICULT 100 
+
 using namespace std;
 
 Jeu :: Jeu() {
@@ -66,9 +85,11 @@ void Jeu :: run(){
 }
 
 void Jeu::easy_game(sf::RenderWindow &window,sf::Event& event){
+
 	switch (_passedGames){
+
 		case 1: {
-			Juste_Prix J1(2, 1, 100);
+			Juste_Prix J1(NB_TRY_JP_EASY, NMIN, NMAX);
 			J1.display(window);
 			check_end(J1,window,event);
 			break;
@@ -76,33 +97,33 @@ void Jeu::easy_game(sf::RenderWindow &window,sf::Event& event){
 		case 2 : {
 			std::cout<<"enter here"<<std::endl;
 			std::fstream inFile("img_pendu/mots_faciles.txt", std::fstream::in);
-			Pendu games(inFile,8); 
+			Pendu games(inFile,NB_TRY_PENDU_EASY); 
     		games.display(window);
 	    	check_end(games,window,event);
 			break;
 		}
 		case 3 : {
-			Batonnets B1(20,1); //1 easy, 2 difficult
+			Batonnets B1(NB_BATONNETS,EASY);
 			B1.display(window);
     		check_end(B1,window,event);
 			break;
 		}
 		case 4 : {
 			std::fstream inFile("img_missing/matrices.txt", std::fstream::in);
-			Missingnumber game(inFile,3); 
+			Missingnumber game(inFile,NB_TRY_MISSING_NUMBER_EASY); 
 			game.display(window);
 			check_end(game,window,event);
 			break;
 		}
 		
 		case 5 : {
-			Demineur game(2,0,8); 
+			Demineur game(NB_TRY_DEMINEUR_EASY,NB_BOMBS_EASY,DEMINEUR_GRID_SIZE); 
     		game.display(window);
     		check_end(game,window,event);
 			break;
 		}
 		case 6 : {
-			Taquin T1(150);
+			Taquin T1(NB_TRY_TAQUIN_EASY);
 			T1.display(window);
 			check_end(T1,window,event);
 			break;
@@ -118,41 +139,43 @@ void Jeu::easy_game(sf::RenderWindow &window,sf::Event& event){
 }
 
 void Jeu::difficult_game(sf::RenderWindow &window,sf::Event& event){
+
     switch (_passedGames){
+
     	case 1: {
-			Juste_Prix J1(6, 1, 100);
+			Juste_Prix J1(NB_TRY_JP_DIFFICULT, NMIN, NMAX);
 			J1.display(window);
 			check_end(J1,window,event);
 			break;
 		}
 		case 2 : {
 			std::fstream inFile("img_pendu/mots_difficiles.txt", std::fstream::in);
-			Pendu games(inFile,8); 
+			Pendu games(inFile,NB_TRY_PENDU_DIFFICULT); 
     		games.display(window);
 	    	check_end(games,window,event);
 			break;
 		}
 		case 3 : {
-			Batonnets B1(20,2); //1 easy, 2 difficult
+			Batonnets B1(NB_BATONNETS,DIFFICULT);
 			B1.display(window);
     		check_end(B1,window,event);
 			break;
 		}
 		case 4 : {
 			std::fstream inFile("img_missing/matrices.txt", std::fstream::in);
-			Missingnumber game(inFile,1); 
+			Missingnumber game(inFile,NB_TRY_MISSING_NUMBER_DIFFICULT); 
 			game.display(window);
 			check_end(game,window,event);
 			break;
 		}
 		case 5 : {
-			Demineur game(1,10,8); 
+			Demineur game(NB_TRY_DEMINEUR_DIFFICULT,NB_BOMBS_DIFFICULT,DEMINEUR_GRID_SIZE); 
     		game.display(window);
     		check_end(game,window,event);
 			break;
 		}
 		case 6 : {
-			Taquin T1(1);
+			Taquin T1(NB_TRY_TAQUIN_DIFFICULT);
 			T1.display(window);
 			check_end(T1,window,event);
 			break;
