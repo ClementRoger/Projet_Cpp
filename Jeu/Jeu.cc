@@ -10,6 +10,7 @@
 #include "missingnumber.hh"
 #include "Batonnets.hh"
 #include "Juste_Prix.hh"
+#include "Taquin.hh"
 
 using namespace std;
 
@@ -90,10 +91,15 @@ void Jeu::easy_game(sf::RenderWindow &window){
 		}
 		
 		case 5 : {
-			Demineur game(2,8,8); 
+			Demineur game(2,0,8); 
     		game.display(window);
     		check_end(game,window);
 			break;
+		}
+		case 6 : {
+			Taquin T1(150);
+			T1.display(window);
+			check_end(T1,window);
 		}
 		
 		default :
@@ -137,7 +143,11 @@ void Jeu::difficult_game(sf::RenderWindow &window){
     		check_end(game,window);
 			break;
 		}
-		
+		case 6 : {
+			Taquin T1(1);
+			T1.display(window);
+			check_end(T1,window);
+		}
 		default :
 		//ajouter la possibilité  de rejouer?
 			window.close();
@@ -263,15 +273,10 @@ void Jeu :: create_button(sf::RenderWindow& window,sf::Sprite Bouton, sf::Text t
     window.draw(text);
 }
 
-/* char (0x82); - é
-char (0x85) - à
-char (0X8A) - è
-*/
+
 std::wstring Jeu::setFinalText(const std::size_t cpt){
     std::wstring res;
-    //char a = char(0x85);
-    //const char e_1 = char(0x82);
-    //const char e_2 = char(0x8A);
+
     switch (cpt){
     	case 0:
     		res = std::wstring(L"2107. \n\n") +
@@ -346,11 +351,6 @@ std::wstring Jeu::setFinalText(const std::size_t cpt){
     		break;
     }
 
-
-    //std::basic_string<sf::Uint8> tmpbuff1 = res.toUtf8();
-    //std::string tmp (tmpbuff1.begin(),tmpbuff1.end());
-    //sf::String tmp(res);
-    //tmp.toUtf8();
     return res;
 }
 
