@@ -12,9 +12,9 @@
 #define XWINDOW 800
 #define YWINDOW 600
 
+
 #include "../MiniJeu.hh"
 
-//extern sf::RenderWindow window;
 
 class Jeu {
 
@@ -23,7 +23,7 @@ class Jeu {
     Jeu();
     void run();
     void init_game(sf::RenderWindow& window);
-    void create_button(sf::RenderWindow& window,sf::Sprite Bouton, sf::Text text, size_t x, size_t y);
+    void create_button(sf::RenderWindow& window,sf::Sprite Bouton, sf::Text text, const size_t x, const size_t y);
 
     std::size_t test_button_border(const sf::Vector2i position);
     bool Get_Mouse_Click(sf::RenderWindow &window);

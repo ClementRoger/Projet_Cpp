@@ -11,7 +11,6 @@ void Pendu::display(sf::RenderWindow& window){
     TextEntry player(window,APP_SIZE_X1,APP_SIZE_Y1+170);
     std::string prev= get_user_entry(); 
 
-
     /* Boucle de jeu */
     while (window.isOpen() && !win() && get_nb_try() )
     {   
@@ -35,9 +34,8 @@ void Pendu::display(sf::RenderWindow& window){
 
                 /* Affichage de la grille */
         window.clear();
-        init_background(window);
-        player.display(window);
         print_game(window);
+        player.display(window);
         window.display();
 
     }  
@@ -81,6 +79,7 @@ void Pendu::create_text(sf::RenderWindow &window, const sf::Font font, const std
     window.draw(text);
 }
 
+/* Permet d'initialiser le fond du jeu */
 void Pendu:: init_background(sf::RenderWindow &window){
     
     sf::Font font;
@@ -98,15 +97,17 @@ void Pendu:: init_background(sf::RenderWindow &window){
 
 }
 
+
+/* Permet d'afficher le jeu sur la console' */
 void Pendu::print_game( sf::RenderWindow &window ){
+    init_background(window);
     print_word(window);
     print_used_letters(window);
 }
 
-/* Affichage du jeu */ 
+/* Affichage du mot à trouver */ 
 void Pendu::print_word(sf::RenderWindow &window){
     std::string res;
-
     for (size_t i=0; i<get_found_letters().size();i++){
         if (get_found_letters()[i]){
             res = res + " " + get_solution()[i];
@@ -115,33 +116,25 @@ void Pendu::print_word(sf::RenderWindow &window){
             res = res + " _";
         }
     }
-
     sf::Font font;
     font.loadFromFile("arial.ttf");
-
     create_text(window,font,25,(APP_SIZE_X1-(get_solution().size()*25))/2,190,res);
    
 }
 
-/* Affichage du jeu */ 
+/* Affichage des lettres à afficher */ 
 void Pendu::print_used_letters(sf::RenderWindow &window){
     std::string res;
-    std::size_t cpt = 0;
 
     for (size_t i=0; i<get_used_letters().size();i++){
-        
             res = res + " " + get_used_letters()[i];
-            cpt ++;
-        
     }
-
     sf::Font font;
     font.loadFromFile("img_pendu/arial.ttf");
-
     create_text(window,font,16,(APP_SIZE_X1-(get_used_letters().size()*16))/2,470,res);
-   
 }
 
+/* Affichage d'un game-over ou you win */
 void Pendu::print_end(bool winner,sf::RenderWindow &window){
 
     sf::Time delayTime = sf::milliseconds(2500);
@@ -154,6 +147,7 @@ void Pendu::print_end(bool winner,sf::RenderWindow &window){
     transition(window);
 }
 
+/* Renvoie le message de transition */
 std::wstring Pendu::setFinalText(bool win){
     std::wstring res;
  
@@ -184,18 +178,17 @@ std::wstring Pendu::setFinalText(bool win){
     return res;
 }
 
+/* Affiche la transition */
 void Pendu:: init_transition(sf::RenderWindow &window){
 
     sf::Font font;
     font.loadFromFile("img_pendu/Type.ttf");
-
     create_sprite(window,0,0,TEXTURE_TRANSITION1);
     create_text(window,font,20,50,85,setFinalText(win()));
     create_text(window,font,16,510,495,L"Press enter \nto continue...");
-
 }
 
-
+/* Réalise la transition */
 void Pendu::transition(sf::RenderWindow &window){
      sf::Event event;
      std::size_t cpt = 0;

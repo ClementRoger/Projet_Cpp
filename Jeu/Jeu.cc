@@ -40,14 +40,13 @@ Jeu :: Jeu() {
 	_playagain = 0;
 }
 
+/* Boucle de jeu */
 void Jeu :: run(){
 	sf::RenderWindow window(sf::VideoMode(XWINDOW, YWINDOW), "Livin' Tomorrow");
 	bool Intropassed = false;
 	while(window.isOpen()) {
-
 		sf::Event event;
 	    while (window.pollEvent(event)) {
-
 	        if (event.type == event.Closed) {
 	        	window.close();
 	        	break;
@@ -70,22 +69,21 @@ void Jeu :: run(){
 	    if (get_difficulty() == 1){
 	    	easy_game(window,event);
 	    }
+	    // Si niveau difficile 
 	    else if (get_difficulty() == 2){
 	    	difficult_game(window,event);
 	    }
-	    
-	    
+	    // On affiche seulement si on est à l'intro
 	    if (!_passedGames){
 	    	window.clear();
 	    	init_game(window);
 			window.display();
-	    }
-	    
+	    } 
 	}
 }
 
+/* Jeux en niveau facile */
 void Jeu::easy_game(sf::RenderWindow &window,sf::Event& event){
-
 	switch (_passedGames){
 
 		case 1: {
@@ -115,7 +113,6 @@ void Jeu::easy_game(sf::RenderWindow &window,sf::Event& event){
 			check_end(game,window,event);
 			break;
 		}
-		
 		case 5 : {
 			Demineur game(NB_TRY_DEMINEUR_EASY,NB_BOMBS_EASY,DEMINEUR_GRID_SIZE); 
     		game.display(window);
@@ -130,18 +127,14 @@ void Jeu::easy_game(sf::RenderWindow &window,sf::Event& event){
 		}
 		
 		default :
-			//ajouter la possibilité de rejouer?
 			playagain(window,event);
-			//window.close();
-			std::cout<<"end"<<std::endl;
 			break;
 	}
 }
 
+/* Jeux en niveau difficile */
 void Jeu::difficult_game(sf::RenderWindow &window,sf::Event& event){
-
     switch (_passedGames){
-
     	case 1: {
 			Juste_Prix J1(NB_TRY_JP_DIFFICULT, NMIN, NMAX);
 			J1.display(window);
@@ -181,13 +174,12 @@ void Jeu::difficult_game(sf::RenderWindow &window,sf::Event& event){
 			break;
 		}
 		default :
-		//ajouter la possibilité  de rejouer?
-			window.close();
-			std::cout<<"end"<<std::endl;
+			playagain(window,event);
 			break;
 	}
 }
 
+/* Permet d'initialiser la fenetre pour proposer au joueur de rejouer' */
 void Jeu::init_playagain(sf::RenderWindow &window){
 	create_sprite(window,0,0,TEXTURE_TRANSITION1);
 	sf::Font font;
@@ -195,18 +187,15 @@ void Jeu::init_playagain(sf::RenderWindow &window){
 	if (!font.loadFromFile("zorque.ttf")) {
         cout << "Erreur de chargement de la police" << endl;
     }
-
     sf::Sprite Bouton_Facile, Bouton_Difficile;
 	sf::Text Texte_Facile("Rejouer",font,50);
 	sf::Text Texte_Difficile("Quitter",font,50);
-
 	create_button(window,Bouton_Facile, Texte_Facile, 100, 430);
 	create_button(window,Bouton_Difficile, Texte_Difficile, 450, 430);
-
-    create_text(window,font,40,300,250,L"Play Again?");
-
+    create_text(window,font,50,200,250,L"Play Again?");
 }
 
+/* Permet de proposer au joeur de rejouer. On teste sur quel bouton il a cliquer et on réalise l'action correspondantes */
 void Jeu::playagain (sf::RenderWindow &window,sf::Event& event){
 	bool passed = false;
 	while (window.isOpen() && !_playagain){
@@ -214,18 +203,14 @@ void Jeu::playagain (sf::RenderWindow &window,sf::Event& event){
 		while (window.pollEvent(event)) {
 				if (event.type == sf::Event::MouseButtonPressed){
 	        	passed = Get_Mouse_Click(window);
-	        	std::cout<<"passed: "<<passed<<std::endl;
 	        	break;
 			}
 			
 	        if (event.type == event.Closed) {
 	        	window.close();
 	        	break;
-	        }
-		   
-		    
+	        } 
 	    }
-
 		if (passed && _playagain == 1){
 			_passedGames = 0;
 			_difficulty = 0;
@@ -240,6 +225,7 @@ void Jeu::playagain (sf::RenderWindow &window,sf::Event& event){
 	
 }
 
+/* Permet de check la fin du jeu. Si game over, le jeu demande au joueur si il veut rejouer*/
 void Jeu::check_end(MiniJeu& game,sf::RenderWindow &window,sf::Event& event){
 	if(game.win()){
 		_passedGames++;
@@ -253,6 +239,8 @@ void Jeu::check_end(MiniJeu& game,sf::RenderWindow &window,sf::Event& event){
 bool Jeu::Get_Mouse_Click(sf::RenderWindow &window){
 	sf::Vector2i position;
     static bool pressed=false;
+    if (pressed) pressed = false;
+
     while (true){
       if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
           if (!pressed){
@@ -268,8 +256,8 @@ bool Jeu::Get_Mouse_Click(sf::RenderWindow &window){
     
     std::size_t tmp = test_button_border(position);
     if (tmp > 0){
-    	if(!_passedGames){ set_difficulty(tmp); }
-    	else { _playagain = tmp; }
+    	if(!_passedGames) set_difficulty(tmp); 
+    	else _playagain = tmp; 
     	return true;
     }
     return false;
@@ -284,7 +272,6 @@ std::size_t Jeu::test_button_border(const sf::Vector2i position){
         && (position.y <= 430 + 480*0.25f )) {
         return 1;
     }
-
     if ( (position.x >= 450)
         && (position.x <= 450 + 960*0.25f)
         && (position.y >= 430)
@@ -292,11 +279,11 @@ std::size_t Jeu::test_button_border(const sf::Vector2i position){
 
     	return 2;
     }
-    
-    
     return 0;
 }
 
+
+/* Permet d'initialiser la fenetre de début du jeu' */
 void Jeu :: init_game(sf::RenderWindow& window) {
 
 	sf::Font font;
@@ -334,31 +321,49 @@ void Jeu :: init_game(sf::RenderWindow& window) {
 
 }
 
-void Jeu :: create_button(sf::RenderWindow& window,sf::Sprite Bouton, sf::Text text, size_t x, size_t y) {
-
+/* Permet de créer un bouton et de le dessiner sur la fenetre */
+void Jeu :: create_button(sf::RenderWindow& window,sf::Sprite Bouton, sf::Text text, const size_t x, const size_t y) {
 	sf::Texture texture;
-	
 	if (!texture.loadFromFile("button.png")){ //NOTE A MOI MEME : PNG >>>>>>>>>>> JPEG. JPEG EST LE DIABLE ET CAUSE DES BUGS DE MEEEEEEEEEEEEEEEEEERDE (jsuis grv d'accord jpg ça pu sa daronne)
 
     	cout << "Erreur de chargement de l'image du bouton" << endl;
 	}
-
 	texture.setSmooth(true);
 	Bouton.setTexture(texture);
 	Bouton.setScale(0.25,0.25);
-
     text.setCharacterSize(30);
     text.setFillColor(sf::Color(55, 0, 139)); // Du bleu foncé stylé
     text.setStyle(sf::Text::Bold);
-
     Bouton.setPosition(x,y);
     text.setPosition(x + texture.getSize().x/8 - text.getLocalBounds().width/2, y + texture.getSize().y/8 - text.getLocalBounds().height); //Un peu au pif pour le y (jsp pourquoi y a pas le /2 pour height), le x est logique : le /8 vient de /2 et il faut multiplier par le cofficient de getScale (0.25) donc 1/2 * 1/4 = 1/8
-
     window.draw(Bouton);
     window.draw(text);
 }
 
 
+/* Permet de créer un sprite et de le dessiner sur la fenetre */
+void Jeu::create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file){
+    sf::Texture texture;
+    sf::Sprite sprite;
+    texture.loadFromFile(file);
+    sprite.setTexture(texture);
+    sprite.setPosition(sf::Vector2f(x,y));
+    window.draw(sprite);
+}
+
+/* Permet de créer un texte et de le dessiner sur la fenetre */
+void Jeu::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input){
+    sf::Text text;
+    text.setFont(font);
+    text.setString(input);
+    text.setCharacterSize(fontSize);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f(x,y));
+    window.draw(text);
+}
+
+/* Renvoie le message de transition */
 std::wstring Jeu::setFinalText(const std::size_t cpt){
     std::wstring res;
 
@@ -439,41 +444,16 @@ std::wstring Jeu::setFinalText(const std::size_t cpt){
     return res;
 }
 
-
-/* Permet de crée un sprite et de le dessiner sur la fenetre */
-void Jeu::create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file){
-    sf::Texture texture;
-    sf::Sprite sprite;
-    texture.loadFromFile(file);
-    sprite.setTexture(texture);
-    sprite.setPosition(sf::Vector2f(x,y));
-    window.draw(sprite);
-}
-
-/* Permet de crée un texte et de le dessiner sur la fenetre */
-void Jeu::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input){
-    sf::Text text;
-    text.setFont(font);
-    text.setString(input);
-    text.setCharacterSize(fontSize);
-    text.setFillColor(sf::Color::White);
-    text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f(x,y));
-    window.draw(text);
-}
-
+/* Affiche la transition */
 void Jeu:: init_transition(sf::RenderWindow &window,const std::size_t cpt){
-
     sf::Font font;
     font.loadFromFile("img_pendu/Type.ttf");
-
     create_sprite(window,0,0,TEXTURE_TRANSITION1);
     create_text(window,font,20,75,90,setFinalText(cpt));
     create_text(window,font,16,510,505,L"Press enter \nto continue...");
-
 }
 
-
+/* Réalise la transition */
 void Jeu::transition(sf::RenderWindow &window,sf::Event& event){
      std::size_t cpt = 0;
 
@@ -486,7 +466,6 @@ void Jeu::transition(sf::RenderWindow &window,sf::Event& event){
                break;
             }
             if (event.type == sf::Event::Closed){ 
-            		
                 window.close();
                 break;                
             }
