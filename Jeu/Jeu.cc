@@ -179,7 +179,7 @@ void Jeu::difficult_game(sf::RenderWindow &window,sf::Event& event){
 }
 
 /* Permet d'initialiser la fenetre pour proposer au joueur de rejouer' */
-void Jeu::init_playagain(sf::RenderWindow &window){
+void Jeu::init_playagain(sf::RenderWindow &window)const{
 	create_sprite(window,0,0,TEXTURE_TRANSITION1);
 	sf::Font font;
 
@@ -263,7 +263,7 @@ bool Jeu::Get_Mouse_Click(sf::RenderWindow &window){
 }
 
 /* Permet de tester si le click se trouve sur difficile ou facile*/
-std::size_t Jeu::test_button_border(const sf::Vector2i position){
+std::size_t Jeu::test_button_border(const sf::Vector2i position)const{
 
     if ( (position.x >= 100)
         && (position.x <= 100 + 960*0.25f)
@@ -283,7 +283,7 @@ std::size_t Jeu::test_button_border(const sf::Vector2i position){
 
 
 /* Permet d'initialiser la fenetre de début du jeu' */
-void Jeu :: init_game(sf::RenderWindow& window) {
+void Jeu :: init_game(sf::RenderWindow& window)const {
 
 	sf::Font font;
 
@@ -321,7 +321,7 @@ void Jeu :: init_game(sf::RenderWindow& window) {
 }
 
 /* Permet de créer un bouton et de le dessiner sur la fenetre */
-void Jeu :: create_button(sf::RenderWindow& window,sf::Sprite Bouton, sf::Text text, const size_t x, const size_t y) {
+void Jeu :: create_button(sf::RenderWindow& window,sf::Sprite Bouton, sf::Text text, const size_t x, const size_t y)const {
 	sf::Texture texture;
 	if (!texture.loadFromFile("button.png")){ //NOTE A MOI MEME : PNG >>>>>>>>>>> JPEG. JPEG EST LE DIABLE ET CAUSE DES BUGS DE MEEEEEEEEEEEEEEEEEERDE (jsuis grv d'accord jpg ça pu sa daronne)
 
@@ -341,7 +341,7 @@ void Jeu :: create_button(sf::RenderWindow& window,sf::Sprite Bouton, sf::Text t
 
 
 /* Permet de créer un sprite et de le dessiner sur la fenetre */
-void Jeu::create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file){
+void Jeu::create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file)const{
     sf::Texture texture;
     sf::Sprite sprite;
     texture.loadFromFile(file);
@@ -351,7 +351,7 @@ void Jeu::create_sprite(sf::RenderWindow &window, const std::size_t x, const std
 }
 
 /* Permet de créer un texte et de le dessiner sur la fenetre */
-void Jeu::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input){
+void Jeu::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input)const{
     sf::Text text;
     text.setFont(font);
     text.setString(input);
@@ -363,7 +363,7 @@ void Jeu::create_text(sf::RenderWindow &window, const sf::Font font, const std::
 }
 
 /* Renvoie le message de transition */
-std::wstring Jeu::setFinalText(const std::size_t cpt){
+std::wstring Jeu::setFinalText(const std::size_t cpt)const{
     std::wstring res;
 
     switch (cpt){
@@ -444,7 +444,7 @@ std::wstring Jeu::setFinalText(const std::size_t cpt){
 }
 
 /* Affiche la transition */
-void Jeu:: init_transition(sf::RenderWindow &window,const std::size_t cpt){
+void Jeu:: init_transition(sf::RenderWindow &window,const std::size_t cpt)const{
     sf::Font font;
     font.loadFromFile("img_pendu/Type.ttf");
     create_sprite(window,0,0,TEXTURE_TRANSITION1);
@@ -453,7 +453,7 @@ void Jeu:: init_transition(sf::RenderWindow &window,const std::size_t cpt){
 }
 
 /* Réalise la transition */
-void Jeu::transition(sf::RenderWindow &window,sf::Event& event){
+void Jeu::transition(sf::RenderWindow &window,sf::Event& event)const{
      std::size_t cpt = 0;
 
      while(window.isOpen() && cpt < 4){
