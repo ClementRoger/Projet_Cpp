@@ -53,7 +53,6 @@ class Missingnumber : public MiniJeuAvecSolution {
   void print_end(const bool winner,sf::RenderWindow &window);
   void print_game(sf::RenderWindow &window)const;
 
-  void transition(sf::RenderWindow &window);
   std::wstring setFinalText(const bool win)const;
   void init_transition(sf::RenderWindow &window)const;
 

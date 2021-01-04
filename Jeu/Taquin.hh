@@ -16,7 +16,7 @@ class Taquin : public MiniJeu{
   void init_background(sf::RenderWindow& window)const;
   bool check_move(const int number)const; // Renvoie true si on peut bouger la case, false sinon
   void display(sf::RenderWindow& window);
-  void transition(sf::RenderWindow& window);
+  
   void init_names(); //Initialise le vecteur contenant le nom des fichiers images
   void init_position(const std::vector<int> v); //Initialise le vecteur contenant les coordonnées des cases
   void init_case_vide(); //Initialise le vecteur contenant les coordonnées de la case vide

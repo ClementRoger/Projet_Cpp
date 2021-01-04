@@ -169,31 +169,4 @@ void Missingnumber:: init_transition(sf::RenderWindow &window)const{
     create_text(window,font,16,510,505,"Press enter \nto continue...");
 }
 
-/* Réalise la transition */
-void Missingnumber::transition(sf::RenderWindow &window){
-     sf::Event event;
-     bool cpt = 0;
-
-     while(window.isOpen() && !cpt){
-        while (window.pollEvent(event))
-        {
-            // Changer de fond
-            if (((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Enter))){
-               cpt = true;
-               break;
-            }
-            if (event.type == sf::Event::Closed){ 
-                    window.close();
-                    break;                
-                }
-
-        } 
-        window.clear();
-        init_transition(window);
-        window.display();
-     }
-    
-}
-
-
 

@@ -16,7 +16,6 @@ class Batonnets : public MiniJeu{
   void print()const;
   bool user_plays();
   bool IA_plays();
-  void transition(sf::RenderWindow &window);
   int generer_nb_aleatoire(const int min, const int max)const;
   void init_background(sf::RenderWindow& window)const;
   bool check_entry(const std::string entry)const;

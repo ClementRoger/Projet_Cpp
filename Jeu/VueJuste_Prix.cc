@@ -228,31 +228,3 @@ void Juste_Prix :: init_transition(sf::RenderWindow &window)const{
     text.setPosition(sf::Vector2f(510,505));
     window.draw(text);
 }
-
-void Juste_Prix :: transition(sf::RenderWindow &window){
-
-    sf::Event event;
-    bool cpt = false;
-
-    while(window.isOpen() && !cpt){
-    
-        while (window.pollEvent(event)) {
-            
-            if (((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Enter))) {
-
-               cpt = true;
-            }
-
-            if (event.type == sf::Event::Closed){ 
-
-                    window.close();
-                    break;                
-            }
-        } 
-
-        window.clear();
-        init_transition(window);
-        window.display();
-    }
-    
-}

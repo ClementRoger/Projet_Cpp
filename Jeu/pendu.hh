@@ -53,7 +53,6 @@ class Pendu : public MiniJeuAvecSolution {
   void print_used_letters(sf::RenderWindow &window)const;
   void print_game( sf::RenderWindow &window)const;
 
-  void transition(sf::RenderWindow &window);
   std::wstring setFinalText(const bool win)const;
   void init_transition(sf::RenderWindow &window)const;
 
@@ -65,6 +64,7 @@ class Pendu : public MiniJeuAvecSolution {
   void  set_used_letters(const std::vector<std::string>tmp) { _used_letters=tmp; }
   void  set_found_letters(const std::vector<std::size_t>tmp) { _found_letters=tmp; }
 
+  /* Overload operator */
   friend std::ostream& operator<<(std::ostream& in, std::vector<std::string>&used_letters);
 
  private:

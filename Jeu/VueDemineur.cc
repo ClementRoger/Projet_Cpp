@@ -85,6 +85,7 @@ void Demineur::create_text(sf::RenderWindow &window, const sf::Font font, const 
     window.draw(text);
 }
 
+/* Permet d'initialiser le fond du jeu */
 void Demineur:: init_background(sf::RenderWindow &window)const{
 
     sf::Font font;
@@ -157,6 +158,7 @@ void Demineur::print_grid(sf::RenderWindow &window,const std::vector<std::vector
     }
 }
 
+/* Selectionne la texture a affichée */
 void Demineur::number_texture(const int val, sf::Texture& texture)const{
     switch(val){
         case 1 : 
@@ -189,7 +191,7 @@ void Demineur::number_texture(const int val, sf::Texture& texture)const{
     }
 }
 
-
+/* Affichage d'un game-over ou you win */
 void Demineur::print_end(const bool winner,sf::RenderWindow &window){
 
     sf::Time delayTime = sf::milliseconds(2500);
@@ -202,8 +204,7 @@ void Demineur::print_end(const bool winner,sf::RenderWindow &window){
     transition(window);
 }
 
-
-
+/* Renvoie le message de transition */
 std::wstring Demineur::setFinalText(const bool win)const{
     std::wstring res;
 
@@ -231,6 +232,7 @@ std::wstring Demineur::setFinalText(const bool win)const{
     return res;
 }
 
+/* Initialise la transition */
 void Demineur:: init_transition(sf::RenderWindow &window)const{
 
     sf::Font font;
@@ -242,28 +244,4 @@ void Demineur:: init_transition(sf::RenderWindow &window)const{
 
 }
 
-
-void Demineur::transition(sf::RenderWindow &window){
-     sf::Event event;
-     bool cpt = 0;
-
-     while(window.isOpen() && !cpt){
-        while (window.pollEvent(event))
-        {
-            // Changer de fond
-            if (((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Enter))){
-               cpt = true ;
-            }
-            if (event.type == sf::Event::Closed){ 
-                    window.close();
-                    break;                
-                }
-
-        } 
-        window.clear();
-        init_transition(window);
-        window.display();
-     }
-    
-}
 

@@ -21,7 +21,9 @@ public:
   virtual void display(sf::RenderWindow &window) = 0;
   virtual void init_background(sf::RenderWindow& window)const = 0;
 
-  virtual void transition(sf::RenderWindow &window) = 0;
+  virtual std::wstring setFinalText(const bool win)const = 0;
+  virtual void init_transition(sf::RenderWindow &window)const = 0;
+  
   virtual void print_end(const bool winner,sf::RenderWindow &window) = 0;
   virtual bool check_entry(const std::string entry) const = 0;
 

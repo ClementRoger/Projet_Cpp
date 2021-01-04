@@ -62,7 +62,6 @@ class Demineur:public MiniJeu{
   void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input)const;
   void create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file)const;
   
-  void transition(sf::RenderWindow &window);
   std::wstring setFinalText(const bool win)const;
   void init_transition(sf::RenderWindow &window)const;
 
@@ -78,6 +77,7 @@ class Demineur:public MiniJeu{
   void set_pos_x(const int position){ pos_x = position; }
   void set_pos_y(const int position){ pos_y = position; }
 
+   /* Overload operator */
   friend std::ostream& operator<<(std::ostream& in, std::vector<std::vector<int>> plateau);
 
 

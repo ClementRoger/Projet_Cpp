@@ -19,9 +19,35 @@ public:
   virtual void play() = 0;
   virtual void display(sf::RenderWindow &window) = 0;
   virtual void init_background(sf::RenderWindow& window)const = 0;
-  
-  virtual void transition(sf::RenderWindow &window) = 0;
   virtual void print_end(const bool winner,sf::RenderWindow &window) = 0;
+  
+  virtual std::wstring setFinalText(const bool win)const = 0;
+  virtual void init_transition(sf::RenderWindow &window)const = 0;
+  
+/* Réalise la transition */
+  void transition(sf::RenderWindow &window)const{
+     sf::Event event;
+     bool cpt = 0;
+
+     while(window.isOpen() && !cpt){
+        while (window.pollEvent(event))
+        {
+            // Changer de fond
+            if (((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Enter))){
+               cpt = true ;
+            }
+            if (event.type == sf::Event::Closed){ 
+                    window.close();
+                    break;                
+                }
+
+        } 
+        window.clear();
+        init_transition(window);
+        window.display();
+     }
+    
+  }
 
   /* Getters & Setters */
   size_t get_nb_try() const { return _nb_try; }
