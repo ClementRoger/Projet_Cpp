@@ -9,13 +9,14 @@
 #include "../pendu.hh"
 #include "../TextEntry.hh"
 #include "../../MiniJeu.hh"
+#include "../MiniJeuAvecSolution.hh"
 using namespace std;
 
 
 TEST_CASE("1: Pendu create","[pendu]"){
   Pendu m("youtube",8);
   REQUIRE(m.get_nb_try() == 8);
-  REQUIRE(m.get_mistery() == "youtube");
+  REQUIRE(m.get_solution() == "youtube");
   REQUIRE(m.get_user_entry() == "");
   REQUIRE(m.get_found_letters()[0] == 1);
   REQUIRE(m.get_found_letters()[1] == 0);
@@ -25,13 +26,13 @@ TEST_CASE("1: Pendu create","[pendu]"){
 TEST_CASE("2: Test validity","[pendu]"){
   Pendu m("youtube",8);
   m.set_user_entry("5");
-  REQUIRE(m.validity_test(m.get_user_entry()) == false);
+  REQUIRE(m.check_entry(m.get_user_entry()) == false);
   m.set_user_entry("-");
-  REQUIRE(m.validity_test(m.get_user_entry()) == false);
+  REQUIRE(m.check_entry(m.get_user_entry()) == false);
   m.set_user_entry("A");
-  REQUIRE(m.validity_test(m.get_user_entry()) == true);
+  REQUIRE(m.check_entry(m.get_user_entry()) == true);
   m.set_user_entry("T");
-  REQUIRE(m.validity_test(m.get_user_entry()) == true);
+  REQUIRE(m.check_entry(m.get_user_entry()) == true);
 }
 
 
