@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Juste_Prix :: Juste_Prix(size_t NB_TENTATIVES, int NMIN, int NMAX) : MiniJeuAvecSolution(NB_TENTATIVES,false) {
+Juste_Prix :: Juste_Prix(const size_t NB_TENTATIVES, const int NMIN, const int NMAX) : MiniJeuAvecSolution(NB_TENTATIVES,false) {
 
 	Nmin = NMIN;
 	Nmax = NMAX;

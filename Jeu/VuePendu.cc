@@ -4,10 +4,10 @@
 
 #include "pendu.hh"
 
- 
+ /* Boucle principale du jeu */
 void Pendu::display(sf::RenderWindow& window){
 
-    /* Init la fenetre */
+    /* Création de la zone de texte */
     TextEntry player(window,APP_SIZE_X1,APP_SIZE_Y1+170);
     std::string prev= get_user_entry(); 
 
@@ -23,26 +23,21 @@ void Pendu::display(sf::RenderWindow& window){
                 window.close();
                 break;                
             }
-
         } 
         prev= get_user_entry(); 
         if (player.get_finalInput() != "" && prev != player.get_finalInput()){
             set_user_entry(player.get_finalInput());
             play();
         }
-        
-
-                /* Affichage de la grille */
+         /* Affichage du jeu */
         window.clear();
         print_game(window);
         player.display(window);
         window.display();
 
     }  
-
     print_end(win(),window); 
     std::cout<<"la solution est: "<<get_solution()<<std::endl;
-
 }
 
 /* Permet de crée un sprite et de le dessiner sur la fenetre */
@@ -135,7 +130,7 @@ void Pendu::print_used_letters(sf::RenderWindow &window){
 }
 
 /* Affichage d'un game-over ou you win */
-void Pendu::print_end(bool winner,sf::RenderWindow &window){
+void Pendu::print_end(const bool winner,sf::RenderWindow &window){
 
     sf::Time delayTime = sf::milliseconds(2500);
 
@@ -148,7 +143,7 @@ void Pendu::print_end(bool winner,sf::RenderWindow &window){
 }
 
 /* Renvoie le message de transition */
-std::wstring Pendu::setFinalText(bool win){
+std::wstring Pendu::setFinalText(const bool win){
     std::wstring res;
  
     if (win){
@@ -164,7 +159,6 @@ std::wstring Pendu::setFinalText(bool win){
         std::wstring(L"vous garantie pas la survie si vous le battez, mais\n") + 
         std::wstring(L"j\'essaierai de vous protéger le moment venu.\n" );
     }
-
     else {
         res = std::wstring(L"\n\n\n\nJ\'en étais sur.\n\n") +
         std::wstring(L"Encore un gugusse qui réussit les épreuves mathématiques\n" )+
@@ -191,14 +185,14 @@ void Pendu:: init_transition(sf::RenderWindow &window){
 /* Réalise la transition */
 void Pendu::transition(sf::RenderWindow &window){
      sf::Event event;
-     std::size_t cpt = 0;
+     bool cpt = 0;
 
-     while(window.isOpen() && cpt < 1){
+     while(window.isOpen() && !cpt){
         while (window.pollEvent(event))
         {
             // Changer de fond
             if (((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Enter))){
-               cpt ++;
+               cpt = true ;
             }
             if (event.type == sf::Event::Closed){ 
                     window.close();

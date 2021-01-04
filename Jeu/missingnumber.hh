@@ -47,7 +47,7 @@ class Missingnumber : public MiniJeuAvecSolution {
   void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input);
   void create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file);
   
-  void print_end(bool winner,sf::RenderWindow &window);
+  void print_end(const bool winner,sf::RenderWindow &window);
   void print_game(sf::RenderWindow &window);
 
   void transition(sf::RenderWindow &window);

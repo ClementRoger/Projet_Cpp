@@ -30,11 +30,14 @@ class Pendu : public MiniJeuAvecSolution {
  public:
  
   Pendu(std::fstream& in,const std::size_t count); //constructeur par défaut
+  Pendu(std::string tmp, const size_t count); //for testcase
 
   ~Pendu();
 
+  std::size_t find_random(std::fstream& in,std::vector<std::string>& all_lines);
   void play();
   bool check_entry(const std::string entry);
+  void compare_to_solution(const std::string letter);
   void affichage(std::vector<std::size_t>found_letters);
   bool find_letter(std::string letter,std::vector<std::size_t>&found_letters, const std::size_t taille);
   void add_letter(std::vector<std::string>&used_letters,std::string letter);
@@ -46,13 +49,13 @@ class Pendu : public MiniJeuAvecSolution {
   void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input);
   
   void create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file);
-  void print_end(bool winner,sf::RenderWindow &window);
+  void print_end(const bool winner,sf::RenderWindow &window);
   void print_word(sf::RenderWindow &window);
   void print_used_letters(sf::RenderWindow &window);
   void print_game( sf::RenderWindow &window );
 
   void transition(sf::RenderWindow &window);
-  std::wstring setFinalText(bool win);
+  std::wstring setFinalText(const bool win);
   void init_transition(sf::RenderWindow &window);
 
   /* Getters & Setters */

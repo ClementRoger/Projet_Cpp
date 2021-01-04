@@ -111,7 +111,7 @@ font.loadFromFile("arial.ttf");
 } 
 
 
-void Missingnumber::print_end(bool winner,sf::RenderWindow &window){
+void Missingnumber::print_end(const bool winner,sf::RenderWindow &window){
 
     sf::Time delayTime = sf::milliseconds(2500);
 
@@ -175,14 +175,14 @@ void Missingnumber:: init_transition(sf::RenderWindow &window){
 
 void Missingnumber::transition(sf::RenderWindow &window){
      sf::Event event;
-     std::size_t cpt = 0;
+     bool cpt = 0;
 
-     while(window.isOpen() && cpt < 1){
+     while(window.isOpen() && !cpt){
         while (window.pollEvent(event))
         {
             // Changer de fond
             if (((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Enter))){
-               cpt ++;
+               cpt = true;
                break;
             }
             if (event.type == sf::Event::Closed){ 

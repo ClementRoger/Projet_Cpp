@@ -190,7 +190,7 @@ void Demineur::number_texture(const int val, sf::Texture& texture){
 }
 
 
-void Demineur::print_end(bool winner,sf::RenderWindow &window){
+void Demineur::print_end(const bool winner,sf::RenderWindow &window){
 
     sf::Time delayTime = sf::milliseconds(2500);
 
@@ -245,14 +245,14 @@ void Demineur:: init_transition(sf::RenderWindow &window){
 
 void Demineur::transition(sf::RenderWindow &window){
      sf::Event event;
-     std::size_t cpt = 0;
+     bool cpt = 0;
 
-     while(window.isOpen() && cpt < 1){
+     while(window.isOpen() && !cpt){
         while (window.pollEvent(event))
         {
             // Changer de fond
             if (((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Enter))){
-               cpt ++;
+               cpt = true ;
             }
             if (event.type == sf::Event::Closed){ 
                     window.close();

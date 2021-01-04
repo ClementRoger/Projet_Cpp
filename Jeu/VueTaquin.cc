@@ -52,7 +52,7 @@ void Taquin :: display(sf::RenderWindow& window){
     print_end(win(),window);
 }
 
-bool Taquin :: check_move(int number) {
+bool Taquin :: check_move(const int number) {
 
     int x1 = v_position[number].x;
     int y1 = v_position[number].y;
@@ -132,7 +132,7 @@ void Taquin :: init_background(sf::RenderWindow& window) {
     window.draw(text);
 }
 
-int Taquin :: get_image_number(int x, int y) {
+int Taquin :: get_image_number(const int x, const int y) {
 
     for (int i = 0; i < 8; ++i) {
 
@@ -150,7 +150,7 @@ bool Taquin :: check_victory() {
     return v_position == v_solution; //Surcharge d'opérateur
 }
 
-void Taquin :: print_end(bool winner,sf::RenderWindow &window){
+void Taquin :: print_end(const bool winner,sf::RenderWindow &window){
 
     sf::Time delayTime = sf::milliseconds(2500);
 
@@ -178,7 +178,7 @@ void Taquin :: print_end(bool winner,sf::RenderWindow &window){
     transition(window);
 }
 
-wstring Taquin :: setFinalText(bool win){
+wstring Taquin :: setFinalText(const bool win){
 
     std::wstring res;
 
@@ -239,15 +239,15 @@ void Taquin :: init_transition(sf::RenderWindow &window){
 void Taquin :: transition(sf::RenderWindow &window){
 
     sf::Event event;
-    std::size_t cpt = 0;
+    bool cpt = false;
 
-    while(window.isOpen() && cpt < 1){
+    while(window.isOpen() && !cpt){
     
         while (window.pollEvent(event)) {
             
             if (((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Enter))) {
 
-               cpt ++;
+               cpt =true ;
             }
 
             if (event.type == sf::Event::Closed){ 

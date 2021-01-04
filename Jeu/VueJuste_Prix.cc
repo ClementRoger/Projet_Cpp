@@ -145,7 +145,7 @@ void Juste_Prix :: init_background(sf::RenderWindow& window) {
 }
 
 
-void Juste_Prix :: print_end(bool winner,sf::RenderWindow &window){
+void Juste_Prix :: print_end(const bool winner,sf::RenderWindow &window){
 
     sf::Time delayTime = sf::milliseconds(2500);
 
@@ -173,7 +173,7 @@ void Juste_Prix :: print_end(bool winner,sf::RenderWindow &window){
     transition(window);
 }
 
-wstring Juste_Prix :: setFinalText(bool win){
+wstring Juste_Prix :: setFinalText(const bool win){
 
     std::wstring res;
 
@@ -232,15 +232,15 @@ void Juste_Prix :: init_transition(sf::RenderWindow &window){
 void Juste_Prix :: transition(sf::RenderWindow &window){
 
     sf::Event event;
-    std::size_t cpt = 0;
+    bool cpt = false;
 
-    while(window.isOpen() && cpt < 1){
+    while(window.isOpen() && !cpt){
     
         while (window.pollEvent(event)) {
             
             if (((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Enter))) {
 
-               cpt ++;
+               cpt = true;
             }
 
             if (event.type == sf::Event::Closed){ 

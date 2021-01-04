@@ -54,7 +54,7 @@ class Demineur:public MiniJeu{
   bool Get_Mouse_Click(sf::RenderWindow& window,sf::Vector2i& position);
   void print_grid(sf::RenderWindow &window,const std::vector<std::vector<bool>>matrice);
   void number_texture(const int val, sf::Texture& texture);
-  void print_end(bool winner,sf::RenderWindow &window);
+  void print_end(const bool winner,sf::RenderWindow &window);
   void init_background(sf::RenderWindow &window);
   void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input);
   void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input);

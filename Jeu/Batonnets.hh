@@ -11,20 +11,20 @@ class Batonnets : public MiniJeu{
  
  public:
 
-  Batonnets(std::size_t NB_BATONNETS,std::size_t nb);
+  Batonnets(const std::size_t NB_BATONNETS,const std::size_t nb);
   void play();
   void print();
   bool user_plays();
   bool IA_plays();
   void transition(sf::RenderWindow &window);
-  int generer_nb_aleatoire(int min, int max);
+  int generer_nb_aleatoire(const int min, const int max);
   void init_background(sf::RenderWindow& window);
-  bool check_entry(std::string entry);
+  bool check_entry(const std::string entry);
   void display(sf::RenderWindow& window);
   void affiche_batonnets(sf::RenderWindow& window);
-  void print_end(bool winner,sf::RenderWindow &window);
+  void print_end(const bool winner,sf::RenderWindow &window);
   void init_transition(sf::RenderWindow &window);
-  std::wstring setFinalText(bool win);
+  std::wstring setFinalText(const bool win);
 
  private:
 

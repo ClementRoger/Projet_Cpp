@@ -61,7 +61,7 @@ void Batonnets :: display(sf::RenderWindow& window){
     print_end(win(),window);
 }
 
-bool Batonnets :: check_entry(string entry) {
+bool Batonnets :: check_entry(const string entry) {
 
 	int number;
 
@@ -192,7 +192,7 @@ void Batonnets :: affiche_batonnets(sf::RenderWindow& window) {
 	}
 }
 
-void Batonnets :: print_end(bool winner,sf::RenderWindow &window){
+void Batonnets :: print_end(const bool winner,sf::RenderWindow &window){
 
     sf::Time delayTime = sf::milliseconds(2500);
 
@@ -220,7 +220,7 @@ void Batonnets :: print_end(bool winner,sf::RenderWindow &window){
     transition(window);
 }
 
-wstring Batonnets :: setFinalText(bool win){
+wstring Batonnets :: setFinalText(const bool win){
 
     std::wstring res;
 
@@ -285,15 +285,15 @@ void Batonnets :: init_transition(sf::RenderWindow &window){
 void Batonnets :: transition(sf::RenderWindow &window){
 
     sf::Event event;
-    std::size_t cpt = 0;
+    bool cpt = false;
 
-    while(window.isOpen() && cpt < 1){
+    while(window.isOpen() && !cpt){
     
         while (window.pollEvent(event)) {
             
             if (((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Enter))) {
 
-               cpt ++;
+               cpt = true;
             }
 
             if (event.type == sf::Event::Closed){ 

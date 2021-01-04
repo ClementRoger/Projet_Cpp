@@ -93,7 +93,6 @@ void Jeu::easy_game(sf::RenderWindow &window,sf::Event& event){
 			break;
 		}
 		case 2 : {
-			std::cout<<"enter here"<<std::endl;
 			std::fstream inFile("img_pendu/mots_faciles.txt", std::fstream::in);
 			Pendu games(inFile,NB_TRY_PENDU_EASY); 
     		games.display(window);

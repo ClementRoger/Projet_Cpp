@@ -10,7 +10,7 @@ using namespace std;
 #define Y_init 150 // Y de la case en haut à gauche
 #define d 100 // ecart entre deux cases adjacentes
 
-Taquin :: Taquin(size_t NB_TRY) : MiniJeu(NB_TRY,false) {
+Taquin :: Taquin(const size_t NB_TRY) : MiniJeu(NB_TRY,false) {
 
 	nb_try = NB_TRY;
 
