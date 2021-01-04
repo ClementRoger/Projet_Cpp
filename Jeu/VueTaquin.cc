@@ -17,7 +17,7 @@ void Taquin :: display(sf::RenderWindow& window){
     init_background(window);
     window.display();    
 
-	while (window.isOpen() && !win() && nb_try > 0) {
+	while (window.isOpen() && !win() && get_nb_try() > 0) {
 
 		sf::Event event;
  
@@ -38,7 +38,7 @@ void Taquin :: display(sf::RenderWindow& window){
                 if (check_move(image_number)) {
 
                     play();
-                    nb_try--;
+                    set_nb_try(get_nb_try()-1);
                     set_win(check_victory());
                 }
             }
@@ -52,7 +52,7 @@ void Taquin :: display(sf::RenderWindow& window){
     print_end(win(),window);
 }
 
-bool Taquin :: check_move(const int number) {
+bool Taquin :: check_move(const int number) const {
 
     int x1 = v_position[number].x;
     int y1 = v_position[number].y;
@@ -70,7 +70,7 @@ bool Taquin :: check_move(const int number) {
 	return false;
 }
 
-void Taquin :: init_background(sf::RenderWindow& window) {   
+void Taquin :: init_background(sf::RenderWindow& window)const{   
 
     sf::Texture texture;
     sf::Sprite sprite;
@@ -124,7 +124,7 @@ void Taquin :: init_background(sf::RenderWindow& window) {
     window.draw(sprite);
 
     font.loadFromFile("images_taquin/arial.ttf");
-    text.setString("Mouvements restants : " + std::to_string(nb_try));
+    text.setString("Mouvements restants : " + std::to_string(get_nb_try()));
     text.setCharacterSize(30);
     text.setFillColor(sf::Color::White);
     text.setStyle(sf::Text::Bold);
@@ -132,7 +132,7 @@ void Taquin :: init_background(sf::RenderWindow& window) {
     window.draw(text);
 }
 
-int Taquin :: get_image_number(const int x, const int y) {
+int Taquin :: get_image_number(const int x, const int y) const{
 
     for (int i = 0; i < 8; ++i) {
 
@@ -145,7 +145,7 @@ int Taquin :: get_image_number(const int x, const int y) {
     return -1;
 }
 
-bool Taquin :: check_victory() {
+bool Taquin :: check_victory() const{
 
     return v_position == v_solution; //Surcharge d'opérateur
 }
@@ -178,7 +178,7 @@ void Taquin :: print_end(const bool winner,sf::RenderWindow &window){
     transition(window);
 }
 
-wstring Taquin :: setFinalText(const bool win){
+wstring Taquin :: setFinalText(const bool win)const{
 
     std::wstring res;
 
@@ -206,7 +206,7 @@ wstring Taquin :: setFinalText(const bool win){
     return res;
 }
 
-void Taquin :: init_transition(sf::RenderWindow &window){
+void Taquin :: init_transition(sf::RenderWindow &window)const{
 
     sf::Font font;
     font.loadFromFile("images_taquin/Type.ttf");

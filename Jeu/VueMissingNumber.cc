@@ -4,14 +4,13 @@
 
 #include "missingnumber.hh"
 
- 
+/* Boucle principale du jeu */
 void Missingnumber::display(sf::RenderWindow &window){
 
-    /* Init la fenetre */
+    /* Création de la zone de texte */
     TextEntry player(window,APP_SIZE_X2,APP_SIZE_Y2+200);
     std::string prev= get_user_entry(); 
 
-    /* Boucle de jeu */
     while (window.isOpen() && !win() && get_nb_try() )
     {
         /* Test les événements */
@@ -31,12 +30,9 @@ void Missingnumber::display(sf::RenderWindow &window){
             play();
         }
         
-
-                /* Affichage de la grille */
         window.clear();
-        init_background(window);
-        player.display(window);
         print_game(window);
+        player.display(window);
         window.display();
 
     }  
@@ -47,7 +43,7 @@ void Missingnumber::display(sf::RenderWindow &window){
 }
 
 /* Permet de crée un sprite et de le dessiner sur la fenetre */
-void Missingnumber::create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file){
+void Missingnumber::create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file)const{
     sf::Texture texture;
     sf::Sprite sprite;
     texture.loadFromFile(file);
@@ -57,7 +53,7 @@ void Missingnumber::create_sprite(sf::RenderWindow &window, const std::size_t x,
 }
 
 /* Permet de crée un texte et de le dessiner sur la fenetre */
-void Missingnumber::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input){
+void Missingnumber::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input)const{
     sf::Text text;
     text.setFont(font);
     text.setString(input);
@@ -70,7 +66,7 @@ void Missingnumber::create_text(sf::RenderWindow &window, const sf::Font font, c
 
 
 /* Permet de crée un texte et de le dessiner sur la fenetre */
-void Missingnumber::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input){
+void Missingnumber::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input)const{
     sf::Text text;
     text.setFont(font);
     text.setString(input);
@@ -81,7 +77,8 @@ void Missingnumber::create_text(sf::RenderWindow &window, const sf::Font font, c
     window.draw(text);
 }
 
-void Missingnumber:: init_background(sf::RenderWindow &window){
+/* Permet d'initialiser le fond du jeu */
+void Missingnumber:: init_background(sf::RenderWindow &window)const{
     sf::Font font;
     font.loadFromFile("img_missing/arial.ttf");
     create_sprite(window,0,0,TEXTURE_BACKGROUND2);
@@ -97,20 +94,20 @@ void Missingnumber:: init_background(sf::RenderWindow &window){
 
 
 /* Affichage du jeu */ 
-void Missingnumber::print_game(sf::RenderWindow &window){
+void Missingnumber::print_game(sf::RenderWindow &window)const{
+    init_background(window);
+    sf::Font font;
+    font.loadFromFile("arial.ttf");
 
- sf::Font font;
-font.loadFromFile("arial.ttf");
+    for (std::size_t i = 0; i < get_matrice().size(); i++){
+        for (std::size_t j = 0; j < get_matrice().size(); j++){
+            create_text(window,font,25,(APP_SIZE_X2-348)/2-5 + (2*i+1)*58 , 170 + (2*j+1)*25,get_matrice()[i][j]);
 
-  for (std::size_t i = 0; i < get_matrice().size(); i++){
-    for (std::size_t j = 0; j < get_matrice().size(); j++){
-        create_text(window,font,25,(APP_SIZE_X2-348)/2-5 + (2*i+1)*58 , 170 + (2*j+1)*25,get_matrice()[i][j]);
-
+        }
     }
-  }
 } 
 
-
+/* Affichage d'un game-over ou you win */
 void Missingnumber::print_end(const bool winner,sf::RenderWindow &window){
 
     sf::Time delayTime = sf::milliseconds(2500);
@@ -123,8 +120,8 @@ void Missingnumber::print_end(const bool winner,sf::RenderWindow &window){
     transition(window);
 }
 
-
-std::wstring Missingnumber::setFinalText(bool win){
+/* Renvoie le message de transition */
+std::wstring Missingnumber::setFinalText(const bool win)const{
     std::wstring res;
 
     if (win){
@@ -161,7 +158,8 @@ std::wstring Missingnumber::setFinalText(bool win){
     return res;
 }
 
-void Missingnumber:: init_transition(sf::RenderWindow &window){
+/* Initialise la transition */
+void Missingnumber:: init_transition(sf::RenderWindow &window)const{
  
     sf::Font font;
     font.loadFromFile("img_pendu/Type.ttf");
@@ -169,10 +167,9 @@ void Missingnumber:: init_transition(sf::RenderWindow &window){
     create_sprite(window,0,0,TEXTURE_TRANSITION2);
     create_text(window,font,20,90,20,setFinalText(win()));
     create_text(window,font,16,510,505,"Press enter \nto continue...");
-
 }
 
-
+/* Réalise la transition */
 void Missingnumber::transition(sf::RenderWindow &window){
      sf::Event event;
      bool cpt = 0;

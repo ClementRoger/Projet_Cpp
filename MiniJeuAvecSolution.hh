@@ -15,12 +15,15 @@ public:
 
   }
 
-  ~MiniJeuAvecSolution(){};
+  virtual ~MiniJeuAvecSolution(){};
 
   virtual void play() = 0;
+  virtual void display(sf::RenderWindow &window) = 0;
+  virtual void init_background(sf::RenderWindow& window)const = 0;
+
   virtual void transition(sf::RenderWindow &window) = 0;
-  virtual void print_end(bool winner,sf::RenderWindow &window) = 0;
-  virtual bool check_entry(const std::string entry) = 0;
+  virtual void print_end(const bool winner,sf::RenderWindow &window) = 0;
+  virtual bool check_entry(const std::string entry) const = 0;
 
   /* Getters & Setters */
   std::string get_user_entry() const { return _user_entry; }

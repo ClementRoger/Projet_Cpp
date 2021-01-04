@@ -12,8 +12,6 @@ using namespace std;
 
 Taquin :: Taquin(const size_t NB_TRY) : MiniJeu(NB_TRY,false) {
 
-	nb_try = NB_TRY;
-
 	read_file();
 	init_names();
 	init_case_vide();

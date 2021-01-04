@@ -32,14 +32,14 @@ void Batonnets :: play() {
 	}			
 }
 
-int Batonnets :: generer_nb_aleatoire(const int min, const int max) {
+int Batonnets :: generer_nb_aleatoire(const int min, const int max)const {
 
     std::srand(std::time(nullptr)); //Initialise le générateur de nombres aléatoires
 
     return rand()%(max - min + 1) + min;
 }
 
-void Batonnets :: print() { //Utilisée pour le test dans le terminal
+void Batonnets :: print() const{ //Utilisée pour le test dans le terminal
 
 	for (size_t i = 0; i < nb_batonnets; ++i) {
 		

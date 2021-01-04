@@ -50,7 +50,7 @@ void Juste_Prix :: display(sf::RenderWindow& window){
     print_end(win(),window);
 }
 
-bool Juste_Prix :: check_entry(string entry) {
+bool Juste_Prix :: check_entry(const string entry) const{
 
 	int number;
 
@@ -73,7 +73,7 @@ bool Juste_Prix :: check_entry(string entry) {
 	return false;
 }
 
-void Juste_Prix :: init_background(sf::RenderWindow& window) {
+void Juste_Prix :: init_background(sf::RenderWindow& window)const{
 
     sf::Texture texture;
     sf::Sprite sprite;
@@ -173,7 +173,7 @@ void Juste_Prix :: print_end(const bool winner,sf::RenderWindow &window){
     transition(window);
 }
 
-wstring Juste_Prix :: setFinalText(const bool win){
+wstring Juste_Prix :: setFinalText(const bool win)const{
 
     std::wstring res;
 
@@ -199,7 +199,7 @@ wstring Juste_Prix :: setFinalText(const bool win){
     return res;
 }
 
-void Juste_Prix :: init_transition(sf::RenderWindow &window){
+void Juste_Prix :: init_transition(sf::RenderWindow &window)const{
 
     sf::Font font;
     font.loadFromFile("images_batonnets/Type.ttf");

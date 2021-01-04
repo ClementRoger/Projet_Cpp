@@ -17,7 +17,11 @@ public:
   virtual ~MiniJeu(){};
 
   virtual void play() = 0;
+  virtual void display(sf::RenderWindow &window) = 0;
+  virtual void init_background(sf::RenderWindow& window)const = 0;
+  
   virtual void transition(sf::RenderWindow &window) = 0;
+  virtual void print_end(const bool winner,sf::RenderWindow &window) = 0;
 
   /* Getters & Setters */
   size_t get_nb_try() const { return _nb_try; }

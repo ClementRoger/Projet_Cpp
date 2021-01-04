@@ -7,10 +7,10 @@ class TextEntry{
  
  public:
 
-  TextEntry(sf::RenderWindow& window, std::size_t x, std::size_t y);
+  TextEntry(sf::RenderWindow& window, const std::size_t x, const std::size_t y);
   ~TextEntry();
-  void init_rectangle(sf::RenderWindow& window,size_t width, size_t height, size_t x, size_t y);
-  void display_playertext(sf::RenderWindow& window,std::string tmp,size_t pos_x,size_t pos_y);
+  void init_rectangle(sf::RenderWindow& window,const size_t width, const size_t height, const size_t x, const size_t y)const;
+  void display_playertext(sf::RenderWindow& window,const std::string tmp,const size_t pos_x,const size_t pos_y);
   void check_events(sf::RenderWindow& window,sf::Event& event);
   void display (sf::RenderWindow& window);
 
@@ -30,23 +30,9 @@ class TextEntry{
   private :
   sf::Font _font;
   std::string _playerInput; //entrée de l'utilisateur
-  std::size_t _entrysize; 
+  std::size_t _entrysize; // Taille de l'entrée utilisateur
   std::size_t _xsize; 
   std::size_t _ysize; 
   std::string _final; //choix final
 };  
 
-/*
-
-#pragma once 
-#include <iostream>
-
-class Text_Entry{
- 
- public:
-
-  Text_Entry(std::size_t x, std::size_t y);
-
-};  
-
-*/

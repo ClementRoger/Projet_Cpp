@@ -61,7 +61,7 @@ void Batonnets :: display(sf::RenderWindow& window){
     print_end(win(),window);
 }
 
-bool Batonnets :: check_entry(const string entry) {
+bool Batonnets :: check_entry(const string entry)const {
 
 	int number;
 
@@ -84,7 +84,7 @@ bool Batonnets :: check_entry(const string entry) {
 	return false;
 }
 
-void Batonnets :: init_background(sf::RenderWindow& window) {
+void Batonnets :: init_background(sf::RenderWindow& window)const{
 
     sf::Texture texture;
     sf::Sprite sprite;
@@ -165,7 +165,7 @@ void Batonnets :: init_background(sf::RenderWindow& window) {
 
 }
 
-void Batonnets :: affiche_batonnets(sf::RenderWindow& window) {
+void Batonnets :: affiche_batonnets(sf::RenderWindow& window) const{
 
 	sf::Texture texture;
     sf::Sprite sprite;
@@ -220,7 +220,7 @@ void Batonnets :: print_end(const bool winner,sf::RenderWindow &window){
     transition(window);
 }
 
-wstring Batonnets :: setFinalText(const bool win){
+wstring Batonnets :: setFinalText(const bool win)const{
 
     std::wstring res;
 
@@ -252,7 +252,7 @@ wstring Batonnets :: setFinalText(const bool win){
     return res;
 }
 
-void Batonnets :: init_transition(sf::RenderWindow &window){
+void Batonnets :: init_transition(sf::RenderWindow &window)const{
 
     sf::Font font;
     font.loadFromFile("images_batonnets/Type.ttf");

@@ -36,27 +36,26 @@ class Pendu : public MiniJeuAvecSolution {
 
   std::size_t find_random(std::fstream& in,std::vector<std::string>& all_lines);
   void play();
-  bool check_entry(const std::string entry);
+  bool check_entry(const std::string entry) const;
   void compare_to_solution(const std::string letter);
   void affichage(std::vector<std::size_t>found_letters);
-  bool find_letter(std::string letter,std::vector<std::size_t>&found_letters, const std::size_t taille);
-  void add_letter(std::vector<std::string>&used_letters,std::string letter);
+  bool find_letter(std::string letter,std::vector<std::size_t>&found_letters, const std::size_t taille)const;
+  void add_letter(std::vector<std::string>&used_letters,std::string letter)const;
 
   /* SFML */
   void display(sf::RenderWindow& window);
-  void init_background(sf::RenderWindow &window);
-  void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input);
-  void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input);
-  
-  void create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file);
+  void init_background(sf::RenderWindow &window)const;
+  void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input)const;
+  void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input)const;
+  void create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file)const;
   void print_end(const bool winner,sf::RenderWindow &window);
-  void print_word(sf::RenderWindow &window);
-  void print_used_letters(sf::RenderWindow &window);
-  void print_game( sf::RenderWindow &window );
+  void print_word(sf::RenderWindow &window)const;
+  void print_used_letters(sf::RenderWindow &window)const;
+  void print_game( sf::RenderWindow &window)const;
 
   void transition(sf::RenderWindow &window);
-  std::wstring setFinalText(const bool win);
-  void init_transition(sf::RenderWindow &window);
+  std::wstring setFinalText(const bool win)const;
+  void init_transition(sf::RenderWindow &window)const;
 
   /* Getters & Setters */
 

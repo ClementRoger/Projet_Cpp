@@ -39,8 +39,10 @@ class Demineur:public MiniJeu{
 
   ~Demineur();
 
-  void initBomb(std::vector<std::vector<int>>&tab,const std::size_t gridsize);
-  void checkBomb(std::vector<std::vector<int>>&tab, const std::size_t gridsize);
+  void init_bomb_pos(const std::size_t gridsize);
+  void check_bomb_pos(const std::size_t i,const std::size_t gridsize,std::size_t &tmp_x,std::size_t &tmp_y)const;
+  void initBomb(std::vector<std::vector<int>>&tab,const std::size_t gridsize)const;
+  void checkBomb(std::vector<std::vector<int>>&tab, const std::size_t gridsize)const;
   bool checkBool(const std::vector<std::vector<bool>>tab);
   void reveal( const std::size_t i, const std::size_t j);
 
@@ -50,19 +52,19 @@ class Demineur:public MiniJeu{
   /* For SFML */
   void display(sf::RenderWindow& window);
   void play();
-  bool test_grid_border(const sf::Vector2i position);
-  bool Get_Mouse_Click(sf::RenderWindow& window,sf::Vector2i& position);
-  void print_grid(sf::RenderWindow &window,const std::vector<std::vector<bool>>matrice);
-  void number_texture(const int val, sf::Texture& texture);
+  bool test_grid_border(const sf::Vector2i position)const;
+  bool Get_Mouse_Click(sf::RenderWindow& window,sf::Vector2i& position)const;
+  void print_grid(sf::RenderWindow &window,const std::vector<std::vector<bool>>matrice)const;
+  void number_texture(const int val, sf::Texture& texture)const;
   void print_end(const bool winner,sf::RenderWindow &window);
-  void init_background(sf::RenderWindow &window);
-  void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input);
-  void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input);
-  void create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file);
+  void init_background(sf::RenderWindow &window)const;
+  void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input)const;
+  void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input)const;
+  void create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file)const;
   
   void transition(sf::RenderWindow &window);
-  std::wstring setFinalText(bool win);
-  void init_transition(sf::RenderWindow &window);
+  std::wstring setFinalText(const bool win)const;
+  void init_transition(sf::RenderWindow &window)const;
 
   /* Getters & Setters */
   std::size_t get_nb_bomb() const { return _nb_bomb; }
@@ -76,6 +78,8 @@ class Demineur:public MiniJeu{
   void set_pos_x(const int position){ pos_x = position; }
   void set_pos_y(const int position){ pos_y = position; }
 
+  friend std::ostream& operator<<(std::ostream& in, std::vector<std::vector<int>> plateau);
+
 
  private:
   std::vector<std::vector<int>>_plateau;
@@ -88,3 +92,15 @@ class Demineur:public MiniJeu{
   int pos_y;
 
 };
+
+
+inline std::ostream& operator<<(std::ostream& in, std::vector<std::vector<int>> plateau){
+   
+    for( std::size_t i = 0; i<plateau.size(); i++ ){
+        for( std::size_t j = 0; j<plateau.size(); j++ ){
+            std::cout<<plateau[j][i]<<" ";
+        } 
+        std::cout<<std::endl;
+    } 
+    return in;
+ }

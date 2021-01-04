@@ -36,23 +36,26 @@ class Missingnumber : public MiniJeuAvecSolution {
   ~Missingnumber();
 
   void play();
+  void fill_vector(std::fstream& in,std::vector<std::vector<std::string>>&tempmatrice);
+  void find_solution(std::stringstream& stream,std::size_t& tmp);
+  void find_matrice(std::stringstream& stream,std::vector<std::vector<std::string>>&tempmatrice,std::size_t& tmp) const;
   void affichage(std::vector<std::vector<std::string>>matrice);
-  bool check_entry(const std::string entry);
+  bool check_entry(const std::string entry) const;
 
   /* SFML */
   void display(sf::RenderWindow &window);
-  void init_background(sf::RenderWindow &window);
+  void init_background(sf::RenderWindow &window)const;
   
-  void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input);
-  void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input);
-  void create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file);
+  void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input)const;
+  void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input)const;
+  void create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file)const;
   
   void print_end(const bool winner,sf::RenderWindow &window);
-  void print_game(sf::RenderWindow &window);
+  void print_game(sf::RenderWindow &window)const;
 
   void transition(sf::RenderWindow &window);
-  std::wstring setFinalText(bool win);
-  void init_transition(sf::RenderWindow &window);
+  std::wstring setFinalText(const bool win)const;
+  void init_transition(sf::RenderWindow &window)const;
 
   /* Getters & Setters */
   std::vector<std::vector<std::string>> get_matrice() const{ return _matrice;}

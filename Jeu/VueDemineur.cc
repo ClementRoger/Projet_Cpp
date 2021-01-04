@@ -51,7 +51,7 @@ void Demineur::display(sf::RenderWindow& window){
 }
 
 /* Permet de crée un sprite et de le dessiner sur la fenetre */
-void Demineur::create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file){
+void Demineur::create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file)const{
     sf::Texture texture;
     sf::Sprite sprite;
     texture.loadFromFile(file);
@@ -61,7 +61,7 @@ void Demineur::create_sprite(sf::RenderWindow &window, const std::size_t x, cons
 }
 
 /* Permet de crée un texte et de le dessiner sur la fenetre */
-void Demineur::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input){
+void Demineur::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input)const{
     sf::Text text;
     text.setFont(font);
     text.setString(input);
@@ -74,7 +74,7 @@ void Demineur::create_text(sf::RenderWindow &window, const sf::Font font, const 
 
 
 /* Permet de crée un texte et de le dessiner sur la fenetre */
-void Demineur::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input){
+void Demineur::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input)const{
     sf::Text text;
     text.setFont(font);
     text.setString(input);
@@ -85,7 +85,7 @@ void Demineur::create_text(sf::RenderWindow &window, const sf::Font font, const 
     window.draw(text);
 }
 
-void Demineur:: init_background(sf::RenderWindow &window){
+void Demineur:: init_background(sf::RenderWindow &window)const{
 
     sf::Font font;
     font.loadFromFile("img_missing/arial.ttf");
@@ -100,7 +100,7 @@ void Demineur:: init_background(sf::RenderWindow &window){
 }
 
 /* Permet de determiner la position de la souris lors du click + de savoir si ce click est dans la grille de jeu */
-bool Demineur::Get_Mouse_Click(sf::RenderWindow &window,sf::Vector2i& position){
+bool Demineur::Get_Mouse_Click(sf::RenderWindow &window,sf::Vector2i& position)const{
     static bool pressed=false;
     while (true){
       if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -119,7 +119,7 @@ bool Demineur::Get_Mouse_Click(sf::RenderWindow &window,sf::Vector2i& position){
 }
 
 /* Permet de tester si le click se trouve sur la grille de jeu */
-bool Demineur::test_grid_border(const sf::Vector2i position){
+bool Demineur::test_grid_border(const sf::Vector2i position)const{
 
     if ( (position.x >= (int)(APP_SIZE_X-(IMG_SIZE*get_plateau().size()))/2 )
         && (position.x <= (int)((APP_SIZE_X-(IMG_SIZE*get_plateau().size()))/2+IMG_SIZE*get_plateau().size()))
@@ -132,7 +132,7 @@ bool Demineur::test_grid_border(const sf::Vector2i position){
 }
 
 /* Affichage du jeu */ 
-void Demineur::print_grid(sf::RenderWindow &window,const std::vector<std::vector<bool>>matrice){
+void Demineur::print_grid(sf::RenderWindow &window,const std::vector<std::vector<bool>>matrice)const{
 
     sf::Texture texture;
     sf::Sprite sprite;
@@ -157,7 +157,7 @@ void Demineur::print_grid(sf::RenderWindow &window,const std::vector<std::vector
     }
 }
 
-void Demineur::number_texture(const int val, sf::Texture& texture){
+void Demineur::number_texture(const int val, sf::Texture& texture)const{
     switch(val){
         case 1 : 
                 texture.loadFromFile(TEXTURE_1);
@@ -204,7 +204,7 @@ void Demineur::print_end(const bool winner,sf::RenderWindow &window){
 
 
 
-std::wstring Demineur::setFinalText(bool win){
+std::wstring Demineur::setFinalText(const bool win)const{
     std::wstring res;
 
     if (win){
@@ -231,7 +231,7 @@ std::wstring Demineur::setFinalText(bool win){
     return res;
 }
 
-void Demineur:: init_transition(sf::RenderWindow &window){
+void Demineur:: init_transition(sf::RenderWindow &window)const{
 
     sf::Font font;
     font.loadFromFile("img_pendu/Type.ttf");

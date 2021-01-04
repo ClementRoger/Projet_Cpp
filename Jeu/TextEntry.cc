@@ -4,7 +4,7 @@ using namespace std;
 
 #define SIZE 200
 
-TextEntry :: TextEntry (sf::RenderWindow& window,size_t x, size_t y) {
+TextEntry :: TextEntry (sf::RenderWindow& window,const size_t x, const size_t y) {
 
 	if (!_font.loadFromFile("arial.ttf")) {
         cout<<"Font ERROR. Don't find arial.ttf"<<endl;
@@ -15,7 +15,6 @@ TextEntry :: TextEntry (sf::RenderWindow& window,size_t x, size_t y) {
     _xsize = (size_t)(x-SIZE)/2;
     _ysize = (size_t)(y-30)/2;
     _final = "";
-   // display(window);
 }
 
 TextEntry :: ~TextEntry(){ 
@@ -23,7 +22,7 @@ TextEntry :: ~TextEntry(){
 
 } 
 
-void TextEntry :: init_rectangle(sf::RenderWindow& window,size_t width, size_t height, size_t x, size_t y) {
+void TextEntry :: init_rectangle(sf::RenderWindow& window,const size_t width, const size_t height, const size_t x, const size_t y)const{
 
 	sf::RectangleShape rectangle(sf::Vector2f(width, height));
     rectangle.setPosition(x,y);
@@ -35,7 +34,7 @@ void TextEntry :: init_rectangle(sf::RenderWindow& window,size_t width, size_t h
 
 }  
 
-void TextEntry :: display_playertext(sf::RenderWindow& window,string tmp,size_t pos_x,size_t pos_y){
+void TextEntry :: display_playertext(sf::RenderWindow& window,const string tmp,const size_t pos_x,const size_t pos_y){
 	sf::Text playerText(tmp,_font,SIZE);
     playerText.setCharacterSize(24);
     playerText.setPosition(pos_x,pos_y);
@@ -86,30 +85,3 @@ void TextEntry :: check_events(sf::RenderWindow& window,sf::Event& event){
     display_playertext(window,get_playerInput(),get_xsize()+ SIZE/2 - get_entrysize()/2, get_ysize());
 
  }
-
- /*
-
- #include <iostream>
-
-using namespace std;
-
-TextEntry :: TextEntry (size_t x, size_t y) {
-
-	init_rectangle(140,30,x/2,y);
-	
-
-
-}
-
-TextEntry :: init_rectangle(size_t width, size_t height, size_t x, size_t y) {
-
-	sf::RectangleShape rectangle(sf::Vector2f(width, height));
-    rectangle.setPosition(x,y);
-
-    rectangle.setFillColor(sf::Color(255,255,255)); //Fill with white
-    rectangle.setOutlineThickness(2); //Border of two pixels ...
-    rectangle.setOutlineColor(sf::Color(0, 0, 0)); // ... in black
-
-}    
-
-*/

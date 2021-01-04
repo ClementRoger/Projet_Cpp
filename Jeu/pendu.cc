@@ -91,7 +91,7 @@ void Pendu::compare_to_solution(const string letter){
 }
 
 /* Permet d'ajouter la lettre à used_letters que si elle n'apparait pas déja*/
-void Pendu::add_letter(vector<string>&used_letters,string letter){
+void Pendu::add_letter(vector<string>&used_letters,string letter)const{
     bool flag = false;
 
     for (size_t i = 0; i < used_letters.size(); i++){
@@ -104,7 +104,7 @@ void Pendu::add_letter(vector<string>&used_letters,string letter){
 }
 
 /* Permet de checker si l'entrée utilisateur est correcte */
-bool Pendu::check_entry(const string entry){
+bool Pendu::check_entry(const string entry)const {
 
     if (!entry.size()){
         return false;
@@ -119,7 +119,7 @@ bool Pendu::check_entry(const string entry){
 
 /* Permet de remplir de tableau des lettre trouvés et de voir si
 elles ont toutes été trouvés */
-bool Pendu::find_letter(string letter,vector<size_t>&found_letters,const size_t taille){
+bool Pendu::find_letter(string letter,vector<size_t>&found_letters,const size_t taille)const{
     bool res = true;
     for (size_t i = 0; i< found_letters.size(); i++){
         if(taille == 1){

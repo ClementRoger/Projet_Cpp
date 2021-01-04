@@ -11,7 +11,6 @@ void Pendu::display(sf::RenderWindow& window){
     TextEntry player(window,APP_SIZE_X1,APP_SIZE_Y1+170);
     std::string prev= get_user_entry(); 
 
-    /* Boucle de jeu */
     while (window.isOpen() && !win() && get_nb_try() )
     {   
         /* Test les événements */
@@ -29,7 +28,7 @@ void Pendu::display(sf::RenderWindow& window){
             set_user_entry(player.get_finalInput());
             play();
         }
-         /* Affichage du jeu */
+
         window.clear();
         print_game(window);
         player.display(window);
@@ -41,7 +40,7 @@ void Pendu::display(sf::RenderWindow& window){
 }
 
 /* Permet de crée un sprite et de le dessiner sur la fenetre */
-void Pendu::create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file){
+void Pendu::create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file)const{
     sf::Texture texture;
     sf::Sprite sprite;
     texture.loadFromFile(file);
@@ -51,7 +50,7 @@ void Pendu::create_sprite(sf::RenderWindow &window, const std::size_t x, const s
 }
 
 /* Permet de crée un texte et de le dessiner sur la fenetre */
-void Pendu::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input){
+void Pendu::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input)const{
     sf::Text text;
     text.setFont(font);
     text.setString(input);
@@ -63,7 +62,7 @@ void Pendu::create_text(sf::RenderWindow &window, const sf::Font font, const std
 }
 
 /* Permet de crée un texte et de le dessiner sur la fenetre */
-void Pendu::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input){
+void Pendu::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input)const{
     sf::Text text;
     text.setFont(font);
     text.setString(input);
@@ -75,7 +74,7 @@ void Pendu::create_text(sf::RenderWindow &window, const sf::Font font, const std
 }
 
 /* Permet d'initialiser le fond du jeu */
-void Pendu:: init_background(sf::RenderWindow &window){
+void Pendu:: init_background(sf::RenderWindow &window)const{
     
     sf::Font font;
     font.loadFromFile("img_pendu/arial.ttf");
@@ -94,14 +93,14 @@ void Pendu:: init_background(sf::RenderWindow &window){
 
 
 /* Permet d'afficher le jeu sur la console' */
-void Pendu::print_game( sf::RenderWindow &window ){
+void Pendu::print_game( sf::RenderWindow &window )const{
     init_background(window);
     print_word(window);
     print_used_letters(window);
 }
 
 /* Affichage du mot à trouver */ 
-void Pendu::print_word(sf::RenderWindow &window){
+void Pendu::print_word(sf::RenderWindow &window)const{
     std::string res;
     for (size_t i=0; i<get_found_letters().size();i++){
         if (get_found_letters()[i]){
@@ -118,7 +117,7 @@ void Pendu::print_word(sf::RenderWindow &window){
 }
 
 /* Affichage des lettres à afficher */ 
-void Pendu::print_used_letters(sf::RenderWindow &window){
+void Pendu::print_used_letters(sf::RenderWindow &window)const{
     std::string res;
 
     for (size_t i=0; i<get_used_letters().size();i++){
@@ -143,7 +142,7 @@ void Pendu::print_end(const bool winner,sf::RenderWindow &window){
 }
 
 /* Renvoie le message de transition */
-std::wstring Pendu::setFinalText(const bool win){
+std::wstring Pendu::setFinalText(const bool win)const{
     std::wstring res;
  
     if (win){
@@ -172,8 +171,8 @@ std::wstring Pendu::setFinalText(const bool win){
     return res;
 }
 
-/* Affiche la transition */
-void Pendu:: init_transition(sf::RenderWindow &window){
+/* Initialise la transition */
+void Pendu:: init_transition(sf::RenderWindow &window)const{
 
     sf::Font font;
     font.loadFromFile("img_pendu/Type.ttf");
