@@ -64,7 +64,5 @@ class Missingnumber : public MiniJeuAvecSolution {
 
  private:
   std::vector<std::vector<std::string>>_matrice;
-  std::string _solution;
-  std::string _user_entry;
 
 };

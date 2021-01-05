@@ -97,7 +97,7 @@ void Missingnumber:: init_background(sf::RenderWindow &window)const{
 void Missingnumber::print_game(sf::RenderWindow &window)const{
     init_background(window);
     sf::Font font;
-    font.loadFromFile("arial.ttf");
+    font.loadFromFile("img_missing/arial.ttf");
 
     for (std::size_t i = 0; i < get_matrice().size(); i++){
         for (std::size_t j = 0; j < get_matrice().size(); j++){
@@ -162,7 +162,7 @@ std::wstring Missingnumber::setFinalText(const bool win)const{
 void Missingnumber:: init_transition(sf::RenderWindow &window)const{
  
     sf::Font font;
-    font.loadFromFile("img_pendu/Type.ttf");
+    font.loadFromFile("img_missing/Type.ttf");
 
     create_sprite(window,0,0,TEXTURE_TRANSITION2);
     create_text(window,font,20,90,20,setFinalText(win()));

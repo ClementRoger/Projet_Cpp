@@ -66,7 +66,7 @@ TEST_CASE("4: Test nombre d'essai restants","[pendu]" )
   REQUIRE(m.get_nb_try() == 7);
 }
 
-TEST_CASE("4: Test victoire","[pendu]" )
+TEST_CASE("5: Test victoire","[pendu]" )
 {
   Pendu m("YOUTUBE",8);
   m.set_user_entry("O");
