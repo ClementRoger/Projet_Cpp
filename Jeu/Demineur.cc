@@ -50,7 +50,7 @@ void Demineur::init_bomb_pos(const std::size_t gridsize){
 /* Check que la position choisie aléatoirement de la bombe nexiste pas déja */
 void Demineur::check_bomb_pos(const std::size_t i,const std::size_t gridsize,std::size_t &tmp_x,std::size_t &tmp_y)const{
     for (std::size_t j = i; j > 0; j--){
-        if(tmp_x == _bomb_x[j] && tmp_y == _bomb_y[j]){
+        while(tmp_x == _bomb_x[j] && tmp_y == _bomb_y[j]){
             tmp_x = 1+rand()%(gridsize - 1);
             tmp_y = 1+rand()%(gridsize - 1);
         }

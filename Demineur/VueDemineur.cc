@@ -4,17 +4,13 @@
 #include <vector>
 
 #include "Demineur.hh"
+
  
 void Demineur::display(sf::RenderWindow& window){
 
     /* Init la fenetre */ 
     bool gridclick = false;
     sf::Vector2i position;
-
-    window.clear();
-    init_background(window);
-    print_grid(window,get_open_tiles());
-    window.display();
 
     /* Boucle de jeu */
     while (window.isOpen() && !win() && get_nb_try() )
@@ -54,52 +50,58 @@ void Demineur::display(sf::RenderWindow& window){
     print_end(win(),window);
 }
 
-void Demineur:: init_background(sf::RenderWindow &window){
-    
+/* Permet de crée un sprite et de le dessiner sur la fenetre */
+void Demineur::create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file)const{
     sf::Texture texture;
     sf::Sprite sprite;
-    texture.loadFromFile(TEXTURE_BACKGROUND);
+    texture.loadFromFile(file);
     sprite.setTexture(texture);
-    window.draw(sprite);
-
-    texture.loadFromFile(TEXTURE_BACKNAME);
-    sprite.setTexture(texture);
-    sprite.setPosition(sf::Vector2f(10,0));
-    window.draw(sprite);
- 
-    sf::Font font;
-    font.loadFromFile("img/arial.ttf");
-    sf::Text text;
-    text.setFont(font);
-    text.setString("Test \n 5/6");
-    text.setCharacterSize(24);
-    text.setFillColor(sf::Color::White);
-    text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f(28,43));
-    window.draw(text);
-
-
-    texture.loadFromFile(TEXTURE_BACKGAME);
-    texture.setSmooth(true);
-    sprite.setTexture(texture);
-    sprite.setPosition(sf::Vector2f(APP_SIZE_X/4,450));
-    window.draw(sprite);
-
-    text.setString("Vies restantes : " + std::to_string(get_nb_try()));
-    text.setCharacterSize(30);
-    text.setFillColor(sf::Color::White);
-    text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f(APP_SIZE_X/3+5,480));
-    window.draw(text);
-
-    texture.loadFromFile(TEXTURE_NAME);
-    sprite.setPosition(sf::Vector2f(APP_SIZE_X/4,0)); 
-    sprite.setTexture(texture);
+    sprite.setPosition(sf::Vector2f(x,y));
     window.draw(sprite);
 }
 
+/* Permet de crée un texte et de le dessiner sur la fenetre */
+void Demineur::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input)const{
+    sf::Text text;
+    text.setFont(font);
+    text.setString(input);
+    text.setCharacterSize(fontSize);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f(x,y));
+    window.draw(text);
+}
+
+
+/* Permet de crée un texte et de le dessiner sur la fenetre */
+void Demineur::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input)const{
+    sf::Text text;
+    text.setFont(font);
+    text.setString(input);
+    text.setCharacterSize(fontSize);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f(x,y));
+    window.draw(text);
+}
+
+/* Permet d'initialiser le fond du jeu */
+void Demineur:: init_background(sf::RenderWindow &window)const{
+
+    sf::Font font;
+    font.loadFromFile("img_demineur/arial.ttf");
+    create_sprite(window,0,0,TEXTURE_BACKGROUND);
+    create_sprite(window,10,0,TEXTURE_BACKNAME);
+    create_text(window,font,24,28,43,"Test \n 5/6");
+    create_sprite(window,APP_SIZE_X/4+10,450,TEXTURE_BACKGAME);
+
+    create_text(window,font,30,APP_SIZE_X/3-8,480,"Erreurs restantes : " + std::to_string(get_nb_try()));
+
+    create_sprite(window,APP_SIZE_X/4,0,TEXTURE_NAME);
+}
+
 /* Permet de determiner la position de la souris lors du click + de savoir si ce click est dans la grille de jeu */
-bool Demineur::Get_Mouse_Click(sf::RenderWindow &window,sf::Vector2i& position){
+bool Demineur::Get_Mouse_Click(sf::RenderWindow &window,sf::Vector2i& position)const{
     static bool pressed=false;
     while (true){
       if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -118,7 +120,7 @@ bool Demineur::Get_Mouse_Click(sf::RenderWindow &window,sf::Vector2i& position){
 }
 
 /* Permet de tester si le click se trouve sur la grille de jeu */
-bool Demineur::test_grid_border(const sf::Vector2i position){
+bool Demineur::test_grid_border(const sf::Vector2i position)const{
 
     if ( (position.x >= (int)(APP_SIZE_X-(IMG_SIZE*get_plateau().size()))/2 )
         && (position.x <= (int)((APP_SIZE_X-(IMG_SIZE*get_plateau().size()))/2+IMG_SIZE*get_plateau().size()))
@@ -131,7 +133,7 @@ bool Demineur::test_grid_border(const sf::Vector2i position){
 }
 
 /* Affichage du jeu */ 
-void Demineur::print_grid(sf::RenderWindow &window,const std::vector<std::vector<bool>>matrice){
+void Demineur::print_grid(sf::RenderWindow &window,const std::vector<std::vector<bool>>matrice)const{
 
     sf::Texture texture;
     sf::Sprite sprite;
@@ -156,8 +158,8 @@ void Demineur::print_grid(sf::RenderWindow &window,const std::vector<std::vector
     }
 }
 
-void Demineur::number_texture(const int val, sf::Texture& texture){
-    
+/* Selectionne la texture a affichée */
+void Demineur::number_texture(const int val, sf::Texture& texture)const{
     switch(val){
         case 1 : 
                 texture.loadFromFile(TEXTURE_1);
@@ -189,28 +191,57 @@ void Demineur::number_texture(const int val, sf::Texture& texture){
     }
 }
 
-
-void Demineur::print_end(bool winner,sf::RenderWindow &window){
+/* Affichage d'un game-over ou you win */
+void Demineur::print_end(const bool winner,sf::RenderWindow &window){
 
     sf::Time delayTime = sf::milliseconds(2500);
-    sf::Texture texture;
-    sf::Sprite sprite;
-    if (winner){ 
-        texture.loadFromFile(TEXTURE_WIN);
-        sprite.setPosition(sf::Vector2f(530/2,411/2)); }
-    else{ 
-        texture.loadFromFile(TEXTURE_LOSE); 
-        sprite.setPosition(sf::Vector2f(450/2,411/2)); }
 
-    sprite.setTexture(texture);
-           
-    window.draw(sprite);
+    if (winner) create_sprite(window,530/2,411/2,TEXTURE_WIN);
+    else create_sprite(window,450/2,411/2,TEXTURE_LOSE);
+
     window.display();
     sf::sleep(delayTime);
+    transition(window);
 }
 
+/* Renvoie le message de transition */
+std::wstring Demineur::setFinalText(const bool win)const{
+    std::wstring res;
 
-void Demineur::transition() {
+    if (win){
+        res = std::wstring(L"\n\nSixième et dernière épreuve. Ouah que le temps \n" )+ 
+        std::wstring(L"passe vite quand on s’amuse ! Pour celle-là,\n" )+ 
+        std::wstring(L"vous devrez résoudre un taquin. Quoi ? Vous savez \n") + 
+        std::wstring(L"pas ce que c’est c’est ça ? Mais si, je suis sûr\n") +
+        std::wstring(L"que vous avez déjà vu ça, le jeu où vous bougez \n" )+ 
+        std::wstring(L"les tuiles pour reconstituer un dessin. Nan ? \n" )+ 
+
+        std::wstring(L"Ça vous dit rien ? \n\n" )+
+        std::wstring(L"Et bah vous comprendrez en jouant ... enfin j’espère\n") +
+        std::wstring(L"pour vous !");
+
+    }
+    else {
+        res = std::wstring(L"\n\n\n\nPas vraiment de surprise, vous avez explosé en vol.\n")+
+        std::wstring(L"Oh allez j’essaye de vous faire rire une \n" )+
+        std::wstring(L"dernière fois avant le grand voyage. Bon \n" )+
+        std::wstring(L"bah j’aurais essayé ...\n\n" )+
+        std::wstring(L"Eddy, explose lui la cervelle ! *Gunshot* ");
+    }
+
+    return res;
+}
+
+/* Initialise la transition */
+void Demineur:: init_transition(sf::RenderWindow &window)const{
+
+    sf::Font font;
+    font.loadFromFile("img_demineur/Type.ttf");
+
+    create_sprite(window,0,0,TEXTURE_TRANSITION);
+    create_text(window,font,20,100,130,setFinalText(win()));
+    create_text(window,font,16,510,505,"Press enter \nto continue...");
 
 }
+
 

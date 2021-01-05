@@ -89,7 +89,7 @@ void Demineur::create_text(sf::RenderWindow &window, const sf::Font font, const 
 void Demineur:: init_background(sf::RenderWindow &window)const{
 
     sf::Font font;
-    font.loadFromFile("img_missing/arial.ttf");
+    font.loadFromFile("img_demineur/arial.ttf");
     create_sprite(window,0,0,TEXTURE_BACKGROUND);
     create_sprite(window,10,0,TEXTURE_BACKNAME);
     create_text(window,font,24,28,43,"Test \n 5/6");
@@ -236,7 +236,7 @@ std::wstring Demineur::setFinalText(const bool win)const{
 void Demineur:: init_transition(sf::RenderWindow &window)const{
 
     sf::Font font;
-    font.loadFromFile("img_pendu/Type.ttf");
+    font.loadFromFile("img_demineur/Type.ttf");
 
     create_sprite(window,0,0,TEXTURE_TRANSITION);
     create_text(window,font,20,100,130,setFinalText(win()));
