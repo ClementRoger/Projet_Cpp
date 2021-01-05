@@ -26,8 +26,5 @@ $(EXEC): $(OBJ)
 -include .depends
 
 clean:
-	rm -f $(OBJ) $(EXEC)
-cleantest:
-	cd $(TST_DIR) ; make clean
-distclean : clean cleantest
+	rm -f $(OBJ)
 

@@ -38,8 +38,7 @@ void Taquin :: display(sf::RenderWindow& window){
                 if (check_move(image_number)) {
 
                     play();
-                    set_nb_try(get_nb_try()-1);
-                    set_win(check_victory());
+
                 }
             }
         }

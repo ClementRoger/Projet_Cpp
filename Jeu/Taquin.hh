@@ -12,6 +12,7 @@ class Taquin : public MiniJeu{
  public:
 
   Taquin(const std::size_t NB_TRY);
+  Taquin(const size_t NB_TRY, const char grille[9]);
   void play();
   void init_background(sf::RenderWindow& window)const;
   bool check_move(const int number)const; // Renvoie true si on peut bouger la case, false sinon
@@ -27,6 +28,13 @@ class Taquin : public MiniJeu{
   void init_transition(sf::RenderWindow &window)const;
   std::wstring setFinalText(const bool win)const;
   void print_end(const bool winner,sf::RenderWindow &window);
+  
+  void set_image_number(const int nb) {
+    number = nb;
+  }
+  sf::Vector2f get_case_vide() {
+    return case_vide;
+  }
 
  private:
 

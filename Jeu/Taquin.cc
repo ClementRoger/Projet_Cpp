@@ -18,6 +18,22 @@ Taquin :: Taquin(const size_t NB_TRY) : MiniJeu(NB_TRY,false) {
 	init_solution();
 }
 
+Taquin :: Taquin(const size_t NB_TRY, const char grille[9]) : MiniJeu(NB_TRY, false) {
+
+	init_names();
+	init_case_vide();
+	init_solution();
+
+	std::vector<int> v;
+
+	for (int i = 0; i < 8; ++i) {
+		
+		v.push_back(grille[i] - '0');
+	}
+
+	init_position(v);
+}
+
 void Taquin :: init_names() {
 
 	v_name.push_back("images_taquin/1.png");
@@ -151,7 +167,7 @@ void Taquin :: init_solution() {
 	v_solution.push_back(sf::Vector2f(X_init + d,Y_init + 2*d));
 }
 
-void Taquin :: play() { // Echange les coordonées de la case cliquée et de la case vide
+void Taquin :: play() { // Echange les coordonées de la case cliquée et de la case vide, diminue le nombre de tentatives et vérifie la victoire
 
 	int temp;
 
@@ -162,4 +178,7 @@ void Taquin :: play() { // Echange les coordonées de la case cliquée et de la 
 	temp = v_position[number].y; 
 	v_position[number].y = case_vide.y;
 	case_vide.y = temp;
+
+	set_nb_try(get_nb_try()-1);
+    set_win(check_victory());
 }

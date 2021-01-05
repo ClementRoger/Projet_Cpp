@@ -17,7 +17,7 @@ void Taquin :: display(sf::RenderWindow& window){
     init_background(window);
     window.display();    
 
-	while (window.isOpen() && !win() && nb_try > 0) {
+	while (window.isOpen() && !win() && get_nb_try() > 0) {
 
 		sf::Event event;
  
@@ -38,8 +38,7 @@ void Taquin :: display(sf::RenderWindow& window){
                 if (check_move(image_number)) {
 
                     play();
-                    nb_try--;
-                    set_win(check_victory());
+
                 }
             }
         }
@@ -52,7 +51,7 @@ void Taquin :: display(sf::RenderWindow& window){
     print_end(win(),window);
 }
 
-bool Taquin :: check_move(int number) {
+bool Taquin :: check_move(const int number) const {
 
     int x1 = v_position[number].x;
     int y1 = v_position[number].y;
@@ -70,12 +69,12 @@ bool Taquin :: check_move(int number) {
 	return false;
 }
 
-void Taquin :: init_background(sf::RenderWindow& window) {   
+void Taquin :: init_background(sf::RenderWindow& window)const{   
 
     sf::Texture texture;
     sf::Sprite sprite;
 
-    texture.loadFromFile("images/background.jpg");
+    texture.loadFromFile("images_taquin/background.jpg");
     sprite.setTexture(texture);
     window.draw(sprite);
 
@@ -90,14 +89,14 @@ void Taquin :: init_background(sf::RenderWindow& window) {
         window.draw(sprite);
     }
 
-    texture.loadFromFile("images/taquin.png"); 
+    texture.loadFromFile("images_taquin/taquin.png"); 
     sprite.setTexture(texture);
     sprite.setPosition(sf::Vector2f(10,20));
     sprite.setScale(0.35,0.35);
     window.draw(sprite);
 
     sf::Font font;
-    font.loadFromFile("images/arial.ttf");
+    font.loadFromFile("images_taquin/arial.ttf");
     sf::Text text;
     text.setFont(font);
     text.setString("Test \n 6/6");
@@ -107,32 +106,32 @@ void Taquin :: init_background(sf::RenderWindow& window) {
     text.setPosition(sf::Vector2f(28,35));
     window.draw(text);
 
-    font.loadFromFile("images/lakeshore.ttf");
+    font.loadFromFile("images_taquin/lakeshore.ttf");
     text.setFont(font);
     text.setString("Epreuve du Taquin");
     text.setCharacterSize(65);
     text.setFillColor(sf::Color::Black);
     text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f(APP_SIZE_X/4,25));
+    text.setPosition(sf::Vector2f(APP_SIZE_X5/4,25));
     window.draw(text);
 
-    texture.loadFromFile("images/paint.png");
+    texture.loadFromFile("images_taquin/paint.png");
     texture.setSmooth(true);
     sprite.setTexture(texture);
     sprite.setScale(1.3,0.9);
-    sprite.setPosition(sf::Vector2f(APP_SIZE_X/4 - 47,480));
+    sprite.setPosition(sf::Vector2f(APP_SIZE_X5/4 - 47,480));
     window.draw(sprite);
 
-    font.loadFromFile("images/arial.ttf");
-    text.setString("Mouvements restants : " + std::to_string(nb_try));
+    font.loadFromFile("images_taquin/arial.ttf");
+    text.setString("Mouvements restants : " + std::to_string(get_nb_try()));
     text.setCharacterSize(30);
     text.setFillColor(sf::Color::White);
     text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f(APP_SIZE_X/3-48,510));
+    text.setPosition(sf::Vector2f(APP_SIZE_X5/3-48,510));
     window.draw(text);
 }
 
-int Taquin :: get_image_number(int x, int y) {
+int Taquin :: get_image_number(const int x, const int y) const{
 
     for (int i = 0; i < 8; ++i) {
 
@@ -145,12 +144,12 @@ int Taquin :: get_image_number(int x, int y) {
     return -1;
 }
 
-bool Taquin :: check_victory() {
+bool Taquin :: check_victory() const{
 
     return v_position == v_solution; //Surcharge d'opérateur
 }
 
-void Taquin :: print_end(bool winner,sf::RenderWindow &window){
+void Taquin :: print_end(const bool winner,sf::RenderWindow &window){
 
     sf::Time delayTime = sf::milliseconds(2500);
 
@@ -159,18 +158,18 @@ void Taquin :: print_end(bool winner,sf::RenderWindow &window){
 
     if (winner) {
 
-        texture.loadFromFile("images/win.png");
+        texture.loadFromFile("images_taquin/win.png");
         sprite.setTexture(texture);
     }    
 
     else {
 
-        texture.loadFromFile("images/game_over.png");
+        texture.loadFromFile("images_taquin/game_over.png");
         sprite.setTexture(texture);
     }    
 
     sprite.setScale(0.9,0.9);
-    sprite.setPosition(APP_SIZE_X/2 - sprite.getLocalBounds().width/2,APP_SIZE_Y/2 - sprite.getLocalBounds().height/2);
+    sprite.setPosition(APP_SIZE_X5/2 - sprite.getLocalBounds().width/2,APP_SIZE_Y5/2 - sprite.getLocalBounds().height/2);
     window.draw(sprite);
 
     window.display();
@@ -178,7 +177,7 @@ void Taquin :: print_end(bool winner,sf::RenderWindow &window){
     transition(window);
 }
 
-wstring Taquin :: setFinalText(bool win){
+wstring Taquin :: setFinalText(const bool win)const{
 
     std::wstring res;
 
@@ -206,16 +205,16 @@ wstring Taquin :: setFinalText(bool win){
     return res;
 }
 
-void Taquin :: init_transition(sf::RenderWindow &window){
+void Taquin :: init_transition(sf::RenderWindow &window)const{
 
     sf::Font font;
-    font.loadFromFile("images/Type.ttf");
+    font.loadFromFile("images_taquin/Type.ttf");
     wstring str = L"Press enter \nto continue...";
 
     sf::Texture texture;
     sf::Sprite sprite;
 
-    texture.loadFromFile("images/wall.jpeg");
+    texture.loadFromFile("images_taquin/wall.jpeg");
     sprite.setTexture(texture);
     window.draw(sprite);
 
@@ -225,7 +224,7 @@ void Taquin :: init_transition(sf::RenderWindow &window){
     text.setCharacterSize(18);
     text.setFillColor(sf::Color::White);
     text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f((APP_SIZE_X - text.getLocalBounds().width)/2,(APP_SIZE_Y - text.getLocalBounds().height)/2));
+    text.setPosition(sf::Vector2f((APP_SIZE_X5 - text.getLocalBounds().width)/2,(APP_SIZE_Y5 - text.getLocalBounds().height)/2));
     window.draw(text);
 
     text.setString(str);
@@ -236,30 +235,3 @@ void Taquin :: init_transition(sf::RenderWindow &window){
     window.draw(text);
 }
 
-void Taquin :: transition(sf::RenderWindow &window){
-
-    sf::Event event;
-    std::size_t cpt = 0;
-
-    while(window.isOpen() && cpt < 1){
-    
-        while (window.pollEvent(event)) {
-            
-            if (((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Enter))) {
-
-               cpt ++;
-            }
-
-            if (event.type == sf::Event::Closed){ 
-
-                    window.close();
-                    break;                
-            }
-        } 
-
-        window.clear();
-        init_transition(window);
-        window.display();
-    }
-    
-}
