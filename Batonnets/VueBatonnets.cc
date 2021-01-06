@@ -7,6 +7,9 @@
 #include "Batonnets.hh"
 #include "TextEntry.hh"
 
+#define APP_SIZE_X 800
+#define APP_SIZE_Y 600
+
 using namespace std;
  
 void Batonnets :: display(sf::RenderWindow& window){
@@ -14,7 +17,7 @@ void Batonnets :: display(sf::RenderWindow& window){
 	window.clear();
 	init_background(window);
 	affiche_batonnets(window);
-	TextEntry textbar(window,APP_SIZE_X,APP_SIZE_Y + 220);
+	TextEntry textbar(window,APP_SIZE_X3,APP_SIZE_Y3 + 220);
 	window.display();
 
 	while (window.isOpen() && !win() && nb_batonnets > 0) {
@@ -54,10 +57,11 @@ void Batonnets :: display(sf::RenderWindow& window){
         textbar.display(window);
         window.display();
 	}
+
     print_end(win(),window);
 }
 
-bool Batonnets :: check_entry(string entry) {
+bool Batonnets :: check_entry(const string entry)const {
 
 	int number;
 
@@ -80,22 +84,22 @@ bool Batonnets :: check_entry(string entry) {
 	return false;
 }
 
-void Batonnets :: init_background(sf::RenderWindow& window) {
+void Batonnets :: init_background(sf::RenderWindow& window)const{
 
     sf::Texture texture;
     sf::Sprite sprite;
-    texture.loadFromFile("images/background.jpg");
+    texture.loadFromFile("images_batonnets/background.jpg");
     sprite.setTexture(texture);
     window.draw(sprite);
 
-    texture.loadFromFile("images/tiger.png"); 
+    texture.loadFromFile("images_batonnets/tiger.png"); 
     sprite.setTexture(texture);
     sprite.setPosition(sf::Vector2f(10,20));
     sprite.setScale(0.35,0.35);
     window.draw(sprite);
  
     sf::Font font;
-    font.loadFromFile("images/arial.ttf");
+    font.loadFromFile("images_batonnets/arial.ttf");
     sf::Text text;
     text.setFont(font);
     text.setString("Test \n 3/6");
@@ -105,13 +109,13 @@ void Batonnets :: init_background(sf::RenderWindow& window) {
     text.setPosition(sf::Vector2f(32,43));
     window.draw(text);
 
-    font.loadFromFile("images/lakeshore.ttf");
+    font.loadFromFile("images_batonnets/lakeshore.ttf");
     text.setFont(font);
     text.setString("Epreuve des Batonnets");
     text.setCharacterSize(65);
     text.setFillColor(sf::Color::Black);
     text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f(APP_SIZE_X/4,25));
+    text.setPosition(sf::Vector2f(APP_SIZE_X3/4,25));
     window.draw(text);
 
     string str;
@@ -126,7 +130,7 @@ void Batonnets :: init_background(sf::RenderWindow& window) {
     	str = "Au tour d'Eddy de jouer";	
     }
 
-    font.loadFromFile("images/Trouble.otf");
+    font.loadFromFile("images_batonnets/Trouble.otf");
 
 	text.setFont(font);
     text.setString(str);
@@ -144,39 +148,39 @@ void Batonnets :: init_background(sf::RenderWindow& window) {
     text.setPosition(sf::Vector2f(400 - text.getLocalBounds().width/2,430));
     window.draw(text);
 
-    texture.loadFromFile("images/paint.png");
+    texture.loadFromFile("images_batonnets/paint.png");
     texture.setSmooth(true);
     sprite.setTexture(texture);
     sprite.setScale(1.3,0.9);
-    sprite.setPosition(sf::Vector2f(APP_SIZE_X/4 - 47,480));
+    sprite.setPosition(sf::Vector2f(APP_SIZE_X3/4 - 47,480));
     window.draw(sprite);
 
-    font.loadFromFile("images/arial.ttf");
+    font.loadFromFile("images_batonnets/arial.ttf");
     text.setString("Batonnets restants : " + std::to_string(nb_batonnets));
     text.setCharacterSize(30);
     text.setFillColor(sf::Color::White);
     text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f(APP_SIZE_X/3-30,510));
+    text.setPosition(sf::Vector2f(APP_SIZE_X3/3-30,510));
     window.draw(text);
 
 }
 
-void Batonnets :: affiche_batonnets(sf::RenderWindow& window) {
+void Batonnets :: affiche_batonnets(sf::RenderWindow& window) const{
 
 	sf::Texture texture;
     sf::Sprite sprite;
-    texture.loadFromFile("images/metal.jpeg");
+    texture.loadFromFile("images_batonnets/metal.jpeg");
     sprite.setTexture(texture);
     sprite.setPosition(30, 220);
     sprite.setScale(1.04,0.3);
     window.draw(sprite);
 
-	for (int i = 0; i < nb_batonnets; ++i) {
+	for (std::size_t i = 0; i < nb_batonnets; ++i) {
 
 		sf::Texture texture;
     	sf::Sprite sprite;
 		
-		if (!texture.loadFromFile("images/batonnet.png")){
+		if (!texture.loadFromFile("images_batonnets/batonnet.png")){
 
 			cout << "Erreur lors du chargement de l'image" << endl;
 		}	
@@ -188,22 +192,93 @@ void Batonnets :: affiche_batonnets(sf::RenderWindow& window) {
 	}
 }
 
-
-void Batonnets::print_end(bool winner,sf::RenderWindow &window){
+void Batonnets :: print_end(const bool winner,sf::RenderWindow &window){
 
     sf::Time delayTime = sf::milliseconds(2500);
+
     sf::Texture texture;
     sf::Sprite sprite;
-    if (winner){ 
-        texture.loadFromFile("images/you_win.png");
-        sprite.setPosition(sf::Vector2f(530/2,411/2)); }
-    else{ 
-        texture.loadFromFile("images/game_over.png"); 
-        sprite.setPosition(sf::Vector2f(450/2,411/2)); }
 
-    sprite.setTexture(texture);
-           
+    if (winner) {
+
+        texture.loadFromFile("images_batonnets/you_win.png");
+        sprite.setTexture(texture);
+    }    
+
+    else {
+
+        texture.loadFromFile("images_batonnets/game_over.png");
+        sprite.setTexture(texture);
+    }    
+
+    sprite.setScale(0.9,0.9);
+    sprite.setPosition(APP_SIZE_X/2 - sprite.getLocalBounds().width/2,APP_SIZE_Y/2 - sprite.getLocalBounds().height/2);
     window.draw(sprite);
+
     window.display();
     sf::sleep(delayTime);
+    transition(window);
 }
+
+wstring Batonnets :: setFinalText(const bool win)const{
+
+    std::wstring res;
+
+    if (win){
+
+        res = std::wstring(L"Bravo. Oh ne prenez pas cet air hautain, battre Eddy\n") + 
+        std::wstring(L"n’a rien d'impressionnant, et vous n’êtes qu’à la moitié.\n") + 
+        std::wstring(L"Les choses sérieuses commencent maintenant, avant c’était\n") +
+        std::wstring(L"l’échauffement.\n\nLa quatrième épreuve est très simple - même pour\n")+
+        std::wstring(L"vous -. Huit chiffres seront affichés devant vous, à vous\n") + 
+        std::wstring(L"de retrouver la logique et de deviner le nombre manquant.\n\n") +
+        std::wstring(L"Cela peut paraître facile sur le papier, mais je suis celui qui\n") +
+        std::wstring(L"a créé ce test donc attendez-vous à du challenge. Réfléchissez\n") +
+        std::wstring(L"bien, vous n’aurez droit qu’à quelques propositions avant\n") +
+        std::wstring(L"qu’Eddy vous transforme en viande hachée.\n\n");
+
+    }
+
+    else {
+
+        res = std::wstring(L"Je n’en reviens pas qu’autant de personnes perdent\n") +
+        std::wstring(L"contre Eddy à cette épreuve. Avant de devenir ... “nettoyeur”\n") +
+        std::wstring(L"ici, il lisait l’avenir dans un potiron dans une foire ambulante,\n") +
+        std::wstring(L"ce gars est bête comme une brique. Ne le prends pas mal Eddy, \n") +
+        std::wstring(L"tu fais parfaitement ton boulot maintenant. \n\n") +
+        std::wstring(L"Allez, élimine le. *Gunshot*\n"); 
+    }
+
+    return res;
+}
+
+void Batonnets :: init_transition(sf::RenderWindow &window)const{
+
+    sf::Font font;
+    font.loadFromFile("images_batonnets/Type.ttf");
+    wstring str = L"Press enter \nto continue...";
+
+    sf::Texture texture;
+    sf::Sprite sprite;
+
+    texture.loadFromFile("images_batonnets/wall.jpeg");
+    sprite.setTexture(texture);
+    window.draw(sprite);
+
+    sf::Text text;
+    text.setFont(font);
+    text.setString(setFinalText(win()));
+    text.setCharacterSize(18);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f((APP_SIZE_X - text.getLocalBounds().width)/2,(APP_SIZE_Y - text.getLocalBounds().height)/2));
+    window.draw(text);
+
+    text.setString(str);
+    text.setCharacterSize(16);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f(510,505));
+    window.draw(text);
+}
+

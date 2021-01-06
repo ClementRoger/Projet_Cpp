@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Batonnets :: Batonnets(size_t NB_BATONNETS, size_t dif) : MiniJeu(dif,false) {
+Batonnets :: Batonnets(const size_t NB_BATONNETS, const size_t dif) : MiniJeu(dif,false) {
 
 	nb_batonnets = NB_BATONNETS;
 	tour = true;
@@ -28,18 +28,19 @@ void Batonnets :: play() {
 
 	else {
 
+		number = stoi(user_entry, nullptr, 10);
 		tour = user_plays();			
 	}			
 }
 
-int Batonnets :: generer_nb_aleatoire(int min, int max) {
+int Batonnets :: generer_nb_aleatoire(const int min, const int max)const {
 
     std::srand(std::time(nullptr)); //Initialise le générateur de nombres aléatoires
 
     return rand()%(max - min + 1) + min;
 }
 
-void Batonnets :: print() { //Utilisée pour le test dans le terminal
+void Batonnets :: print() const{ //Utilisée pour le test dans le terminal
 
 	for (size_t i = 0; i < nb_batonnets; ++i) {
 		
@@ -111,13 +112,8 @@ bool Batonnets :: user_plays() {
 
 	else{
 
-		number = stoi(user_entry, nullptr, 10);;
 		nb_batonnets -= number;
 		last_move = number;
 		return false;
 	}
-}
-
-void Batonnets::transition(sf::RenderWindow &window){
-
 }

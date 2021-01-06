@@ -27,6 +27,22 @@ class Batonnets : public MiniJeu{
   void init_transition(sf::RenderWindow &window)const;
   std::wstring setFinalText(const bool win)const;
 
+  void set_number(const int nb) {
+    number = nb;
+  }
+  void set_user_entry(const std::string str) {
+    user_entry = str;
+  }
+  std::size_t get_nb_batonnets() const{
+    return nb_batonnets;
+  }
+  std::size_t get_last_move() const{
+    return last_move;
+  }
+  bool get_tour() const{
+    return tour;
+  }
+
  private:
 
   std::size_t nb_batonnets;
@@ -34,5 +50,6 @@ class Batonnets : public MiniJeu{
   bool tour; // A l'IA de jouer si tour == false, sinon au tour du joueur. Le joueur commence
   std::size_t last_move;
   std::string user_entry;
+  int number;
 
 };  

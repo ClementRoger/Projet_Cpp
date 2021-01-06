@@ -110,8 +110,8 @@ bool Batonnets :: user_plays() {
 	}
 
 	else{
-
-		number = stoi(user_entry, nullptr, 10);;
+		
+		number = stoi(user_entry, nullptr, 10);
 		nb_batonnets -= number;
 		last_move = number;
 		return false;
