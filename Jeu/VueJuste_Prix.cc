@@ -39,7 +39,8 @@ void Juste_Prix :: display(sf::RenderWindow& window){
 		if(check_entry(textbar.get_finalInput()) && textbar.get_finalInput() != "" && prev != textbar.get_finalInput()){
 
             set_user_entry(textbar.get_finalInput());
-			play();
+            number = (size_t) stoi(get_user_entry(), nullptr, 10);
+            play();
 		}	
 			
 		window.clear();

@@ -16,6 +16,7 @@ class Juste_Prix : public MiniJeuAvecSolution{
  public:
 
   Juste_Prix(const size_t NB_TENTATIVES, const int NMIN, const int NMAX);
+  Juste_Prix(const size_t NB_TENTATIVES, const int solution);
   void play();
   bool check_entry(const std::string entry)const;
   
@@ -25,10 +26,17 @@ class Juste_Prix : public MiniJeuAvecSolution{
   std::wstring setFinalText(const bool win)const;
   void init_transition(sf::RenderWindow &window)const;
 
+  sf::String get_result() const{
+    return result;
+  }
+  void set_number(const int nb) {
+    number = (size_t)nb;
+  }
+
  private:
 
   std::size_t Nmin;
   std::size_t Nmax;
   sf::String result;
-
+  size_t number;
 };  

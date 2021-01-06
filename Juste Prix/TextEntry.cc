@@ -4,7 +4,7 @@ using namespace std;
 
 TextEntry :: TextEntry (sf::RenderWindow& window,size_t x, size_t y) {
 
-	if (!_font.loadFromFile("images/arial.ttf")) {
+	if (!_font.loadFromFile("images_justep/arial.ttf")) {
         cout<<"Font ERROR. Don't find arial.ttf"<<endl;
     }
   

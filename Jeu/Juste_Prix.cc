@@ -16,9 +16,13 @@ Juste_Prix :: Juste_Prix(const size_t NB_TENTATIVES, const int NMIN, const int N
 
 }
 
+Juste_Prix :: Juste_Prix(const size_t NB_TENTATIVES, const int solution) : MiniJeuAvecSolution(NB_TENTATIVES,false) {
+
+	set_solution(std::to_string(solution));
+}
+
 void Juste_Prix :: play() {
 
-	size_t number = (size_t) stoi(get_user_entry(), nullptr, 10);
 	size_t solution = (size_t) stoi(get_solution(), nullptr, 10);
 
 	if(number > solution) {

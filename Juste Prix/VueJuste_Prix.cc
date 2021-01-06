@@ -7,6 +7,9 @@
 #include "Juste_Prix.hh"
 #include "TextEntry.hh"
 
+#define APP_SIZE_X 800
+#define APP_SIZE_Y 600
+
 using namespace std;
  
 void Juste_Prix :: display(sf::RenderWindow& window){
@@ -15,9 +18,8 @@ void Juste_Prix :: display(sf::RenderWindow& window){
 	init_background(window);
     string prev;
 
-	TextEntry textbar(window,APP_SIZE_X,APP_SIZE_Y + 50);
+	TextEntry textbar(window,APP_SIZE_X4,APP_SIZE_Y4 + 50);
 	window.display();
-
 	while (window.isOpen() && !win() && get_nb_try() > 0) {
 
 		sf::Event event;
@@ -32,11 +34,12 @@ void Juste_Prix :: display(sf::RenderWindow& window){
             }
         }
 
-        prev = user_entry;
+        prev = get_user_entry();
 
 		if(check_entry(textbar.get_finalInput()) && textbar.get_finalInput() != "" && prev != textbar.get_finalInput()){
 
-            user_entry = textbar.get_finalInput();
+            set_user_entry(textbar.get_finalInput());
+            number = (size_t) stoi(get_user_entry(), nullptr, 10);
 			play();
 		}	
 			
@@ -48,7 +51,7 @@ void Juste_Prix :: display(sf::RenderWindow& window){
     print_end(win(),window);
 }
 
-bool Juste_Prix :: check_entry(string entry) {
+bool Juste_Prix :: check_entry(const string entry) const{
 
 	int number;
 
@@ -71,22 +74,22 @@ bool Juste_Prix :: check_entry(string entry) {
 	return false;
 }
 
-void Juste_Prix :: init_background(sf::RenderWindow& window) {
+void Juste_Prix :: init_background(sf::RenderWindow& window)const{
 
     sf::Texture texture;
     sf::Sprite sprite;
-    texture.loadFromFile("images/background.jpg");
+    texture.loadFromFile("images_justep/background.jpg");
     sprite.setTexture(texture);
     window.draw(sprite);
 
-    texture.loadFromFile("images/target.png"); 
+    texture.loadFromFile("images_justep/target.png"); 
     sprite.setTexture(texture);
     sprite.setPosition(sf::Vector2f(-30,-20));
     sprite.setScale(0.35,0.35);
     window.draw(sprite);
  
     sf::Font font;
-    font.loadFromFile("images/arial.ttf");
+    font.loadFromFile("images_justep/arial.ttf");
     sf::Text text;
     text.setFont(font);
     text.setString("Test \n 1/6");
@@ -96,16 +99,16 @@ void Juste_Prix :: init_background(sf::RenderWindow& window) {
     text.setPosition(sf::Vector2f(32,35));
     window.draw(text);
 
-    font.loadFromFile("images/lakeshore.ttf");
+    font.loadFromFile("images_justep/lakeshore.ttf");
     text.setFont(font);
     text.setString("Epreuve du Plus ou Moins");
     text.setCharacterSize(65);
     text.setFillColor(sf::Color::Black);
     text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f(APP_SIZE_X/4-30,25));
+    text.setPosition(sf::Vector2f(APP_SIZE_X4/4-30,25));
     window.draw(text);
 
-    font.loadFromFile("images/arial.ttf");
+    font.loadFromFile("images_justep/arial.ttf");
 
 	text.setFont(font);
     text.setString(result);
@@ -115,7 +118,7 @@ void Juste_Prix :: init_background(sf::RenderWindow& window) {
     text.setPosition(sf::Vector2f(400 - text.getLocalBounds().width/2,200));
     window.draw(text);    
 
-    font.loadFromFile("images/Trouble.otf");
+    font.loadFromFile("images_justep/Trouble.otf");
 
     text.setFont(font);
     text.setString("Press Enter to submit");
@@ -125,39 +128,104 @@ void Juste_Prix :: init_background(sf::RenderWindow& window) {
     text.setPosition(sf::Vector2f(400 - text.getLocalBounds().width/2,345));
     window.draw(text);
 
-    texture.loadFromFile("images/paint.png");
+    texture.loadFromFile("images_justep/paint.png");
     texture.setSmooth(true);
     sprite.setTexture(texture);
     sprite.setScale(1.3,0.9);
-    sprite.setPosition(sf::Vector2f(APP_SIZE_X/4 - 47,430));
+    sprite.setPosition(sf::Vector2f(APP_SIZE_X4/4 - 47,430));
     window.draw(sprite);
 
-    font.loadFromFile("images/arial.ttf");
+    font.loadFromFile("images_justep/arial.ttf");
     text.setString("Tentatives restantes : " + std::to_string(get_nb_try()));
     text.setCharacterSize(30);
     text.setFillColor(sf::Color::White);
     text.setStyle(sf::Text::Bold);
-    text.setPosition(sf::Vector2f(APP_SIZE_X/3-30,460));
+    text.setPosition(sf::Vector2f(APP_SIZE_X4/3-30,460));
     window.draw(text);
 
 }
 
 
-void Juste_Prix::print_end(bool winner,sf::RenderWindow &window){
-    std::cout<<"jsuis"<<std::endl;
+void Juste_Prix :: print_end(const bool winner,sf::RenderWindow &window){
+
     sf::Time delayTime = sf::milliseconds(2500);
+
     sf::Texture texture;
     sf::Sprite sprite;
-    if (winner){ 
-        texture.loadFromFile("images/you_win.png");
-        sprite.setPosition(sf::Vector2f(530/2,411/2)); }
-    else{ 
-        texture.loadFromFile("images/game_over.png"); 
-        sprite.setPosition(sf::Vector2f(450/2,411/2)); }
 
-    sprite.setTexture(texture);
-           
+    if (winner) {
+
+        texture.loadFromFile("images_justep/you_win.png");
+        sprite.setTexture(texture);
+    }    
+
+    else {
+
+        texture.loadFromFile("images_justep/game_over.png");
+        sprite.setTexture(texture);
+    }    
+
+    sprite.setScale(0.9,0.9);
+    sprite.setPosition(APP_SIZE_X/2 - sprite.getLocalBounds().width/2,APP_SIZE_Y/2 - sprite.getLocalBounds().height/2);
     window.draw(sprite);
+
     window.display();
     sf::sleep(delayTime);
+    transition(window);
+}
+
+wstring Juste_Prix :: setFinalText(const bool win)const{
+
+    std::wstring res;
+
+    if (win){
+
+        res = std::wstring(L"Bon vous avez réussi. Étant donné votre tête je m’attendais\n") + 
+        std::wstring(L"à ce que vous ne compreniez même pas les règles mais bon, on est\n") + 
+        std::wstring(L"surpris de tout de nos jours. Voyons maintenant si vous êtes aussi\n") +
+        std::wstring(L"à l’aise avec les lettres qu’avec les chiffres.\n\n")+
+        std::wstring(L"La deuxième épreuve est un pendu : vous devez trouver le mot secret\n") +
+        std::wstring(L"en devinant les lettres qui le composent. Pour cela vous n’avez le\n") +
+        std::wstring(L"droit qu’à peu d'erreurs, si vous ne voulez pas finir en donut ...\n\n");
+    }
+
+    else {
+
+        res = std::wstring(L"Eh beh ce fut rapide. Si seulement tous les participants\n") +
+        std::wstring(L"pouvaient être aussi idiots, je ferais des journées de 3h\n") +
+        std::wstring(L"et je pourrais passer du temps avec mes gosses. \nEddy, sois gentil ") +
+        std::wstring(L"fais ton boulot s’il te plait. *Gunshot*\n");
+    }
+
+    return res;
+}
+
+void Juste_Prix :: init_transition(sf::RenderWindow &window)const{
+
+    sf::Font font;
+    font.loadFromFile("images_justep/Type.ttf");
+    wstring str = L"Press enter \nto continue...";
+
+    sf::Texture texture;
+    sf::Sprite sprite;
+
+    texture.loadFromFile("images_justep/wall.jpeg");
+    sprite.setTexture(texture);
+    window.draw(sprite);
+
+    sf::Text text;
+    text.setFont(font);
+    text.setString(setFinalText(win()));
+    text.setCharacterSize(18);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f((APP_SIZE_X - text.getLocalBounds().width)/2,(APP_SIZE_Y - text.getLocalBounds().height)/2));
+    window.draw(text);
+
+    text.setString(str);
+    text.setCharacterSize(16);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(sf::Vector2f(510,505));
+    window.draw(text);
 }
