@@ -14,9 +14,10 @@
 
 
 #include "../MiniJeu.hh"
+#include"../Itransition.hh"
 
 
-class Jeu {
+class Jeu : public Itransition {
 
   public :
 
@@ -27,11 +28,11 @@ class Jeu {
 
     std::size_t test_button_border(const sf::Vector2i position)const;
     bool Get_Mouse_Click(sf::RenderWindow &window);
-    void check_end(MiniJeu& game,sf::RenderWindow &window,sf::Event& event);
-    void easy_game(sf::RenderWindow &window,sf::Event& event);
-    void difficult_game(sf::RenderWindow &window,sf::Event& event);
+    void check_end(MiniJeu& game,sf::RenderWindow &window);
+    void easy_game(sf::RenderWindow &window);
+    void difficult_game(sf::RenderWindow &window);
 
-    void transition(sf::RenderWindow &window,sf::Event& event)const;
+    void transition(sf::RenderWindow &window)const;
   	std::wstring setFinalText(const std::size_t cpt)const;
   	void init_transition(sf::RenderWindow &window,const std::size_t cpt)const;
   	void create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input)const;
@@ -39,7 +40,7 @@ class Jeu {
   
 
     void init_playagain(sf::RenderWindow &window)const;
-    void playagain(sf::RenderWindow &window,sf::Event& event);
+    void playagain(sf::RenderWindow &window);
     /* Getters & Setters */
     std::size_t get_difficulty() const { return _difficulty;}
   	void set_difficulty(const std::size_t val){ _difficulty = val; }

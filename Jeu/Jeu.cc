@@ -61,17 +61,17 @@ void Jeu :: run(){
 	    }
 	     // Si un niveau : facile ou difficile sélectionné on incrémente cpt pour passer aux minijeux
 	    if(Intropassed && !_passedGames){
-	    	transition(window,event);
+	    	transition(window);
 	    	_passedGames ++;
 	    	Intropassed = false;
 	    }
 	    // Si niveau facile
 	    if (get_difficulty() == 1){
-	    	easy_game(window,event);
+	    	easy_game(window);
 	    }
 	    // Si niveau difficile 
 	    else if (get_difficulty() == 2){
-	    	difficult_game(window,event);
+	    	difficult_game(window);
 	    }
 	    // On affiche seulement si on est à l'intro
 	    if (!_passedGames){
@@ -83,97 +83,97 @@ void Jeu :: run(){
 }
 
 /* Jeux en niveau facile */
-void Jeu::easy_game(sf::RenderWindow &window,sf::Event& event){
+void Jeu::easy_game(sf::RenderWindow &window){
 	switch (_passedGames){
 
 		case 1: {
 			Juste_Prix J1(NB_TRY_JP_EASY, NMIN, NMAX);
 			J1.display(window);
-			check_end(J1,window,event);
+			check_end(J1,window);
 			break;
 		}
 		case 2 : {
 			std::fstream inFile("img_pendu/mots_faciles.txt", std::fstream::in);
 			Pendu games(inFile,NB_TRY_PENDU_EASY); 
     		games.display(window);
-	    	check_end(games,window,event);
+	    	check_end(games,window);
 			break;
 		}
 		case 3 : {
 			Batonnets B1(NB_BATONNETS,EASY);
 			B1.display(window);
-    		check_end(B1,window,event);
+    		check_end(B1,window);
 			break;
 		}
 		case 4 : {
 			std::fstream inFile("img_missing/matrices.txt", std::fstream::in);
 			Missingnumber game(inFile,NB_TRY_MISSING_NUMBER_EASY); 
 			game.display(window);
-			check_end(game,window,event);
+			check_end(game,window);
 			break;
 		}
 		case 5 : {
 			Demineur game(NB_TRY_DEMINEUR_EASY,NB_BOMBS_EASY,DEMINEUR_GRID_SIZE); 
     		game.display(window);
-    		check_end(game,window,event);
+    		check_end(game,window);
 			break;
 		}
 		case 6 : {
 			Taquin T1(NB_TRY_TAQUIN_EASY);
 			T1.display(window);
-			check_end(T1,window,event);
+			check_end(T1,window);
 			break;
 		}
 		
 		default :
-			playagain(window,event);
+			playagain(window);
 			break;
 	}
 }
 
 /* Jeux en niveau difficile */
-void Jeu::difficult_game(sf::RenderWindow &window,sf::Event& event){
+void Jeu::difficult_game(sf::RenderWindow &window){
     switch (_passedGames){
     	case 1: {
 			Juste_Prix J1(NB_TRY_JP_DIFFICULT, NMIN, NMAX);
 			J1.display(window);
-			check_end(J1,window,event);
+			check_end(J1,window);
 			break;
 		}
 		case 2 : {
 			std::fstream inFile("img_pendu/mots_difficiles.txt", std::fstream::in);
 			Pendu games(inFile,NB_TRY_PENDU_DIFFICULT); 
     		games.display(window);
-	    	check_end(games,window,event);
+	    	check_end(games,window);
 			break;
 		}
 		case 3 : {
 			Batonnets B1(NB_BATONNETS,DIFFICULT);
 			B1.display(window);
-    		check_end(B1,window,event);
+    		check_end(B1,window);
 			break;
 		}
 		case 4 : {
 			std::fstream inFile("img_missing/matrices.txt", std::fstream::in);
 			Missingnumber game(inFile,NB_TRY_MISSING_NUMBER_DIFFICULT); 
 			game.display(window);
-			check_end(game,window,event);
+			check_end(game,window);
 			break;
 		}
 		case 5 : {
 			Demineur game(NB_TRY_DEMINEUR_DIFFICULT,NB_BOMBS_DIFFICULT,DEMINEUR_GRID_SIZE); 
     		game.display(window);
-    		check_end(game,window,event);
+    		check_end(game,window);
 			break;
 		}
 		case 6 : {
 			Taquin T1(NB_TRY_TAQUIN_DIFFICULT);
 			T1.display(window);
-			check_end(T1,window,event);
+			check_end(T1,window);
 			break;
 		}
 		default :
-			playagain(window,event);
+			playagain(window);
 			break;
 	}
 }
@@ -195,7 +195,8 @@ void Jeu::init_playagain(sf::RenderWindow &window)const{
 }
 
 /* Permet de proposer au joeur de rejouer. On teste sur quel bouton il a cliquer et on réalise l'action correspondantes */
-void Jeu::playagain (sf::RenderWindow &window,sf::Event& event){
+void Jeu::playagain (sf::RenderWindow &window){
+	sf::Event event;
 	bool passed = false;
 	while (window.isOpen() && !_playagain){
 		
@@ -225,12 +226,12 @@ void Jeu::playagain (sf::RenderWindow &window,sf::Event& event){
 }
 
 /* Permet de check la fin du jeu. Si game over, le jeu demande au joueur si il veut rejouer*/
-void Jeu::check_end(MiniJeu& game,sf::RenderWindow &window,sf::Event& event){
+void Jeu::check_end(MiniJeu& game,sf::RenderWindow &window){
 	if(game.win()){
 		_passedGames++;
 	}
 	else {
-		playagain(window,event);
+		playagain(window);
 	}
 }
 
@@ -453,7 +454,8 @@ void Jeu:: init_transition(sf::RenderWindow &window,const std::size_t cpt)const{
 }
 
 /* Réalise la transition */
-void Jeu::transition(sf::RenderWindow &window,sf::Event& event)const{
+void Jeu::transition(sf::RenderWindow &window)const{
+	sf::Event event;
      std::size_t cpt = 0;
 
      while(window.isOpen() && cpt < 4){
