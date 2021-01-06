@@ -30,6 +30,26 @@
 }
 
 
+Demineur::Demineur(const std::size_t nb):MiniJeu(nb,false){
+    std::vector<std::vector<int>>temp { {0, 0, 0, 0, 0, 0, 0, 0 },
+                                        {1, 2, 3, 2, 1, 1, 1, 1 },
+                                        {1, -1, -1, -1, 1, 1, -1, 1} ,
+                                        {2, 3, 4, 2, 1, 1, 1, 1 },
+                                        {1, -1, 2, 2, 1, 1, 0, 0 },
+                                        {2, 3, -1, 2, -1, 3, 2, 1 },
+                                        {1, -1, 2, 2, 2, -1, -1, 1 },
+                                        {1, 1, 1, 0, 1, 2, 2, 1 },
+                                        };
+    _plateau = temp;
+    _nb_bomb = 9;
+    std::vector<std::vector<bool>>open_tiles(get_plateau().size(),std::vector<bool>(get_plateau().size(),false));
+    _open_tiles = open_tiles;
+    pos_x=0;
+    pos_y=0;
+}
+
+
+
 Demineur::~Demineur(){ 
     //std::cout<<"Demineur destroyed"<<std::endl;
 
@@ -92,7 +112,7 @@ void Demineur::checkBomb(std::vector<std::vector<int>>&tab, const std::size_t gr
 
 
 void Demineur::play(){
-    std::size_t tmp_x,tmp_y;
+   std::size_t tmp_x,tmp_y;
   // Permet de récuperer les indices des cases cliqués 
     tmp_x = (std::size_t)(get_pos_x() - (APP_SIZE_X-(IMG_SIZE*get_plateau().size()))/2)/IMG_SIZE;
     tmp_y = (std::size_t)(get_pos_y() - (APP_SIZE_Y-(IMG_SIZE*get_plateau().size()))/2)/IMG_SIZE;
@@ -145,7 +165,6 @@ bool Demineur::checkBool(const std::vector<std::vector<bool>>tab){
 
 /* Affichage du jeu */ 
 void Demineur::affichage(const std::vector<std::vector<bool>>matrice){
- //   cout<<get_plateau().size();
     for(std::size_t x=0; x < get_plateau().size(); x++){
         for(std::size_t y=0; y < get_plateau().size(); y++){
             if (matrice[x][y]){
