@@ -6,9 +6,6 @@
 
 #include "Demineur.hh"
  
-/*  _plateau :0 = case vide 
-            -1 = bombe 
-            >0 = nombres de bombes environantes */
 
 /* nb_try, nb_bomb, taille de la grille */
  Demineur::Demineur(const std::size_t count, const std::size_t bomb, const std::size_t gridsize):MiniJeu(count,false){ 
@@ -25,8 +22,8 @@
     std::vector<std::vector<bool>>open_tiles(get_plateau().size(),std::vector<bool>(get_plateau().size(),false));
     _open_tiles = open_tiles;
     
-    pos_x=0;
-    pos_y=0;
+    _position.first = 0;
+    _position.second = 0;
 }
 
 
@@ -44,8 +41,8 @@ Demineur::Demineur(const std::size_t nb):MiniJeu(nb,false){
     _nb_bomb = 9;
     std::vector<std::vector<bool>>open_tiles(get_plateau().size(),std::vector<bool>(get_plateau().size(),false));
     _open_tiles = open_tiles;
-    pos_x=0;
-    pos_y=0;
+    _position.first = 0;
+    _position.second = 0;
 }
 
 
@@ -114,8 +111,8 @@ void Demineur::checkBomb(std::vector<std::vector<int>>&tab, const std::size_t gr
 void Demineur::play(){
    std::size_t tmp_x,tmp_y;
   // Permet de récuperer les indices des cases cliqués 
-    tmp_x = (std::size_t)(get_pos_x() - (APP_SIZE_X-(IMG_SIZE*get_plateau().size()))/2)/IMG_SIZE;
-    tmp_y = (std::size_t)(get_pos_y() - (APP_SIZE_Y-(IMG_SIZE*get_plateau().size()))/2)/IMG_SIZE;
+    tmp_x = (std::size_t)(get_position().first - (APP_SIZE_X-(IMG_SIZE*get_plateau().size()))/2)/IMG_SIZE;
+    tmp_y = (std::size_t)(get_position().second - (APP_SIZE_Y-(IMG_SIZE*get_plateau().size()))/2)/IMG_SIZE;
 
     if (!get_open_tiles()[tmp_x][tmp_y]){
         reveal(tmp_x,tmp_y);

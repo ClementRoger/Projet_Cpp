@@ -21,7 +21,7 @@ void Demineur::display(sf::RenderWindow& window){
         {
             if (event.type == sf::Event::Closed){
                 window.close();
-                break;                
+                break;                 
             }
 
             if (event.type == sf::Event::MouseButtonPressed){
@@ -32,8 +32,7 @@ void Demineur::display(sf::RenderWindow& window){
 
         // Click dans la zone de jeu ?
         if (gridclick){
-            set_pos_x(position.x);
-            set_pos_y(position.y);
+            set_position(position.x,position.y);
             play();
             gridclick = false;
         }  
@@ -94,15 +93,14 @@ void Demineur:: init_background(sf::RenderWindow &window)const{
     create_sprite(window,10,0,TEXTURE_BACKNAME);
     create_text(window,font,24,28,43,"Test \n 5/6");
     create_sprite(window,APP_SIZE_X/4+10,450,TEXTURE_BACKGAME);
-
     create_text(window,font,30,APP_SIZE_X/3-8,480,"Erreurs restantes : " + std::to_string(get_nb_try()));
-
     create_sprite(window,APP_SIZE_X/4,0,TEXTURE_NAME);
 }
 
 /* Permet de determiner la position de la souris lors du click + de savoir si ce click est dans la grille de jeu */
 bool Demineur::Get_Mouse_Click(sf::RenderWindow &window,sf::Vector2i& position)const{
     static bool pressed=false;
+    if (pressed) pressed = false;
     while (true){
       if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
           if (!pressed){

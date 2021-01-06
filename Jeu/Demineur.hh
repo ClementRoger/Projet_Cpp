@@ -4,6 +4,7 @@
 #include <vector>
 #include <time.h>
 #include <string>
+#include <utility>
 #include <SFML/Graphics.hpp>
 
 #define TEXTURE_CELL "img_demineur/cell.png"
@@ -36,6 +37,7 @@ class Demineur:public MiniJeu{
  public:
  
   Demineur(const std::size_t count, const std::size_t bomb, const std::size_t gridsize);
+  Demineur(const std::size_t nb);
 
   ~Demineur();
 
@@ -72,24 +74,27 @@ class Demineur:public MiniJeu{
   void set_open_tiles(const bool val, const size_t x, const size_t y) { _open_tiles[x][y] = val;}
   std::vector<std::size_t> get_bomb_x() const{ return _bomb_x;}
   std::vector<std::size_t> get_bomb_y() const{ return _bomb_y;}
-  int get_pos_x() const { return pos_x;}
-  int get_pos_y() const { return pos_y;}
-  void set_pos_x(const int position){ pos_x = position; }
-  void set_pos_y(const int position){ pos_y = position; }
+
+  std::pair<int,int> get_position() const { return _position; }
+  void set_position(const int x, const int y) {
+    _position.first = x;
+    _position.second = y;
+  }
 
    /* Overload operator */
   friend std::ostream& operator<<(std::ostream& in, std::vector<std::vector<int>> plateau);
 
 
  private:
-  std::vector<std::vector<int>>_plateau;
+  /*  _plateau :0 = case vide 
+            -1 = bombe 
+            >0 = nombres de bombes environantes */
+  std::vector<std::vector<int>>_plateau; 
   std::size_t _nb_bomb; //nombre de bombes
   std::vector<std::size_t> _bomb_x; // coordonnées des bombes en x
   std::vector<std::size_t> _bomb_y; // coordonnées des bombes en y
-  std::vector<std::vector<bool>>_open_tiles;
-
-  int pos_x;
-  int pos_y;
+  std::vector<std::vector<bool>>_open_tiles; //tableau contenant les cases ouvertes
+  std::pair<int,int> _position; //position du click de l'utilisateur
 
 };
 
