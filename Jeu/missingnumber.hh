@@ -32,6 +32,7 @@ class Missingnumber : public MiniJeuAvecSolution {
  public:
  
   Missingnumber(std::fstream& in,const std::size_t count); 
+  Missingnumber(const std::size_t nb);
 
   ~Missingnumber();
 
@@ -58,9 +59,6 @@ class Missingnumber : public MiniJeuAvecSolution {
 
   /* Getters & Setters */
   std::vector<std::vector<std::string>> get_matrice() const{ return _matrice;}
-
-  std::string get_user_entry() const { return _user_entry; }
-  void  set_user_entry(const std::string tmp) { _user_entry = tmp; }
 
  private:
   std::vector<std::vector<std::string>>_matrice;

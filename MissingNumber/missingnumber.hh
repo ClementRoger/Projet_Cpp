@@ -14,6 +14,7 @@
 #include "../MiniJeuAvecSolution.hh"
 
 #define TEXTURE_BACKGROUND2 "img_missing/background.png"
+
 #define TEXTURE_BACKNAME2 "img_missing/arrow.png"
 #define TEXTURE_NAME2 "img_missing/title.png"
 #define TEXTURE_GRID2 "img_missing/grid.png" 
@@ -30,8 +31,8 @@ class Missingnumber : public MiniJeuAvecSolution {
  
  public:
  
-  Missingnumber(std::fstream& in,const std::size_t nb);
-  Missingnumber(const std::size_t nb);  // Constructor for testcase
+  Missingnumber(std::fstream& in,const std::size_t count); 
+  Missingnumber(const std::size_t nb);
 
   ~Missingnumber();
 
@@ -58,9 +59,6 @@ class Missingnumber : public MiniJeuAvecSolution {
 
   /* Getters & Setters */
   std::vector<std::vector<std::string>> get_matrice() const{ return _matrice;}
-
-  std::string get_user_entry() const { return _user_entry; }
-  void  set_user_entry(const std::string tmp) { _user_entry = tmp; }
 
  private:
   std::vector<std::vector<std::string>>_matrice;

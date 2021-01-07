@@ -20,6 +20,16 @@
     std::cout<<"solution :"<<get_solution()<<std::endl;
 }
 
+Missingnumber::Missingnumber(const std::size_t nb):MiniJeuAvecSolution(nb,false){
+    std::vector<std::vector<std::string>>temp { {"3","1","4"},
+                                                {"1","?","9"},
+                                                {"2","6","5"}};
+    _matrice = temp;
+    set_solution("5");
+    set_user_entry("");
+}
+
+
 Missingnumber::~Missingnumber(){ 
     //std::cout<<"Missingnumber destroyed"<<std::endl;
 
