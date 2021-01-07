@@ -18,7 +18,7 @@ using namespace std;
 
     set_solution(all_lines[find_random(in,all_lines)]);
 
-    vector<size_t>found_letters(get_solution().size(),0);
+    vector<bool>found_letters(get_solution().size(),false);
     found_letters[0] = 1;
     _found_letters=found_letters;
     set_user_entry("");
@@ -26,10 +26,10 @@ using namespace std;
 }
 
 // Contructeur fait seulement pour le testcase
-Pendu::Pendu(const string tmp, const size_t count):MiniJeuAvecSolution(count,false){ 
+Pendu::Pendu(string tmp, const size_t count):MiniJeuAvecSolution(count,false){ 
 
     set_solution(tmp);
-    vector<size_t>found_letters(get_solution().size(),0);
+    vector<bool>found_letters(get_solution().size(),false);
     found_letters[0] = 1;
     _found_letters=found_letters;
     set_user_entry("");
@@ -71,7 +71,7 @@ void Pendu::play(){
 /* Permet de comparer l'entrée de l'utilisateur à la solution */
 void Pendu::compare_to_solution(const string letter){
     vector<string>used_letters=get_used_letters();
-    vector<size_t>found_letters=get_found_letters();
+    vector<bool>found_letters=get_found_letters();
     if (letter.size() == 1 ){
         add_letter(used_letters,letter);
         size_t place = get_solution().find(letter);
@@ -119,7 +119,7 @@ bool Pendu::check_entry(const string entry)const {
 
 /* Permet de remplir de tableau des lettre trouvés et de voir si
 elles ont toutes été trouvés */
-bool Pendu::find_letter(string letter,vector<size_t>&found_letters,const size_t taille)const{
+bool Pendu::find_letter(string letter,vector<bool>&found_letters,const size_t taille)const{
     bool res = true;
     for (size_t i = 0; i< found_letters.size(); i++){
         if(taille == 1){
@@ -127,11 +127,11 @@ bool Pendu::find_letter(string letter,vector<size_t>&found_letters,const size_t 
             ss << get_solution()[i];
             string tmp = ss.str();
             if(letter == tmp ){
-                found_letters[i] = 1;
+                found_letters[i] = true;
             }
         }
         else {
-            found_letters[i] = 1;
+            found_letters[i] = true;
         }
 
         if(!found_letters[i]){
@@ -142,7 +142,7 @@ bool Pendu::find_letter(string letter,vector<size_t>&found_letters,const size_t 
 }
 
 /* Affichage du jeu */ 
-void Pendu::affichage(vector<size_t>found_letters){
+void Pendu::affichage(vector<bool>found_letters){
     string res;
 
     for (size_t i=0; i<found_letters.size();i++){

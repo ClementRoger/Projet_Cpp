@@ -30,7 +30,7 @@ class Pendu : public MiniJeuAvecSolution {
  public:
  
   Pendu(std::fstream& in,const std::size_t count); //constructeur par défaut
-  Pendu(const std::string tmp, const std::size_t count); //for testcase
+  Pendu(std::string tmp, const size_t count); //for testcase
 
   ~Pendu();
 
@@ -38,8 +38,8 @@ class Pendu : public MiniJeuAvecSolution {
   void play();
   bool check_entry(const std::string entry) const;
   void compare_to_solution(const std::string letter);
-  void affichage(std::vector<std::size_t>found_letters);
-  bool find_letter(std::string letter,std::vector<std::size_t>&found_letters, const std::size_t taille)const;
+  void affichage(std::vector<bool>found_letters);
+  bool find_letter(std::string letter,std::vector<bool>&found_letters, const std::size_t taille)const;
   void add_letter(std::vector<std::string>&used_letters,std::string letter)const;
 
   /* SFML */
@@ -59,10 +59,10 @@ class Pendu : public MiniJeuAvecSolution {
   /* Getters & Setters */
 
   std::vector<std::string>  get_used_letters() const { return _used_letters; }
-  std::vector<std::size_t>  get_found_letters() const { return _found_letters; }
+  std::vector<bool>  get_found_letters() const { return _found_letters; }
 
   void  set_used_letters(const std::vector<std::string>tmp) { _used_letters=tmp; }
-  void  set_found_letters(const std::vector<std::size_t>tmp) { _found_letters=tmp; }
+  void  set_found_letters(const std::vector<bool>tmp) { _found_letters=tmp; }
 
   /* Overload operator */
   friend std::ostream& operator<<(std::ostream& in, std::vector<std::string>&used_letters);
@@ -70,7 +70,7 @@ class Pendu : public MiniJeuAvecSolution {
  private:
 
   std::vector<std::string> _used_letters;
-  std::vector<std::size_t> _found_letters;
+  std::vector<bool> _found_letters;
 
 };
 
