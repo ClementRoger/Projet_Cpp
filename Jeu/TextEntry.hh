@@ -9,6 +9,7 @@ class TextEntry{
 
   TextEntry(sf::RenderWindow& window, const std::size_t x, const std::size_t y);
   ~TextEntry();
+  
   void init_rectangle(sf::RenderWindow& window,const size_t width, const size_t height, const size_t x, const size_t y)const;
   void display_playertext(sf::RenderWindow& window,const std::string tmp,const size_t pos_x,const size_t pos_y);
   void check_events(sf::RenderWindow& window,sf::Event& event);
