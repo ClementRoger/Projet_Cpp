@@ -20,9 +20,7 @@ class Batonnets : public MiniJeu{
   void init_background(sf::RenderWindow& window)const;
   bool check_entry(const std::string entry)const;
   void display(sf::RenderWindow& window);
-  void affiche_batonnets(sf::RenderWindow& window)const
-
-  ;
+  void affiche_batonnets(sf::RenderWindow& window)const;
   void print_end(const bool winner,sf::RenderWindow &window);
   void init_transition(sf::RenderWindow &window)const;
   std::wstring setFinalText(const bool win)const;
