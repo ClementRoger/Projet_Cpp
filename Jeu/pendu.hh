@@ -30,7 +30,7 @@ class Pendu : public MiniJeuAvecSolution {
  public:
  
   Pendu(std::fstream& in,const std::size_t count); //constructeur par défaut
-  Pendu(std::string tmp, const size_t count); //for testcase
+  Pendu(const std::string tmp, const std::size_t count); //for testcase
 
   ~Pendu();
 

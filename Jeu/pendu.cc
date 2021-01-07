@@ -26,7 +26,7 @@ using namespace std;
 }
 
 // Contructeur fait seulement pour le testcase
-Pendu::Pendu(string tmp, const size_t count):MiniJeuAvecSolution(count,false){ 
+Pendu::Pendu(const string tmp, const size_t count):MiniJeuAvecSolution(count,false){ 
 
     set_solution(tmp);
     vector<size_t>found_letters(get_solution().size(),0);
