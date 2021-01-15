@@ -5,7 +5,9 @@
 #include <fstream>
 #include <SFML/Graphics.hpp>
 
-class MiniJeu{
+#include"Itransition.hh"
+
+class MiniJeu: public Itransition{
 
 public:
 
