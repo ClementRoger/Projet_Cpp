@@ -38,7 +38,7 @@ void Missingnumber::display(sf::RenderWindow &window){
     }  
 
     print_end(win(),window); 
-    std::cout<<"la solution est: "<<get_solution()<<std::endl;
+    //std::cout<<"la solution est: "<<get_solution()<<std::endl;
 
 }
 

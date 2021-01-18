@@ -36,7 +36,7 @@ void Pendu::display(sf::RenderWindow& window){
 
     }  
     print_end(win(),window); 
-    std::cout<<"la solution est: "<<get_solution()<<std::endl;
+    //std::cout<<"la solution est: "<<get_solution()<<std::endl;
 }
 
 /* Permet de crée un sprite et de le dessiner sur la fenetre */

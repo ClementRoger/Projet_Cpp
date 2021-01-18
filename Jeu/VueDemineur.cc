@@ -49,7 +49,7 @@ void Demineur::display(sf::RenderWindow& window){
     print_end(win(),window);
 }
 
-/* Permet de crée un sprite et de le dessiner sur la fenetre */
+/* Permet de créer un sprite et de le dessiner sur la fenetre */
 void Demineur::create_sprite(sf::RenderWindow &window, const std::size_t x, const std::size_t y, const std::string file)const{
     sf::Texture texture;
     sf::Sprite sprite;
@@ -59,7 +59,7 @@ void Demineur::create_sprite(sf::RenderWindow &window, const std::size_t x, cons
     window.draw(sprite);
 }
 
-/* Permet de crée un texte et de le dessiner sur la fenetre */
+/* Permet de créer un texte et de le dessiner sur la fenetre */
 void Demineur::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::string input)const{
     sf::Text text;
     text.setFont(font);
@@ -72,7 +72,7 @@ void Demineur::create_text(sf::RenderWindow &window, const sf::Font font, const 
 }
 
 
-/* Permet de crée un texte et de le dessiner sur la fenetre */
+/* Permet de créer un texte et de le dessiner sur la fenetre */
 void Demineur::create_text(sf::RenderWindow &window, const sf::Font font, const std::size_t fontSize, const std::size_t x, const std::size_t y, const std::wstring input)const{
     sf::Text text;
     text.setFont(font);

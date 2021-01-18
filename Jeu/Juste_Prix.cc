@@ -12,7 +12,7 @@ Juste_Prix :: Juste_Prix(const size_t NB_TENTATIVES, const int NMIN, const int N
 	Nmax = NMAX;
 	std::srand(std::time(nullptr)); //Initialise le générateur de nombres aléatoires
 	set_solution(std::to_string(rand()%Nmax + Nmin)); //Nombre aléatoire entre Nmin et Nmax
-	cout << get_solution() << endl;
+	//cout << get_solution() << endl;
 
 }
 

@@ -17,7 +17,7 @@
     fill_vector(in,tempmatrice);
     _matrice = tempmatrice;
     set_user_entry("");
-    std::cout<<"solution :"<<get_solution()<<std::endl;
+    //std::cout<<"solution :"<<get_solution()<<std::endl;
 }
 
 Missingnumber::Missingnumber(const std::size_t nb):MiniJeuAvecSolution(nb,false){
@@ -94,7 +94,7 @@ void Missingnumber::play(){
                 set_win(true);
             }
             else {
-                std::cout<<"Try again. Il vous reste "<<get_nb_try()-1<<" chances."<<std::endl;
+                //std::cout<<"Try again. Il vous reste "<<get_nb_try()-1<<" chances."<<std::endl;
             }
 
             set_nb_try(get_nb_try()-1);

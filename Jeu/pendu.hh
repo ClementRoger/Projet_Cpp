@@ -75,7 +75,8 @@ class Pendu : public MiniJeuAvecSolution {
 };
 
 inline std::ostream& operator<<(std::ostream& in, std::vector<std::string>&used_letters){
-  	in<<"Vous avez utiliser les lettres suivantes :"<<std::endl;
+
+  	in<<"Vous avez utilisé les lettres suivantes :"<<std::endl;
     std::vector<std::string>::iterator  iter ;
     for( iter  = used_letters.begin() ;iter  !=  used_letters.end();  ++iter )
     {

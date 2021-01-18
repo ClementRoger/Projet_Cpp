@@ -183,7 +183,7 @@ void Jeu::init_playagain(sf::RenderWindow &window)const{
 	create_sprite(window,0,0,TEXTURE_TRANSITION1);
 	sf::Font font;
 
-	if (!font.loadFromFile("zorque.ttf")) {
+	if (!font.loadFromFile("images_Jeu/zorque.ttf")) {
         cout << "Erreur de chargement de la police" << endl;
     }
     sf::Sprite Bouton_Facile, Bouton_Difficile;
@@ -288,7 +288,7 @@ void Jeu :: init_game(sf::RenderWindow& window)const {
 
 	sf::Font font;
 
-	if (!font.loadFromFile("zorque.ttf")) {
+	if (!font.loadFromFile("images_Jeu/zorque.ttf")) {
         cout << "Erreur de chargement de la police" << endl;
     }
 
@@ -299,7 +299,7 @@ void Jeu :: init_game(sf::RenderWindow& window)const {
 	sf::Texture bg_texture;
 	sf::Sprite bg;
 	
-	if (!bg_texture.loadFromFile("bg.jpeg")){
+	if (!bg_texture.loadFromFile("images_Jeu/bg.jpeg")){
 
     	cout << "Erreur de chargement de l'image de fond" << endl;
 	}
@@ -318,13 +318,12 @@ void Jeu :: init_game(sf::RenderWindow& window)const {
     Texte_Titre.setPosition(160, 30);
 
     window.draw(Texte_Titre);
-
 }
 
 /* Permet de créer un bouton et de le dessiner sur la fenetre */
 void Jeu :: create_button(sf::RenderWindow& window,sf::Sprite Bouton, sf::Text text, const size_t x, const size_t y)const {
 	sf::Texture texture;
-	if (!texture.loadFromFile("button.png")){ //NOTE A MOI MEME : PNG >>>>>>>>>>> JPEG. JPEG EST LE DIABLE ET CAUSE DES BUGS DE MEEEEEEEEEEEEEEEEEERDE (jsuis grv d'accord jpg ça pu sa daronne)
+	if (!texture.loadFromFile("images_Jeu/button.png")){ 
 
     	cout << "Erreur de chargement de l'image du bouton" << endl;
 	}
@@ -422,6 +421,7 @@ std::wstring Jeu::setFinalText(const std::size_t cpt)const{
 	        break;
 
 	    case 3:
+
     		 res = std::wstring(L"\n\nBien. Commençons.\n\n") +
 	         std::wstring(L"Pour la première épreuve je vais penser à un nombre\n") +
 	         std::wstring(L"entre 1 et 100 inclus, votre objectif est de retrouver\n") +

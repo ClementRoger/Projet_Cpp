@@ -48,7 +48,7 @@ void Taquin :: init_names() {
 
 void Taquin :: read_file() { 
 	
-	ifstream file( "grilles.txt" ); 
+	ifstream file( "images_taquin/grilles.txt" ); 
   
     string line; 
 
@@ -81,16 +81,6 @@ void Taquin :: read_file() {
 void Taquin :: init_position(std::vector<int> v){
 
 	int number = 1;
-
-	/*for (int i = 0; i < 8; ++i){
-
-		cout << v[i];
-
-		if(i == 2 || i == 5) {
-
-			cout << endl;
-		}
-	}*/
 
 	cout << endl;
 
