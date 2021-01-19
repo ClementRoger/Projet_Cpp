@@ -136,7 +136,7 @@ void Demineur::print_grid(sf::RenderWindow &window,const std::vector<std::vector
     sf::Texture texture;
     sf::Sprite sprite;
     for(std::size_t x=0; x < get_plateau().size(); x++){
-        for(std::size_t y=0; y < get_plateau().size(); y++){
+        for(std::size_t y = 0; y < get_plateau().size(); y++){
 
             if (matrice[x][y]){
 

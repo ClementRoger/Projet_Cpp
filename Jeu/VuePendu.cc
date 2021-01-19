@@ -111,7 +111,7 @@ void Pendu::print_word(sf::RenderWindow &window)const{
         }
     }
     sf::Font font;
-    font.loadFromFile("arial.ttf");
+    font.loadFromFile("img_pendu/arial.ttf");
     create_text(window,font,25,(APP_SIZE_X1-(get_solution().size()*25))/2,190,res);
    
 }
