@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 
  
@@ -42,9 +43,26 @@ Jeu :: Jeu() {
 
 /* Boucle de jeu */
 void Jeu :: run(){
+
 	sf::RenderWindow window(sf::VideoMode(XWINDOW, YWINDOW), "Livin' Tomorrow");
 	bool Intropassed = false;
+	sf::SoundBuffer Buffer1, Buffer2;
+	if (!Buffer1.loadFromFile("sons/menu_sound.wav")){
+    	cout << "Erreur de chargement du son (menu_sound.wav)" << endl;
+	}
+	if(!Buffer2.loadFromFile("sons/background_soundtrack.wav")){
+		cout << "Erreur de chargement du son (background_soundtrack.wav)" << endl;
+	}
+	sf::Sound menu_sound, background_sound;
+	menu_sound.setBuffer(Buffer1);
+	background_sound.setBuffer(Buffer2);
+	menu_sound.setLoop(true); //Quand se termine, recommence au début
+	background_sound.setLoop(true);
+	background_sound.setVolume(40);
+	menu_sound.play();
+
 	while(window.isOpen()) {
+
 		sf::Event event;
 	    while (window.pollEvent(event)) {
 	        if (event.type == event.Closed) {
@@ -55,6 +73,8 @@ void Jeu :: run(){
 		        if (event.type == sf::Event::MouseButtonPressed){
 		        	Intropassed = Get_Mouse_Click(window);
 		        	_playagain = 0;
+		        	menu_sound.stop();
+		        	background_sound.play();
 		        	break;
 		        }
 		    }
