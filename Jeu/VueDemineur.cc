@@ -45,7 +45,12 @@ void Demineur::display(sf::RenderWindow& window){
         window.display();
 
     }  
-
+    if(win()){
+        set_path("sons/taquin.wav");
+    }
+    else{
+        set_path("sons/demineur_defaite.wav");
+    }
     print_end(win(),window);
 }
 

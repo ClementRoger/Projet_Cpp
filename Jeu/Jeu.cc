@@ -58,7 +58,7 @@ void Jeu :: run(){
 	background_sound.setBuffer(Buffer2);
 	menu_sound.setLoop(true); //Quand se termine, recommence au début
 	background_sound.setLoop(true);
-	background_sound.setVolume(30);
+	background_sound.setVolume(20);
 	menu_sound.play();
 
 	while(window.isOpen()) {

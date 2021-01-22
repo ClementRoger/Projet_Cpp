@@ -49,6 +49,13 @@ void Juste_Prix :: display(sf::RenderWindow& window){
         textbar.display(window);
         window.display();
 	}
+
+    if(win()){
+        set_path("sons/pendu.wav");
+    }
+    else{
+        set_path("sons/juste_prix_defaite.wav");
+    }
     print_end(win(),window);
 }
 
@@ -175,7 +182,7 @@ void Juste_Prix :: print_end(const bool winner,sf::RenderWindow &window){
     transition(window);
 }
 
-wstring Juste_Prix :: setFinalText(const bool win)const{
+wstring Juste_Prix :: setFinalText(const bool win) const {
 
     std::wstring res;
 
@@ -201,7 +208,7 @@ wstring Juste_Prix :: setFinalText(const bool win)const{
     return res;
 }
 
-void Juste_Prix :: init_transition(sf::RenderWindow &window)const{
+void Juste_Prix :: init_transition(sf::RenderWindow &window) const{
 
     sf::Font font;
     font.loadFromFile("images_batonnets/Type.ttf");
@@ -217,6 +224,7 @@ void Juste_Prix :: init_transition(sf::RenderWindow &window)const{
     sf::Text text;
     text.setFont(font);
     text.setString(setFinalText(win()));
+
     text.setCharacterSize(18);
     text.setFillColor(sf::Color::White);
     text.setStyle(sf::Text::Bold);

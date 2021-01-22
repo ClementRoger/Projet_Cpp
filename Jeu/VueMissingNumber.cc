@@ -36,7 +36,12 @@ void Missingnumber::display(sf::RenderWindow &window){
         window.display();
 
     }  
-
+    if(win()){
+        set_path("sons/demineur.wav");
+    }
+    else{
+        set_path("sons/missing_number_defaite.wav");
+    }
     print_end(win(),window); 
     //std::cout<<"la solution est: "<<get_solution()<<std::endl;
 

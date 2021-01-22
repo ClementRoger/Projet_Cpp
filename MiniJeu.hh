@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #include"Itransition.hh"
 
@@ -28,8 +29,14 @@ public:
   
 /* Réalise la transition */
   void transition(sf::RenderWindow &window)const{
-     sf::Event event;
-     bool cpt = 0;
+    sf::Event event;
+    bool cpt = 0;
+
+    sf::SoundBuffer Buffer;
+    Buffer.loadFromFile(sound_path);
+    sf::Sound sound;
+    sound.setBuffer(Buffer);
+    sound.play();
 
      while(window.isOpen() && !cpt){
         while (window.pollEvent(event))
@@ -56,10 +63,11 @@ public:
   void set_nb_try(const size_t nb){ _nb_try = nb;}
   bool win() const {return _victory;}
   void set_win(const bool flag) {_victory = flag; }
-
+  void set_path(const std::string path){ sound_path = path; }
 
 protected:
   std::size_t _nb_try;
   bool _victory;
+  std::string sound_path;
 
 };

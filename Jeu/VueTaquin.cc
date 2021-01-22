@@ -47,7 +47,12 @@ void Taquin :: display(sf::RenderWindow& window){
         init_background(window);
         window.display();
 	}
-
+    if(win()){
+        set_path("sons/victoire.wav");
+    }
+    else{
+        set_path("sons/taquin_defaite.wav");
+    }
     print_end(win(),window);
 }
 

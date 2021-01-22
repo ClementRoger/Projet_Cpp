@@ -34,7 +34,13 @@ void Pendu::display(sf::RenderWindow& window){
         player.display(window);
         window.display();
 
-    }  
+    } 
+    if(win()){
+        set_path("sons/batonnets.wav");
+    }
+    else{
+        set_path("sons/pendu_defaite.wav");
+    } 
     print_end(win(),window); 
     //std::cout<<"la solution est: "<<get_solution()<<std::endl;
 }

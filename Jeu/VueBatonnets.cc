@@ -57,7 +57,12 @@ void Batonnets :: display(sf::RenderWindow& window){
         textbar.display(window);
         window.display();
 	}
-
+    if(win()){
+        set_path("sons/missing_number.wav");
+    }
+    else{
+        set_path("sons/batonnets_defaite.wav");
+    }
     print_end(win(),window);
 }
 
