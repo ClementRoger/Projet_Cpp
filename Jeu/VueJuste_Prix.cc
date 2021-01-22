@@ -202,7 +202,7 @@ wstring Juste_Prix :: setFinalText(const bool win) const {
         res = std::wstring(L"Eh beh ce fut rapide. Si seulement tous les participants\n") +
         std::wstring(L"pouvaient être aussi idiots, je ferais des journées de 3h\n") +
         std::wstring(L"et je pourrais passer du temps avec mes gosses. \nEddy, sois gentil ") +
-        std::wstring(L"fais ton boulot s’il te plait. *Gunshot*\n");
+        std::wstring(L"fais ton boulot s’il te plait.\n");
     }
 
     return res;

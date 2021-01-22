@@ -251,7 +251,7 @@ wstring Batonnets :: setFinalText(const bool win)const{
         std::wstring(L"ici, il lisait l’avenir dans un potiron dans une foire ambulante,\n") +
         std::wstring(L"ce gars est bête comme une brique. Ne le prends pas mal Eddy, \n") +
         std::wstring(L"tu fais parfaitement ton boulot maintenant. \n\n") +
-        std::wstring(L"Allez, élimine le. *Gunshot*\n"); 
+        std::wstring(L"Allez, élimine le. \n"); 
     }
 
     return res;

@@ -221,7 +221,7 @@ void Jeu::init_playagain(sf::RenderWindow &window)const{
     create_text(window,font,50,200,250,L"Play Again?");
 }
 
-/* Permet de proposer au joeur de rejouer. On teste sur quel bouton il a cliquer et on réalise l'action correspondantes */
+/* Permet de proposer au joeur de rejouer. On teste sur quel bouton il a cliqué et on réalise l'action correspondantes */
 void Jeu::playagain (sf::RenderWindow &window){
 	sf::Event event;
 	bool passed = false;

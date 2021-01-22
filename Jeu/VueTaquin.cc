@@ -204,7 +204,7 @@ wstring Taquin :: setFinalText(const bool win)const{
         std::wstring(L"arriver. Je suis à deux doigts de vous laisser retenter la\n" )+
         std::wstring(L"dernière épreuve ... Naaan je rigole. Eddy je te laisse \n" )+
         std::wstring(L"t’occuper de lui, je vais me chercher un café.\n\n") +
-        std::wstring(L"Comme d’habitude, je te prends un déca ? *Gunshot*\n\n");
+        std::wstring(L"Comme d’habitude, je te prends un déca ? \n\n");
     }
 
     return res;

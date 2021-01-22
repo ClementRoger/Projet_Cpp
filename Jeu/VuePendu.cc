@@ -171,7 +171,7 @@ std::wstring Pendu::setFinalText(const bool win)const{
         std::wstring(L"savez comment on appelle les gens comme vous avec Eddy ?\n\n" )+
 
         std::wstring(L"Des MAIN, pour Mots Aussi Importants que les Nombres.\n") +
-        std::wstring(L"Allez Eddy, liquide moi ce MAIN. *Gunshot* \n" ); 
+        std::wstring(L"Allez Eddy, liquide moi ce MAIN. \n" ); 
     }
 
     return res;

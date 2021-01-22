@@ -229,7 +229,7 @@ std::wstring Demineur::setFinalText(const bool win)const{
         std::wstring(L"Oh allez j’essaye de vous faire rire une \n" )+
         std::wstring(L"dernière fois avant le grand voyage. Bon \n" )+
         std::wstring(L"bah j’aurais essayé ...\n\n" )+
-        std::wstring(L"Eddy, explose lui la cervelle ! *Gunshot* ");
+        std::wstring(L"Eddy, explose lui la cervelle ! ");
     }
 
     return res;

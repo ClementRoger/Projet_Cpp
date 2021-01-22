@@ -155,7 +155,7 @@ std::wstring Missingnumber::setFinalText(const bool win)const{
         std::wstring(L"savez ? Je peux vous la donner, c\'est pas comme si\n") +
         std::wstring(L" vous alliez pouvoir retenter l\'épreuve plus\ntard !\n\n" )+
 
-        std::wstring(L"C\'était ... *Gunshot*. Eddy ! La dernière\n") +
+        std::wstring(L"C\'était ... Eddy ! La dernière\n") +
         std::wstring(L"volonté, ça te parle ? Quel idiot.\n") + 
         std::wstring(L"Allez nettoie moi tout ça ...");
     }
