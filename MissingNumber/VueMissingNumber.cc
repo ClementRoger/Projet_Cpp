@@ -101,7 +101,7 @@ void Missingnumber::print_game(sf::RenderWindow &window)const{
 
     for (std::size_t i = 0; i < get_matrice().size(); i++){
         for (std::size_t j = 0; j < get_matrice().size(); j++){
-            create_text(window,font,25,(APP_SIZE_X2-348)/2-5 + (2*i+1)*58 , 170 + (2*j+1)*25,get_matrice()[i][j]);
+            create_text(window,font,25,(APP_SIZE_X2-348)/2-5 + (2*i+1)*58 , 170 + (2*j+1)*25,get_matrice()[j][i]);
 
         }
     }
