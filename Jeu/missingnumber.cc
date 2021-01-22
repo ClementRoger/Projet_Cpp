@@ -17,7 +17,7 @@
     fill_vector(in,tempmatrice);
     _matrice = tempmatrice;
     set_user_entry("");
-    //std::cout<<"solution :"<<get_solution()<<std::endl;
+    std::cout<<"solution :"<<get_solution()<<std::endl;
 }
 
 Missingnumber::Missingnumber(const std::size_t nb):MiniJeuAvecSolution(nb,false){
@@ -37,7 +37,8 @@ Missingnumber::~Missingnumber(){
 
 /* Parcours le fichier pour en extraire une matrice et sa solution */
 void Missingnumber::fill_vector(std::fstream& in,std::vector<std::vector<std::string>>&tempmatrice){
-    std::size_t random = 1+rand()%(5);
+    std::size_t random = 1+rand()%(7);
+    std::cout<<"rand :"<<random<<std::endl;
     std::size_t count = 1;
     std::size_t tmp = 1;
     std::string line;
