@@ -7,7 +7,7 @@
 #include <fstream>
 #include <list>
 #include "Demineur.hh"
-#include "../../MiniJeu.hh"
+#include "../MiniJeu.hh"
 
 using namespace std;
 

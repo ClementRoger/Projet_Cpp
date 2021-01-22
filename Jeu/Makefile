@@ -26,5 +26,5 @@ $(EXEC): $(OBJ)
 -include .depends
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) Jeu
 

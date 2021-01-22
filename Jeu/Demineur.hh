@@ -30,7 +30,7 @@
 #define APP_SIZE_Y 600
 #define IMG_SIZE 32 
 
-#include "../MiniJeu.hh"
+#include "MiniJeu.hh"
 
 class Demineur:public MiniJeu{
  

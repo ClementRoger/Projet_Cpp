@@ -10,8 +10,8 @@
 
 #include "TextEntry.hh"
 
-#include "../MiniJeu.hh"
-#include "../MiniJeuAvecSolution.hh"
+#include "MiniJeu.hh"
+#include "MiniJeuAvecSolution.hh"
 
 #define TEXTURE_BACKGROUND2 "img_missing/background.png"
 

@@ -1,6 +1,6 @@
 #pragma once 
 #include <iostream>
-#include "../MiniJeu.hh"
+#include "MiniJeu.hh"
 #include <SFML/Graphics.hpp>
 #include <string.h>
 

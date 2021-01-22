@@ -6,10 +6,10 @@
 #include <iostream>
 #include <fstream>
 #include <list>
-#include "../pendu.hh"
-#include "../TextEntry.hh"
-#include "../../MiniJeu.hh"
-#include "../MiniJeuAvecSolution.hh"
+#include "pendu.hh"
+#include "TextEntry.hh"
+#include "MiniJeu.hh"
+#include "MiniJeuAvecSolution.hh"
 using namespace std;
 
 

@@ -16,7 +16,7 @@
     std::vector<std::vector<int>>tmp(gridsize,std::vector<int>(gridsize,0));
     init_bomb_pos(gridsize);
     initBomb(tmp,gridsize);
-    std::cout<<tmp;
+    //std::cout<<tmp;
     _plateau = tmp;
 
     std::vector<std::vector<bool>>open_tiles(get_plateau().size(),std::vector<bool>(get_plateau().size(),false));
@@ -120,12 +120,12 @@ void Demineur::play(){
         
         if( get_plateau()[tmp_x][tmp_y] == -1 ){
             set_nb_try(get_nb_try()-1);
-            std::cout<<"Aie, vous etes tombé sur une bombe... Il vous reste : "<<get_nb_try()<<std::endl;
+            //std::cout<<"Aie, vous etes tombé sur une bombe... Il vous reste : "<<get_nb_try()<<std::endl;
         }
         set_win(checkBool(get_open_tiles()));
     }
     else {
-        std::cout<<"Vous avez deja ouvert cette case."<<std::endl;
+        //std::cout<<"Vous avez deja ouvert cette case."<<std::endl;
     }
 }
 

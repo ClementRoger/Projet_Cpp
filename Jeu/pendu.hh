@@ -9,8 +9,8 @@
 
 #include "TextEntry.hh"
 
-#include "../MiniJeu.hh"
-#include "../MiniJeuAvecSolution.hh"
+#include "MiniJeu.hh"
+#include "MiniJeuAvecSolution.hh"
 
 #define TEXTURE_BACKGROUND1 "img_pendu/background.png"
 #define TEXTURE_BACKNAME1 "img_pendu/hangman.png"

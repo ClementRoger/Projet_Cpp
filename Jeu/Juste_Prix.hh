@@ -1,8 +1,8 @@
 #pragma once 
 #include <iostream>
 
-#include "../MiniJeu.hh"
-#include "../MiniJeuAvecSolution.hh"
+#include "MiniJeu.hh"
+#include "MiniJeuAvecSolution.hh"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>

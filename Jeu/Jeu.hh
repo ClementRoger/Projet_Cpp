@@ -13,8 +13,8 @@
 #define YWINDOW 600
 
 
-#include "../MiniJeu.hh"
-#include"../Itransition.hh"
+#include "MiniJeu.hh"
+#include"Itransition.hh"
 
 
 class Jeu : public Itransition {
