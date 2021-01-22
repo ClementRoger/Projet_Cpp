@@ -26,12 +26,10 @@ void Juste_Prix :: play() {
 	size_t solution = (size_t) stoi(get_solution(), nullptr, 10);
 
 	if(number > solution) {
-
 		result = "C'est moins";
 	}
 
 	else if(number < solution){
-
 		result = "C'est plus";
 	}
 

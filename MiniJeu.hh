@@ -39,9 +39,9 @@ public:
                cpt = true ;
             }
             if (event.type == sf::Event::Closed){ 
-                    window.close();
-                    break;                
-                }
+              window.close();
+              break;                
+            }
 
         } 
         window.clear();

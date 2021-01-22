@@ -58,7 +58,7 @@ void Jeu :: run(){
 	background_sound.setBuffer(Buffer2);
 	menu_sound.setLoop(true); //Quand se termine, recommence au début
 	background_sound.setLoop(true);
-	background_sound.setVolume(40);
+	background_sound.setVolume(30);
 	menu_sound.play();
 
 	while(window.isOpen()) {
@@ -98,12 +98,19 @@ void Jeu :: run(){
 	    	window.clear();
 	    	init_game(window);
 			window.display();
-	    } 
+	    }
+
+	    if(_playagain) {
+	    	background_sound.stop();
+	    	menu_sound.play();
+	    	_playagain = 0;
+	    }
 	}
 }
 
 /* Jeux en niveau facile */
 void Jeu::easy_game(sf::RenderWindow &window){
+
 	switch (_passedGames){
 
 		case 1: {
@@ -402,6 +409,7 @@ std::wstring Jeu::setFinalText(const std::size_t cpt)const{
 	        std::wstring(L"une grande partie de la population mondiale et, \n") +
 	        std::wstring(L"de préférence, les moins utiles au développement \n") + 
 	        std::wstring(L"scientifique des Nations.  \n");
+
     		break;
 
     	case 1:
@@ -419,7 +427,6 @@ std::wstring Jeu::setFinalText(const std::size_t cpt)const{
 	        std::wstring(L"attendu demain au Centre de Recherche afin de\n")+
 	        std::wstring(L"passer Le Test...");
 	        
-
     		break;
 
     	case 2:
@@ -437,23 +444,22 @@ std::wstring Jeu::setFinalText(const std::size_t cpt)const{
 	        std::wstring(L"êtes pas assis sur des morceaux de cervelle,\n") +
 	        std::wstring(L"dit-il en ricanant.");
 
-    	
 	        break;
 
 	    case 3:
 
-    		 res = std::wstring(L"\n\nBien. Commençons.\n\n") +
-	         std::wstring(L"Pour la première épreuve je vais penser à un nombre\n") +
-	         std::wstring(L"entre 1 et 100 inclus, votre objectif est de retrouver\n") +
-	         std::wstring(L"ce nombre en un nombre limité de tentatives.\n") +
-	         std::wstring(L"A chacune de vos propositions je ne répondrai que \n") +
+    		res = std::wstring(L"\n\nBien. Commençons.\n\n") +
+	        std::wstring(L"Pour la première épreuve je vais penser à un nombre\n") +
+	        std::wstring(L"entre 1 et 100 inclus, votre objectif est de retrouver\n") +
+	        std::wstring(L"ce nombre en un nombre limité de tentatives.\n") +
+	        std::wstring(L"A chacune de vos propositions je ne répondrai que \n") +
 
-	         std::wstring(L"\"C\'est plus\",\"C\'est moins\" ou \"C\'est correct\",") +
-	         std::wstring(L"rien d’autre.\n\n") +
+	        std::wstring(L"\"C\'est plus\",\"C\'est moins\" ou \"C\'est correct\",") +
+	        std::wstring(L"rien d’autre.\n\n") +
 
-	         std::wstring(L"Si à la fin des tentatives autorisés,vous n’avez \n") + 
-	         std::wstring(L"pas trouvé le nombre, pan.\n\n") +
-	         std::wstring(L"Compris ?"); 
+	        std::wstring(L"Si à la fin des tentatives autorisés,vous n’avez \n") + 
+	        std::wstring(L"pas trouvé le nombre, pan.\n\n") +
+	        std::wstring(L"Compris ?"); 
 
     		break;
 
@@ -476,9 +482,13 @@ void Jeu:: init_transition(sf::RenderWindow &window,const std::size_t cpt)const{
 /* Réalise la transition */
 void Jeu::transition(sf::RenderWindow &window)const{
 	sf::Event event;
-     std::size_t cpt = 0;
+    std::size_t cpt = 0;
+    sf::SoundBuffer Buffer;
+	sf::Sound sound;
 
-     while(window.isOpen() && cpt < 4){
+    int flag = 0;
+
+    while(window.isOpen() && cpt < 4){
         while (window.pollEvent(event))
         {
             // Changer de fond
@@ -490,11 +500,34 @@ void Jeu::transition(sf::RenderWindow &window)const{
                 window.close();
                 break;                
             }
-
+            if(cpt == 0 && flag == 0){
+				Buffer.loadFromFile("sons/intro1.wav");
+				sound.setBuffer(Buffer);
+				sound.play();
+				flag++;
+            }
+            if(cpt == 1 && flag == 1){
+            	Buffer.loadFromFile("sons/intro2.wav");
+				sound.setBuffer(Buffer);
+				sound.play();
+				flag++;
+            }
+            if(cpt == 2 && flag == 2){
+            	Buffer.loadFromFile("sons/intro3.wav");
+				sound.setBuffer(Buffer);
+				sound.play();
+				flag++;
+            }
+            if(cpt == 3 && flag == 3){
+            	Buffer.loadFromFile("sons/juste_prix.wav");
+				sound.setBuffer(Buffer);
+				sound.play();
+				flag++;
+            }
         } 
         window.clear();
         init_transition(window,cpt);
         window.display();
-     }
+    }
     
 }

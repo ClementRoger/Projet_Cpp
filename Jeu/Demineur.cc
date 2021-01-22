@@ -16,7 +16,7 @@
     std::vector<std::vector<int>>tmp(gridsize,std::vector<int>(gridsize,0));
     init_bomb_pos(gridsize);
     initBomb(tmp,gridsize);
-    std::cout<<tmp;
+    //std::cout<<tmp;
     _plateau = tmp;
 
     std::vector<std::vector<bool>>open_tiles(get_plateau().size(),std::vector<bool>(get_plateau().size(),false));
