@@ -215,7 +215,7 @@ void Jeu::init_playagain(sf::RenderWindow &window)const{
     }
     sf::Sprite Bouton_Facile, Bouton_Difficile;
 	sf::Text Texte_Facile("Rejouer",font,50);
-	sf::Text Texte_Difficile("Quitter",font,50);
+	sf::Text Texte_Difficile("Terminer",font,50);
 	create_button(window,Bouton_Facile, Texte_Facile, 100, 430);
 	create_button(window,Bouton_Difficile, Texte_Difficile, 450, 430);
     create_text(window,font,50,200,250,L"Play Again?");
@@ -361,7 +361,7 @@ void Jeu :: create_button(sf::RenderWindow& window,sf::Sprite Bouton, sf::Text t
     text.setFillColor(sf::Color(55, 0, 139)); // Du bleu foncé stylé
     text.setStyle(sf::Text::Bold);
     Bouton.setPosition(x,y);
-    text.setPosition(x + texture.getSize().x/8 - text.getLocalBounds().width/2, y + texture.getSize().y/8 - text.getLocalBounds().height); //Un peu au pif pour le y (jsp pourquoi y a pas le /2 pour height), le x est logique : le /8 vient de /2 et il faut multiplier par le cofficient de getScale (0.25) donc 1/2 * 1/4 = 1/8
+    text.setPosition(Bouton.getPosition().x + texture.getSize().x/8 - text.getLocalBounds().width/2, Bouton.getPosition().y + texture.getSize().y/8 - text.getLocalBounds().height); //le /8 vient de /2 et il faut multiplier par le cofficient de getScale (0.25) donc 1/2 * 1/4 = 1/8
     window.draw(Bouton);
     window.draw(text);
 }
