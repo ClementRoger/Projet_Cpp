@@ -37,7 +37,7 @@ Missingnumber::~Missingnumber(){
 
 /* Parcours le fichier pour en extraire une matrice et sa solution */
 void Missingnumber::fill_vector(std::fstream& in,std::vector<std::vector<std::string>>&tempmatrice){
-    std::size_t random = 1+rand()%(5);
+    std::size_t random = 1+rand()%(7);
     std::size_t count = 1;
     std::size_t tmp = 1;
     std::string line;
