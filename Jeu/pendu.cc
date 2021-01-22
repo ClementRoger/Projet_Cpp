@@ -22,7 +22,7 @@ using namespace std;
     found_letters[0] = 1;
     _found_letters=found_letters;
     set_user_entry("");
-    cout<<"mistery: "<<get_solution()<<endl;
+    //cout<<"mistery: "<<get_solution()<<endl;
 }
 
 // Contructeur fait seulement pour le testcase
