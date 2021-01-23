@@ -10,5 +10,5 @@ Les fichiers du Rapport (le rapport en .pdf ainsi que le diagramme UML) sont pr�
 
 Les Testcase de chaque mini-jeu sont présents dans le dossier Testcase
 
-**Réalisé par Alexandra Déac & Clément Roger - Polytech Sorbonne EISE4**
+**Réalisé par Alexandra Deac & Clément Roger - Polytech Sorbonne EISE4**
 
