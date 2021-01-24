@@ -5,6 +5,7 @@ SRC= $(wildcard ../*.cc)
 OBJ= $(SRC:.cc=.o)
 TST= $(wildcard *.cc)
 OBJ_TEST = $(filter-out ../main.o, $(OBJ)) $(TST:.cc=.o)
+EXEC = Jeu	
 
 Jeu : $(OBJ_TEST) 
 	$(CC) $^ -o $@ $(LIBFLAGS)
@@ -13,4 +14,4 @@ Jeu : $(OBJ_TEST)
 	$(CC) $(CCFLAGS) -I../ -o $@ -c $<
 
 clean :
-	rm -f $(OBJ_TEST) Jeu
+	rm -f $(OBJ_TEST) $(EXEC)
