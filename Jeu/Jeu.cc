@@ -332,7 +332,7 @@ void Jeu :: init_game(sf::RenderWindow& window)const {
 	}
 
 	bg.setTexture(bg_texture);
-	bg.setScale(1.18,1.48); //Valeur trouvées un peu au pif mdr
+	bg.setScale(1.18,1.48); 
 	window.draw(bg);
 
 	create_button(window,Bouton_Facile, Texte_Facile, 100, 430);

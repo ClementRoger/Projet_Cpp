@@ -1,30 +1,16 @@
 CC=g++
 CCFLAGS= -Wall -Werror -std=c++11 -g
 LIBFLAGS= -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
-SRC= $(wildcard *.cc)
+SRC= $(wildcard ../*.cc)
 OBJ= $(SRC:.cc=.o)
-TST_DIR=tests/
-TST= $(wildcard $(TST_DIR)/*.cc)
-OBJ_TEST = $(filter-out main.o, $(OBJ)) $(TST:.cc=.o)
-EXEC= Jeu 
- 
+TST= $(wildcard *.cc)
+OBJ_TEST = $(filter-out ../main.o, $(OBJ)) $(TST:.cc=.o)
 
-
-all: $(EXEC)
-
-testcase : 
-	cd $(TST_DIR) ;  make
-
-$(EXEC): $(OBJ)
+Jeu : $(OBJ_TEST) 
 	$(CC) $^ -o $@ $(LIBFLAGS)
 
-%.o: %.cc
-	$(CC) $(CCFLAGS) -o $@ -c $<
+%.o: %.cpp
+	$(CC) $(CCFLAGS) -I../ -o $@ -c $<
 
-.depend:
-	g++ $(CCFLAGS) -MM $(SRC) > .depends
--include .depends
-
-clean:
-	rm -f $(OBJ) Jeu
-
+clean :
+	rm -f $(OBJ_TEST) Jeu
